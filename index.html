@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOBOFU — Top of Funnel, by Centle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+</head>
+
+<body>
+
+    <!-- ══════════ PAGE LOADER ══════════ -->
+    <div id="tobofu-loader">
+        <div class="tl-bg-word">TOBOFU</div>
+        <div class="tl-corner tl-corner-left">Top of Funnel · by Centle</div>
+        <div class="tl-corner tl-corner-right" id="tlCornerRight">Converting since 2024</div>
+        <div class="tl-spinner-wrap">
+            <div class="tl-ring" id="tlRing"></div>
+            <div class="tl-dot" id="tlDot"></div>
+            <div class="tl-wordmark" id="tlWordmark">
+                <span class="tl-letter">L</span><span class="tl-letter">O</span><span class="tl-letter">A</span><span
+                    class="tl-letter">D</span><span class="tl-letter">I</span><span class="tl-letter">N</span><span
+                    class="tl-letter">G</span>
+            </div>
+        </div>
+        <div class="tl-bar-wrap">
+            <div class="tl-bar" id="tlBar"></div>
+            <div class="tl-bar-fill" id="tlBarFill"></div>
+        </div>
+        <div class="tl-percent" id="tlPercent">0%</div>
+    </div>
+
+
+    <!-- cursor -->
+    <div class="cursor" id="cursor">
+  <svg viewBox="0 0 22 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0L0 22L6 17L10 28L13 27L9 16H16L0 0Z" fill="#0A0A0A"/>
+    <path d="M1 2L1 19L6.5 14.5L10.5 25L11.5 24.5L7.5 14H14L1 2Z" fill="#FFD700"/>
+  </svg>
+</div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+
+    <!-- Sticky nav -->
+ <nav id="mainNav">
+  <div class="nav-left">
+            <div class="centle-logo">
+                <img src="centle-logo.png"alt="TOBOFU by Centle" style="height:78px;width:auto;display:block;" /></div>
+        </div>
+  <ul class="nav-links-center">
+    <li><a href="index.html"class="active">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="tobofu-services.html">Services</a></li>
+    <li><a href="process.html">Process</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="contact.html" class="pill-btn">Get Started ↗</a>
+  </div>
+</nav>
+
+    <!-- Fixed CTA -->
+    <a href="contact.html" class="start-btn" id="startBtn" style="text-decoration:none;">Start your funnel →</a>
+
+    <div class="page">
+
+        <!-- ══════════ HERO ══════════ -->
+        <section id="hero">
+            <div class="hero-bg-text">TOBOFU</div>
+            <div class="hero-headline">
+                Click.<br>
+                <span class="accent">Convert.</span><br>
+                C<span class="hero-o-wrap">
+                    <div class="o-inner">Click</div>
+                </span>nquer.
+            </div>
+            <div class="hero-sub">
+                We're a growth-first creative studio that builds <strong>top-of-funnel experiences</strong> that turn
+                curiosity
+                into customers — built by Centle.
+            </div>
+            <div class="hero-awards">
+                <div class="award-item">CLUTCH<span>Top Agency 2025</span></div>
+                <div class="award-item">AWWWARDS<span>Honorable Mention</span></div>
+                <div class="award-item">G2<span>Leader Rating</span></div>
+                <div class="award-item">CSSDA<span>Award Winner</span></div>
+            </div>
+        </section>
+
+        <!-- ══════════ SERVICES STICKY CARDS ══════════ -->
+        <section id="services">
+            <div class="section-intro fade-up">
+                <h2>OUR<br>SERVICES</h2>
+            </div>
+
+            <div class="sticky-cards-outer">
+                <!-- Card 1 -->
+                <div class="sticky-card" style="z-index:10;">
+                    <div class="card-inner">
+                        <div class="card-content">
+                            <h3 class="card-title">Landing page<br>design</h3>
+                            <div class="card-tags">
+                                <span class="tag">Conversion-first</span>
+                                <span class="tag">A/B Testing</span>
+                                <span class="tag">Copywriting</span>
+                                <span class="tag">CRO</span>
+                            </div>
+                            <p class="card-body">Pages built to stop the scroll, hold attention, and push visitors
+                                through the funnel
+                                — beautiful and brutally effective.</p>
+                            <a href="services.html" class="card-link" style="text-decoration:none;">Find out more →</a>
+                        </div>
+                        <div class="card-visual cv1">
+                            <div class="vis-inner">
+                                <!-- Yellow card visual: big faithful cone SVG -->
+                                <svg viewBox="0 0 200 240" width="200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Card bg -->
+                                    <rect x="8" y="8" width="178" height="218" fill="#F5C800" stroke="#0D0D0D"
+                                        stroke-width="3" />
+                                    <rect x="0" y="0" width="178" height="218" fill="#FFD600" stroke="#0D0D0D"
+                                        stroke-width="3" />
+
+                                    <!-- TO BO FU lettering left side -->
+                                    <text x="14" y="54" font-family="'Bebas Neue', Impact, sans-serif" font-size="38"
+                                        fill="#0D0D0D" letter-spacing="2">TO</text>
+                                    <text x="14" y="100" font-family="'Bebas Neue', Impact, sans-serif" font-size="38"
+                                        fill="#0D0D0D" letter-spacing="2">BO</text>
+                                    <text x="14" y="146" font-family="'Bebas Neue', Impact, sans-serif" font-size="38"
+                                        fill="#0D0D0D" letter-spacing="2">FU</text>
+
+                                    <!-- CONE right side: red wide top, blue mid, purple tip -->
+                                    <polygon points="92,22  170,22  154,76  108,76" fill="#E63946" />
+                                    <polygon points="108,80 154,80 144,118 118,118" fill="#3A86FF" />
+                                    <polygon points="118,122 144,122 131,162" fill="#8338EC" />
+
+                                    <!-- Cone crisp outlines -->
+                                    <polygon points="92,22  170,22  154,76  108,76" fill="none" stroke="#0D0D0D"
+                                        stroke-width="2.5" stroke-linejoin="round" />
+                                    <polygon points="108,80 154,80 144,118 118,118" fill="none" stroke="#0D0D0D"
+                                        stroke-width="2.5" stroke-linejoin="round" />
+                                    <polygon points="118,122 144,122 131,162" fill="none" stroke="#0D0D0D"
+                                        stroke-width="2.5" stroke-linejoin="round" />
+
+                                    <!-- cursor click icon hint -->
+                                    <text x="148" y="185" font-size="28" fill="#0D0D0D" opacity=".35">↙</text>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="sticky-card" style="z-index:20;">
+                    <div class="card-inner">
+                        <div class="card-content">
+                            <h3 class="card-title">Brand<br>identity</h3>
+                            <div class="card-tags">
+                                <span class="tag">Strategy</span>
+                                <span class="tag">Visual identity</span>
+                                <span class="tag">Tone of voice</span>
+                            </div>
+                            <p class="card-body">Your brand is the first thing people feel. We craft identities that are
+                                impossible to
+                                ignore — built for attention.</p>
+                            <a href="services.html" class="card-link" style="text-decoration:none;">Find out more →</a>
+                        </div>
+                        <div class="card-visual cv2">
+                            <div class="vis-inner">
+                                <div
+                                    style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:48px;width:100%;height:100%;">
+                                    <div style="background:var(--yellow);border:2px solid rgba(255,255,255,.15);"></div>
+                                    <div
+                                        style="background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.1);">
+                                    </div>
+                                    <div
+                                        style="background:rgba(255,255,255,.05);border:2px solid rgba(255,255,255,.08);">
+                                    </div>
+                                    <div style="background:var(--red);border:2px solid rgba(255,255,255,.15);"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="sticky-card" style="z-index:30;">
+                    <div class="card-inner">
+                        <div class="card-content">
+                            <h3 class="card-title">Growth<br>campaigns</h3>
+                            <div class="card-tags">
+                                <span class="tag">Paid ads</span>
+                                <span class="tag">Creative campaigns</span>
+                                <span class="tag">Email flows</span>
+                            </div>
+                            <p class="card-body">Campaigns engineered to fill the top of your funnel with the right
+                                audience — then
+                                guide them all the way to conversion.</p>
+                            <a href="services.html" class="card-link" style="text-decoration:none;">Find out more →</a>
+                        </div>
+                        <div class="card-visual cv3">
+                            <div class="vis-inner">
+                                <div style="display:flex;flex-direction:column;gap:12px;padding:48px;width:100%;">
+                                    <div
+                                        style="height:52px;background:rgba(0,0,0,.15);border:2px solid rgba(0,0,0,.2);">
+                                    </div>
+                                    <div
+                                        style="height:52px;background:rgba(0,0,0,.1);border:2px solid rgba(0,0,0,.15);width:80%;">
+                                    </div>
+                                    <div
+                                        style="height:52px;background:rgba(0,0,0,.07);border:2px solid rgba(0,0,0,.12);width:55%;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="sticky-card" style="z-index:40;">
+                    <div class="card-inner">
+                        <div class="card-content">
+                            <h3 class="card-title">Content<br>production</h3>
+                            <div class="card-tags">
+                                <span class="tag">Video ads</span>
+                                <span class="tag">UGC</span>
+                                <span class="tag">Social creative</span>
+                            </div>
+                            <p class="card-body">We produce thumb-stopping content for every channel — crafted with
+                                story, style, and
+                                a performance mindset.</p>
+                            <a href="services.html" class="card-link" style="text-decoration:none;">Find out more →</a>
+                        </div>
+                        <div class="card-visual cv4">
+                            <div class="vis-inner">
+                                <div
+                                    style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:48px;width:100%;height:100%;">
+                                    <div style="background:var(--yellow);border:2px solid rgba(255,255,255,.1);"></div>
+                                    <div
+                                        style="background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.1);">
+                                    </div>
+                                    <div
+                                        style="background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.08);grid-column:1/-1;height:80px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════ APPROACH ROWS ══════════ -->
+        <section id="approach">
+            <div class="approach-intro fade-up">
+                <p
+                    style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#aaa;margin-bottom:16px;">
+                    Funnel-first. Results-obsessed.</p>
+                <h2>How we work</h2>
+            </div>
+
+            <div class="rows-wrapper">
+                <div class="section-row" data-grad="linear-gradient(135deg,#FFD600,#F5A623)" data-label="Hook hard">
+                    <div style="padding-left:0;">
+                        <p class="row-num">01/</p>
+                        <h2 class="row-heading">Hook<br>hard.</h2>
+                    </div>
+                    <div class="row-right">
+                        <p class="row-body">The first second is everything. We craft entry points — ads, landing pages,
+                            search —
+                            that stop people mid-scroll and pull them into your world.</p>
+                    </div>
+                </div>
+
+                <div class="section-row" data-grad="linear-gradient(135deg,#E63946,#c02030)" data-label="Build trust">
+                    <div>
+                        <p class="row-num">02/</p>
+                        <h2 class="row-heading">Build<br>trust fast.</h2>
+                    </div>
+                    <div class="row-right">
+                        <p class="row-body">Great design and copy do the heavy lifting. We establish credibility quickly
+                            and make
+                            every next step feel natural, inevitable, and low-risk.</p>
+                    </div>
+                </div>
+
+                <div class="section-row" data-grad="linear-gradient(135deg,#3A86FF,#0057c2)" data-label="Guide to act">
+                    <div>
+                        <p class="row-num">03/</p>
+                        <h2 class="row-heading">Guide<br>to action.</h2>
+                    </div>
+                    <div class="row-right">
+                        <p class="row-body">Every element is a breadcrumb leading toward conversion. We design with
+                            intent — every
+                            CTA, every flow, every word is intentional.</p>
+                    </div>
+                </div>
+
+                <div class="section-row" data-grad="linear-gradient(135deg,#8338EC,#4e17a8)"
+                    data-label="Measure & grow">
+                    <div>
+                        <p class="row-num">04/</p>
+                        <h2 class="row-heading">Measure<br>&amp; grow.</h2>
+                    </div>
+                    <div class="row-right">
+                        <p class="row-body">We don't set and forget. Continuous testing, data loops, and iteration turn
+                            good funnels
+                            into great ones — and great ones into machines.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════ DARK SECTION ══════════ -->
+        <div class="dark-section">
+
+            <section id="work">
+                <div class="work-intro fade-up">
+                    <h2>OUR<br>WORK</h2>
+                    <p>Funnels that don't just look good — they perform. Here's proof that beauty and conversions aren't
+                        opposites.</p>
+                </div>
+
+                <div class="work-list">
+                    <div class="work-item fade-up">
+                        <div class="work-item-left">
+                            <span class="work-arrow">↗</span>
+                            <span class="work-name">FinFlow SaaS</span>
+                        </div>
+                        <span class="work-year">2025</span>
+                    </div>
+                    <div class="work-item fade-up fade-up-d1">
+                        <div class="work-item-left">
+                            <span class="work-arrow">↗</span>
+                            <span class="work-name">Karam Foods D2C</span>
+                        </div>
+                        <span class="work-year">2024</span>
+                    </div>
+                    <div class="work-item fade-up fade-up-d2">
+                        <div class="work-item-left">
+                            <span class="work-arrow">↗</span>
+                            <span class="work-name">TalentBridge HR Platform</span>
+                        </div>
+                        <span class="work-year">2024</span>
+                    </div>
+                    <div class="work-item fade-up fade-up-d3">
+                        <div class="work-item-left">
+                            <span class="work-arrow">↗</span>
+                            <span class="work-name">GreenCart Retail</span>
+                        </div>
+                        <span class="work-year">2023</span>
+                    </div>
+                </div>
+
+                <div class="work-grid fade-up">
+                    <div class="work-thumb wt1">
+                        <div class="wt-inner">FinFlow — 3x MQLs</div>
+                    </div>
+                    <div class="work-thumb wt2">
+                        <div class="wt-inner">Karam Foods — 180% ROAS</div>
+                    </div>
+                </div>
+
+                <a href="services.html" class="view-all-btn fade-up" style="text-decoration:none;">View all projects →</a>
+            </section>
+
+            <!-- ══════════ RESULTS ══════════ -->
+            <section id="results">
+                <h2 class="fade-up">OUR<br>RESULTS</h2>
+                <div class="stats-grid">
+                    <div class="stat-item fade-up">
+                        <div class="stat-num">+280%</div>
+                        <div class="stat-label">Average increase in qualified leads for our funnel clients</div>
+                    </div>
+                    <div class="stat-item fade-up fade-up-d1">
+                        <div class="stat-num">4.9★</div>
+                        <div class="stat-label">Average client rating across 60+ verified reviews</div>
+                    </div>
+                    <div class="stat-item fade-up fade-up-d2">
+                        <div class="stat-num">3.8×</div>
+                        <div class="stat-label">Average ROAS lift on paid campaigns within 90 days</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ══════════ CLIENTS ══════════ -->
+            <section id="clients">
+                <h2>Trusted by growing brands</h2>
+                <div class="clients-grid">
+                    <div class="client-name">FinFlow</div>
+                    <div class="client-name">Karam Foods</div>
+                    <div class="client-name">TalentBridge</div>
+                    <div class="client-name">GreenCart</div>
+                    <div class="client-name">Vymo</div>
+                    <div class="client-name">NestAway</div>
+                    <div class="client-name">Classplus</div>
+                    <div class="client-name">Fynd</div>
+                    <div class="client-name">Lead Square</div>
+                    <div class="client-name">Slintel</div>
+                    <div class="client-name">Airmeet</div>
+                    <div class="client-name">Smallcase</div>
+                    <div class="client-name">Rupeek</div>
+                    <div class="client-name">Teachmint</div>
+                    <div class="client-name">Unacademy</div>
+                </div>
+            </section>
+
+            <!-- ══════════ TESTIMONIAL ══════════ -->
+            <section id="testimonial">
+                <div class="testimonial-card fade-up">
+                    <div class="test-logo">
+                        <div class="test-icon">⚡</div>
+                        FINFLOW
+                    </div>
+                    <p class="test-quote">"Centle's TOBOFU team completely transformed how we think about acquisition.
+                        Our landing
+                        pages went from 2% to 9% conversion in 8 weeks. Remarkable work, remarkable people."</p>
+                    <p class="test-author">— Priya Mehta, Head of Growth, FinFlow</p>
+                </div>
+            </section>
+
+            <!-- ══════════ MARQUEE ══════════ -->
+            <section id="marquee-section">
+                <div class="marquee-track">
+                    <div class="marquee-item">TOP OF FUNNEL <span class="dot">✦</span></div>
+                    <div class="marquee-item">TOBOFU BY CENTLE <span class="dot">✦</span></div>
+                    <div class="marquee-item">CLICKS THAT CONVERT <span class="dot">✦</span></div>
+                    <div class="marquee-item">HYDERABAD &amp; BEYOND <span class="dot">✦</span></div>
+                    <div class="marquee-item">TOP OF FUNNEL <span class="dot">✦</span></div>
+                    <div class="marquee-item">TOBOFU BY CENTLE <span class="dot">✦</span></div>
+                    <div class="marquee-item">CLICKS THAT CONVERT <span class="dot">✦</span></div>
+                    <div class="marquee-item">HYDERABAD &amp; BEYOND <span class="dot">✦</span></div>
+                </div>
+            </section>
+
+            <!-- ══════════ BLOG ══════════ -->
+            <section id="blog">
+                <h2>Latest from the blog</h2>
+                <div class="blog-grid">
+                    <div class="blog-card fade-up">
+                        <div class="blog-img bi1"></div>
+                        <div class="blog-content">
+                            <p class="blog-tag">Strategy</p>
+                            <p class="blog-title">Why your landing page loses 80% of visitors in 5 seconds (and how to
+                                fix it)</p>
+                        </div>
+                    </div>
+                    <div class="blog-card fade-up fade-up-d1">
+                        <div class="blog-img bi2"></div>
+                        <div class="blog-content">
+                            <p class="blog-tag">Inspiration</p>
+                            <p class="blog-title">10 high-converting landing pages to learn from in 2025</p>
+                        </div>
+                    </div>
+                    <div class="blog-card fade-up fade-up-d2">
+                        <div class="blog-img bi3"></div>
+                        <div class="blog-content">
+                            <p class="blog-tag">Performance</p>
+                            <p class="blog-title">The anatomy of a TOBOFU funnel: from awareness to MQL in 3 steps</p>
+                        </div>
+                    </div>
+                    <div class="blog-card fade-up">
+                        <div class="blog-img bi4"></div>
+                        <div class="blog-content">
+                            <p class="blog-tag">Culture</p>
+                            <p class="blog-title">Centle named Top Creative Studio by G2 — what it means for our clients
+                            </p>
+                        </div>
+                    </div>
+                    <div class="blog-card fade-up fade-up-d1">
+                        <div class="blog-img bi5"></div>
+                        <div class="blog-content">
+                            <p class="blog-tag">Conversion</p>
+                            <p class="blog-title">Above-the-fold done right: the 6-second test every page must pass</p>
+                        </div>
+                    </div>
+                    <div class="blog-card fade-up fade-up-d2">
+                        <div class="blog-img bi6"></div>
+                        <div class="blog-content">
+                            <p class="blog-tag">Expertise</p>
+                            <p class="blog-title">What your 2026 growth brief should include (template inside)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ══════════ CTA / TOBOFUVERSE ══════════ -->
+            <section id="tobofuverse" class="tobofuverse">
+                <p class="tobofuverse-label">Built for the top of the funnel</p>
+                <div class="tobofuverse-headline">START CONVERTING</div>
+                <p class="tobofuverse-sub">Your next customer is already online. Let's make sure they find you, trust
+                    you, and
+                    choose you.</p>
+                <a href="contact.html" class="pill-btn" style="text-decoration:none;">Book a free strategy call →</a>
+            </section>
+
+            <!-- ══════════ FOOTER ══════════ -->
+            <footer>
+                <div class="footer-top">
+                    <div class="footer-logo-box">
+                        <div class="footer-logo-text">TOBOFU</div>
+                        <div class="footer-logo-by">by <em>Centle</em></div>
+                    </div>
+                    <a href="mailto:hello@centle.io" class="footer-email">hello@centle.io</a>
+                </div>
+
+                <div class="footer-mid">
+                    <div class="footer-socials">
+                        <a href="#" class="footer-social">LinkedIn ↗</a>
+                        <a href="#" class="footer-social">Instagram ↗</a>
+                        <a href="#" class="footer-social">Twitter ↗</a>
+                        <a href="#" class="footer-social">YouTube ↗</a>
+                    </div>
+                    <div class="footer-awards">
+                        <span class="footer-award">G2</span>
+                        <span class="footer-award">Clutch</span>
+                        <span class="footer-award">AWWWARDS</span>
+                        <span class="footer-award">CSSDA</span>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <div class="footer-nav">
+                        <a href="contact.html" class="footer-link">Contact</a>
+                        <a href="about.html" class="footer-link">FAQs</a>
+                        <a href="about.html" class="footer-link">Privacy Policy</a>
+                    </div>
+                    <button class="footer-newsletter">Sign up to our newsletter</button>
+                    <span class="footer-copyright">© TOBOFU by Centle 2026</span>
+                </div>
+
+                <div class="sectors-row">
+                    <span class="sectors-label">Sectors :</span>
+                    <span class="sector-tag">SaaS & Tech</span>
+                    <span class="sector-tag">D2C Brands</span>
+                    <span class="sector-tag">EdTech</span>
+                    <span class="sector-tag">FinTech</span>
+                    <span class="sector-tag">Healthcare</span>
+                    <span class="sector-tag">E-Commerce</span>
+                    <span class="sector-tag">B2B</span>
+                </div>
+            </footer>
+
+        </div><!-- /dark-section -->
+    </div><!-- /page -->
+
+    <script>
+        document.body.classList.add('loading');
+
+        function runLoader() {
+            const ring = document.getElementById('tlRing');
+            const dot = document.getElementById('tlDot');
+            const letters = document.querySelectorAll('.tl-letter');
+            const bar = document.getElementById('tlBar');
+            const barFill = document.getElementById('tlBarFill');
+            const pctEl = document.getElementById('tlPercent');
+            const loader = document.getElementById('tobofu-loader');
+            const cornerR = document.getElementById('tlCornerRight');
+
+            const spinAnim = anime({
+                targets: ring,
+                rotate: '20turn',
+                duration: 2500,
+                loop: true,
+                easing: 'easeInOutExpo',
+                autoplay: false
+            });
+
+            const quirk = anime({
+                targets: letters,
+                rotate: function () { return anime.random(-38, 38); },
+                duration: function () { return anime.random(900, 1800); },
+                delay: function (el, i) { return i * 350; },
+                direction: 'alternate',
+                easing: 'easeInOutExpo',
+                loop: true,
+                autoplay: false
+            });
+
+            anime.timeline({ easing: 'easeOutExpo' })
+                .add({
+                    targets: dot,
+                    scale: [0, 0.55],
+                    opacity: [0, 1],
+                    duration: 240,
+                    easing: 'easeOutBack'
+                })
+                .add({
+                    targets: ring,
+                    scale: [0, 1],
+                    duration: 270,
+                    easing: 'easeOutElastic(1, .5)',
+                    complete: function () { spinAnim.play(); }
+                })
+                .add({
+                    targets: letters,
+                    marginTop: ['18px', '0px'],
+                    opacity: [0, 0.9],
+                    delay: anime.stagger(80),
+                    duration: 190,
+                    easing: 'easeOutExpo',
+                    complete: function () { quirk.play(); }
+                }, '-=280')
+                .add({
+                    targets: pctEl,
+                    opacity: [0, 1],
+                    duration: 100
+                }, '-=180')
+                .add({
+                    targets: cornerR,
+                    opacity: [0, 1],
+                    duration: 150
+                }, '-=150')
+                .add({
+                    targets: bar,
+                    width: ['0%', '25%', '52%', '78%', '100%'],
+                    duration: 1200,
+                    easing: 'easeInOutQuart',
+                    update: function (anim) {
+                        pctEl.textContent = Math.round(anim.progress) + '%';
+                    }
+                })
+                .add({
+                    targets: bar,
+                    opacity: 0,
+                    duration: 80
+                })
+                .add({
+                    targets: barFill,
+                    height: '100%',
+                    duration: 300,
+                    easing: 'easeInOutQuart',
+                    complete: function () {
+                        spinAnim.pause();
+                        quirk.pause();
+                    }
+                })
+                .add({
+                    targets: loader,
+                    translateY: [0, '-100%'],
+                    duration: 500,
+                    easing: 'cubicBezier(0.76, 0, 0.24, 1)',
+                    complete: function () {
+                        loader.style.display = 'none';
+                        document.body.classList.remove('loading');
+                    }
+                });
+        }
+
+        // Dynamically load anime.js then run loader
+        (function () {
+            var s = document.createElement('script');
+            s.src = 'https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js';
+            s.onload = function () { runLoader(); };
+            s.onerror = function () {
+                document.getElementById('tobofu-loader').style.display = 'none';
+                document.body.classList.remove('loading');
+            };
+            document.head.appendChild(s);
+        })();
+    </script>
+    </script>
+
+</body>
+
+<script src="main.js"></script>
+
+</html>
