@@ -38,8 +38,12 @@ body{
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
   display:flex;align-items:center;justify-content:space-between;
-  padding:18px 48px;background:var(--white);border-bottom:var(--border);
+  padding:12px 48px;
+  background:var(--white);border-bottom:var(--border);
   transition:background .3s,border-color .3s;
+}
+nav.dark-nav .centle-logo span{
+  color:var(--yellow) !important;
 }
 nav.dark-nav{background:var(--black);border-bottom-color:rgba(255,255,255,.1)}
 .nav-left{display:flex;align-items:center;gap:16px}
