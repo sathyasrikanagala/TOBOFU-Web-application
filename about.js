@@ -183,3 +183,18 @@ const io = new IntersectionObserver(entries => {
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
 document.querySelectorAll('.reveal, .stat-item, .value-card').forEach(el => io.observe(el));
+
+/* ─── NAV THEME ─── */
+function updateNavTheme() {
+  const nav = document.getElementById('mainNav');
+  const darkSections = document.querySelectorAll('.ecosystem-section, .r-section');
+  let isDark = false;
+  darkSections.forEach(section => {
+    const rect = section.getBoundingClientRect();
+    if (rect.top <= nav.offsetHeight && rect.bottom > 0) isDark = true;
+  });
+  nav.classList.toggle('dark-nav', isDark);
+}
+
+window.addEventListener('scroll', updateNavTheme, { passive: true });
+updateNavTheme();
