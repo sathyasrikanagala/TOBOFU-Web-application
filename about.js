@@ -81,26 +81,6 @@ function drawLogoFace(ctx, cx, cy, W, H, scaleX) {
   ctx.lineTo(funnelX + funnelW * 0.55, fy + funnelH * 0.70); ctx.lineTo(funnelX + funnelW * 0.50, fy + funnelH);
   ctx.closePath(); ctx.fillStyle = '#FFD600'; ctx.fill();
   ctx.restore();
-  if (Math.abs(scaleX) > 0.3) {
-    ctx.save(); ctx.globalAlpha = Math.abs(scaleX);
-    ctx.font = `600 ${H * 0.055}px 'DM Sans', sans-serif`;
-    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    const byY = cy + hh - H * 0.09;
-    ctx.save(); ctx.transform(Math.abs(scaleX), 0, 0, 1, 0, 0);
-    const byText = 'by '; const centleText = 'Centle';
-    const totalW2 = ctx.measureText(byText + centleText).width * Math.abs(scaleX);
-    let curX = cx - totalW2 / 2;
-    ctx.fillStyle = '#888'; ctx.textAlign = 'left';
-    ctx.fillText(byText, curX / Math.abs(scaleX), byY);
-    const byW = ctx.measureText(byText).width;
-    const colors = ['#2EC4B6','#E63946','#111','#3A86FF','#FF6B2B','#2EC4B6'];
-    let lx = (curX / Math.abs(scaleX)) + byW;
-    centleText.split('').forEach((ch, i) => {
-      ctx.fillStyle = colors[i] || '#111'; ctx.fillText(ch, lx, byY);
-      lx += ctx.measureText(ch).width;
-    });
-    ctx.restore(); ctx.restore();
-  }
   ctx.restore(); ctx.restore();
 }
 
@@ -130,14 +110,23 @@ function makeCardSpinner(canvasId, opts = {}) {
     ctx.beginPath(); roundRect(ctx, cx - hw, cy - hh, hw * 2, hh * 2, 6 * Math.abs(cosA));
     ctx.strokeStyle = '#111'; ctx.lineWidth = 3 * Math.abs(cosA); ctx.stroke();
   }
-  if (Math.abs(cosA) > 0.08) {
+if (Math.abs(cosA) > 0.08) {
     ctx.save();
     ctx.transform(Math.abs(cosA), 0, 0, 1, cx, cy);
     const fontSize = CH * 0.22;
     ctx.font = `900 ${fontSize}px 'Bebas Neue', sans-serif`;
-    ctx.fillStyle = '#111111'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.fillText('CENTLE', 0, 0);
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    const colors = ['#2EC4B6','#E63946','#111','#3A86FF','#FF6B2B','#2EC4B6'];
+    const letters = 'CENTLE'.split('');
+    const totalW = letters.reduce((acc, ch) => acc + ctx.measureText(ch).width, 0);
+    let lx = -totalW / 2;
+    letters.forEach((ch, i) => {
+      ctx.fillStyle = colors[i] || '#111';
+      ctx.fillText(ch, lx + ctx.measureText(ch).width / 2, 0);
+      lx += ctx.measureText(ch).width;
+    });
     ctx.restore();
+  }
   }
   ctx.restore();
       ctx.restore();
