@@ -13,6 +13,9 @@ document.querySelectorAll('a,button').forEach(el => {
 });
 
 // ── CANVAS LOGO HELPERS ────────────────────────────────────────
+const centleLogoImg = new Image();
+centleLogoImg.src = 'centle.png';
+
 function roundRect(ctx, x, y, w, h, r) {
   r = Math.max(0, r);
   ctx.moveTo(x + r, y);
@@ -110,23 +113,14 @@ function makeCardSpinner(canvasId, opts = {}) {
         ctx.beginPath(); roundRect(ctx, cx - hw, cy - hh, hw * 2, hh * 2, 6 * Math.abs(cosA));
         ctx.strokeStyle = '#111'; ctx.lineWidth = 3 * Math.abs(cosA); ctx.stroke();
       }
-      if (Math.abs(cosA) > 0.08) {
-        ctx.save();
-        ctx.transform(Math.abs(cosA), 0, 0, 1, cx, cy);
-        const fontSize = CH * 0.22;
-        ctx.font = `900 ${fontSize}px 'Bebas Neue', sans-serif`;
-        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-        const colors = ['#2EC4B6','#E63946','#111','#3A86FF','#FF6B2B','#2EC4B6'];
-        const letters = 'CENTLE'.split('');
-        const totalW = letters.reduce((acc, ch) => acc + ctx.measureText(ch).width, 0);
-        let lx = -totalW / 2;
-        letters.forEach((ch, i) => {
-          ctx.fillStyle = colors[i] || '#111';
-          ctx.fillText(ch, lx + ctx.measureText(ch).width / 2, 0);
-          lx += ctx.measureText(ch).width;
-        });
-        ctx.restore();
-      }
+     if (Math.abs(cosA) > 0.08) {
+  ctx.save();
+  ctx.transform(Math.abs(cosA), 0, 0, 1, cx, cy);
+  const imgW = CW * 0.7 * Math.abs(cosA);
+  const imgH = imgW * 0.5;
+  ctx.drawImage(centleLogoImg, -imgW / 2, -imgH / 2, imgW, imgH);
+  ctx.restore();
+}
       ctx.restore();
     } else {
       drawLogoFace(ctx, cx, cy, CW, CH, cosA);
