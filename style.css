@@ -52,6 +52,9 @@ nav{
   padding:18px 48px;background:var(--white);border-bottom:var(--border);
   transition:background .3s,border-color .3s;
 }
+nav.dark-nav .centle-logo span{
+  color:var(--yellow) !important;
+}
 nav.dark-nav{background:var(--black);border-bottom-color:rgba(255,255,255,.1)}
 .nav-left{display:flex;align-items:center;gap:16px}
 .nav-logo-box{
