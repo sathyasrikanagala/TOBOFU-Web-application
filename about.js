@@ -81,7 +81,7 @@ function drawLogoFace(ctx, cx, cy, W, H, scaleX) {
   ctx.lineTo(funnelX + funnelW * 0.55, fy + funnelH * 0.70); ctx.lineTo(funnelX + funnelW * 0.50, fy + funnelH);
   ctx.closePath(); ctx.fillStyle = '#FFD600'; ctx.fill();
   ctx.restore();
-  ctx.restore(); ctx.restore();
+  ctx.restore(); 
 }
 
 function makeCardSpinner(canvasId, opts = {}) {
@@ -102,35 +102,35 @@ function makeCardSpinner(canvasId, opts = {}) {
     ctx.clearRect(0, 0, S, S);
     const cosA = Math.cos(angle + scrollBoost);
     if (cosA < 0) {
-  ctx.save();
-  const hw = (CW / 2) * Math.abs(cosA), hh = CH / 2;
-  ctx.beginPath(); roundRect(ctx, cx - hw, cy - hh, hw * 2, hh * 2, 6 * Math.abs(cosA));
-  ctx.fillStyle = '#FFD600'; ctx.fill();
-  if (Math.abs(cosA) > 0.05) {
-    ctx.beginPath(); roundRect(ctx, cx - hw, cy - hh, hw * 2, hh * 2, 6 * Math.abs(cosA));
-    ctx.strokeStyle = '#111'; ctx.lineWidth = 3 * Math.abs(cosA); ctx.stroke();
-  }
-if (Math.abs(cosA) > 0.08) {
-    ctx.save();
-    ctx.transform(Math.abs(cosA), 0, 0, 1, cx, cy);
-    const fontSize = CH * 0.22;
-    ctx.font = `900 ${fontSize}px 'Bebas Neue', sans-serif`;
-    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    const colors = ['#2EC4B6','#E63946','#111','#3A86FF','#FF6B2B','#2EC4B6'];
-    const letters = 'CENTLE'.split('');
-    const totalW = letters.reduce((acc, ch) => acc + ctx.measureText(ch).width, 0);
-    let lx = -totalW / 2;
-    letters.forEach((ch, i) => {
-      ctx.fillStyle = colors[i] || '#111';
-      ctx.fillText(ch, lx + ctx.measureText(ch).width / 2, 0);
-      lx += ctx.measureText(ch).width;
-    });
-    ctx.restore();
-  }
-  }
-  ctx.restore();
+      ctx.save();
+      const hw = (CW / 2) * Math.abs(cosA), hh = CH / 2;
+      ctx.beginPath(); roundRect(ctx, cx - hw, cy - hh, hw * 2, hh * 2, 6 * Math.abs(cosA));
+      ctx.fillStyle = '#FFD600'; ctx.fill();
+      if (Math.abs(cosA) > 0.05) {
+        ctx.beginPath(); roundRect(ctx, cx - hw, cy - hh, hw * 2, hh * 2, 6 * Math.abs(cosA));
+        ctx.strokeStyle = '#111'; ctx.lineWidth = 3 * Math.abs(cosA); ctx.stroke();
+      }
+      if (Math.abs(cosA) > 0.08) {
+        ctx.save();
+        ctx.transform(Math.abs(cosA), 0, 0, 1, cx, cy);
+        const fontSize = CH * 0.22;
+        ctx.font = `900 ${fontSize}px 'Bebas Neue', sans-serif`;
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        const colors = ['#2EC4B6','#E63946','#111','#3A86FF','#FF6B2B','#2EC4B6'];
+        const letters = 'CENTLE'.split('');
+        const totalW = letters.reduce((acc, ch) => acc + ctx.measureText(ch).width, 0);
+        let lx = -totalW / 2;
+        letters.forEach((ch, i) => {
+          ctx.fillStyle = colors[i] || '#111';
+          ctx.fillText(ch, lx + ctx.measureText(ch).width / 2, 0);
+          lx += ctx.measureText(ch).width;
+        });
+        ctx.restore();
+      }
       ctx.restore();
-    } else { drawLogoFace(ctx, cx, cy, CW, CH, cosA); }
+    } else {
+      drawLogoFace(ctx, cx, cy, CW, CH, cosA);
+    }
     const edgeThick = (CW * 0.04) * (1 - Math.abs(cosA));
     if (edgeThick > 0.5) {
       const hw = (CW / 2) * Math.abs(cosA), hh = CH / 2;
@@ -142,11 +142,6 @@ if (Math.abs(cosA) > 0.08) {
       ctx.fill(); ctx.restore();
     }
   }
-  let rafId;
-  function tick() { angle += speed; frame(); rafId = requestAnimationFrame(tick); }
-  tick();
-  return { setScrollBoost: v => { scrollBoost = v; }, stop: () => cancelAnimationFrame(rafId) };
-}
 
 const heroSpinner = makeCardSpinner('spinCanvas', { size: 480, speed: 0.014, startAngle: 0.3 });
 const valueSpinner = makeCardSpinner('purpleCanvas', { size: 340, speed: 0.009, startAngle: 1.8 });
