@@ -88,3 +88,10 @@ if (mobileMenuBtn && mobileMenu) {
         mobileMenu.classList.toggle('open');
     });
 }
+/* ─── NAV THEME ─────────────────────────────────────────── */
+function updateNavTheme() {
+  const darkSection = document.querySelector('.dark-section');
+  if (!darkSection) return;
+  const rect = darkSection.getBoundingClientRect();
+  document.getElementById('mainNav').classList.toggle('dark-nav', rect.top <= 80);
+}
