@@ -142,6 +142,11 @@ function makeCardSpinner(canvasId, opts = {}) {
       ctx.fill(); ctx.restore();
     }
   }
+  let rafId;
+  function tick() { angle += speed; frame(); rafId = requestAnimationFrame(tick); }
+  tick();
+  return { setScrollBoost: v => { scrollBoost = v; }, stop: () => cancelAnimationFrame(rafId) };
+}
 
 const heroSpinner = makeCardSpinner('spinCanvas', { size: 480, speed: 0.014, startAngle: 0.3 });
 const valueSpinner = makeCardSpinner('purpleCanvas', { size: 340, speed: 0.009, startAngle: 1.8 });
