@@ -30,10 +30,15 @@ function roundRect(ctx, x, y, w, h, r) {
 function drawLogoFace(ctx, cx, cy, W, H, scaleX) {
   const hw = (W / 2) * Math.abs(scaleX);
   const hh = H / 2;
+  const facingRight = scaleX >= 0;
   const x0 = cx - hw, y0 = cy - hh;
   const w = hw * 2, h = hh * 2;
   ctx.save();
-  // all yellow card, no white layer
+  if (Math.abs(scaleX) > 0.15) {
+    const shadowOff = 8 * Math.abs(scaleX) * (facingRight ? 1 : -1);
+    ctx.beginPath(); roundRect(ctx, x0 + shadowOff, y0 + 8, w, h, 6);
+    ctx.fillStyle = '#FFD600'; ctx.fill();
+  }
   ctx.beginPath(); roundRect(ctx, x0, y0, w, h, 6 * Math.abs(scaleX));
   ctx.fillStyle = '#FFD600'; ctx.fill();
   if (hw > 2) {
@@ -42,13 +47,61 @@ function drawLogoFace(ctx, cx, cy, W, H, scaleX) {
   }
   if (Math.abs(scaleX) < 0.08) { ctx.restore(); return; }
   ctx.save();
+  ctx.beginPath(); roundRect(ctx, x0 + 1, y0 + 1, w - 2, h - 2, Math.max(1, 6 * Math.abs(scaleX) - 1));
+  ctx.clip();
+  const pad = w * 0.08;
+  ctx.fillStyle = '#FFD600'; ctx.fillRect(x0 + pad, y0 + pad, w - pad, h - pad * 0.5);
+  ctx.save();
   ctx.transform(Math.abs(scaleX), 0, 0, 1, cx, cy);
-  const fontSize = H * 0.22;
+  const fontSize = H * 0.18;
   ctx.font = `900 ${fontSize}px 'Bebas Neue', sans-serif`;
   ctx.fillStyle = '#111111'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  ctx.fillText('TOBOFU', 0, 0);
+  const lineH = fontSize * 1.05;
+  const totalTextH = lineH * 3;
+  const textTop = -totalTextH / 2 + lineH * 0.1;
+  ctx.fillText('TO', 0, textTop);
+  ctx.fillText('BO', 0, textTop + lineH);
+  ctx.textAlign = 'left';
+  const fWidth = ctx.measureText('F').width;
+  const rowY = textTop + lineH * 2;
+  const rowX = -W * 0.28 * Math.abs(scaleX);
+  ctx.fillText('F', rowX, rowY);
+  const funnelX = rowX + fWidth + W * 0.04 * Math.abs(scaleX);
+  const funnelW = fontSize * 0.72;
+  const funnelH = fontSize * 0.85;
+  const fy = rowY - funnelH / 2;
+  ctx.beginPath(); ctx.moveTo(funnelX, fy); ctx.lineTo(funnelX + funnelW, fy);
+  ctx.lineTo(funnelX + funnelW * 0.65, fy + funnelH * 0.38); ctx.lineTo(funnelX + funnelW * 0.35, fy + funnelH * 0.38);
+  ctx.closePath(); ctx.fillStyle = '#3A86FF'; ctx.fill();
+  ctx.beginPath(); ctx.moveTo(funnelX + funnelW * 0.35, fy + funnelH * 0.38);
+  ctx.lineTo(funnelX + funnelW * 0.65, fy + funnelH * 0.38);
+  ctx.lineTo(funnelX + funnelW * 0.55, fy + funnelH * 0.70); ctx.lineTo(funnelX + funnelW * 0.45, fy + funnelH * 0.70);
+  ctx.closePath(); ctx.fillStyle = '#E63946'; ctx.fill();
+  ctx.beginPath(); ctx.moveTo(funnelX + funnelW * 0.45, fy + funnelH * 0.70);
+  ctx.lineTo(funnelX + funnelW * 0.55, fy + funnelH * 0.70); ctx.lineTo(funnelX + funnelW * 0.50, fy + funnelH);
+  ctx.closePath(); ctx.fillStyle = '#FFD600'; ctx.fill();
   ctx.restore();
-  ctx.restore();
+  if (Math.abs(scaleX) > 0.3) {
+    ctx.save(); ctx.globalAlpha = Math.abs(scaleX);
+    ctx.font = `600 ${H * 0.055}px 'DM Sans', sans-serif`;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    const byY = cy + hh - H * 0.09;
+    ctx.save(); ctx.transform(Math.abs(scaleX), 0, 0, 1, 0, 0);
+    const byText = 'by '; const centleText = 'Centle';
+    const totalW2 = ctx.measureText(byText + centleText).width * Math.abs(scaleX);
+    let curX = cx - totalW2 / 2;
+    ctx.fillStyle = '#888'; ctx.textAlign = 'left';
+    ctx.fillText(byText, curX / Math.abs(scaleX), byY);
+    const byW = ctx.measureText(byText).width;
+    const colors = ['#2EC4B6','#E63946','#111','#3A86FF','#FF6B2B','#2EC4B6'];
+    let lx = (curX / Math.abs(scaleX)) + byW;
+    centleText.split('').forEach((ch, i) => {
+      ctx.fillStyle = colors[i] || '#111'; ctx.fillText(ch, lx, byY);
+      lx += ctx.measureText(ch).width;
+    });
+    ctx.restore(); ctx.restore();
+  }
+  ctx.restore(); ctx.restore();
 }
 
 function makeCardSpinner(canvasId, opts = {}) {
