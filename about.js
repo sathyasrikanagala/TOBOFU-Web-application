@@ -14,7 +14,7 @@ document.querySelectorAll('a,button').forEach(el => {
 
 // ── CANVAS LOGO HELPERS ────────────────────────────────────────
 const centleLogoImg = new Image();
-centleLogoImg.src = 'centle.png';
+centleLogoImg.src = 'centle.avif';
 
 function roundRect(ctx, x, y, w, h, r) {
   r = Math.max(0, r);
