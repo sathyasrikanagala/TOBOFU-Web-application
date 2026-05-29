@@ -148,7 +148,7 @@ function makeCardSpinner(canvasId, opts = {}) {
   return { setScrollBoost: v => { scrollBoost = v; }, stop: () => cancelAnimationFrame(rafId) };
 }
 
-const heroSpinner = makeCardSpinner('spinCanvas', { size: 320, speed: 0.014, startAngle: 0.3 });
+const heroSpinner = makeCardSpinner('spinCanvas', { size: 400, speed: 0.014, startAngle: 0.3 });
 const valueSpinner = makeCardSpinner('purpleCanvas', { size: 340, speed: 0.009, startAngle: 1.8 });
 
 function setTrackHeight() {
