@@ -56,51 +56,77 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
 
-    <!-- ── HERO OVERLAP FIX ── -->
+    <!-- ── HERO LAYOUT FIX ── -->
     <style>
-      /* Remove absolute positioning from hero-sub so it flows
-         below the headline instead of floating over the spinning box */
+      /*
+       * Convert hero to a grid:
+       *   Row 1: headline (spans full width)
+       *   Row 2: awards (left) + sub-text (right)
+       * This eliminates all overlap — nothing is positioned absolute.
+       */
+      #hero {
+        display: grid !important;
+        grid-template-rows: 1fr auto;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+          "headline headline"
+          "awards   sub";
+        padding: 120px 60px 60px !important;
+        align-items: end;
+        gap: 0;
+      }
+
+      .hero-headline {
+        grid-area: headline;
+        align-self: end;
+        margin-bottom: 40px;
+      }
+
+      .hero-awards {
+        grid-area: awards;
+        position: static !important;
+        left: auto !important;
+        bottom: auto !important;
+        align-self: end;
+        padding-bottom: 4px;
+      }
+
       .hero-sub {
+        grid-area: sub;
         position: static !important;
         right: auto !important;
         bottom: auto !important;
-        max-width: 420px;
-        margin-top: 32px;
-        align-self: flex-start;
+        max-width: 380px;
+        margin-left: auto;
+        align-self: end;
+        padding-bottom: 4px;
+        font-size: 17px;
       }
 
-      /* Give the hero a flex column layout so sub sits naturally below headline */
-      #hero {
-        flex-direction: column;
-        justify-content: flex-end;
-        padding-bottom: 100px;
-      }
-
-      /* Keep awards row anchored at the bottom-left as before */
-      .hero-awards {
+      /* bg text stays decorative / absolute as-is */
+      .hero-bg-text {
         position: absolute;
-        left: 60px;
-        bottom: 44px;
+        pointer-events: none;
       }
 
-      /* Prevent the spinning O-box from being taller than the headline line-height */
-      .hero-o-wrap {
-        vertical-align: middle;
-        position: relative;
-        top: -4px;
-      }
-
-      /* On narrower screens, hero-sub goes full-width */
       @media (max-width: 900px) {
+        #hero {
+          grid-template-columns: 1fr !important;
+          grid-template-areas:
+            "headline"
+            "sub"
+            "awards" !important;
+          padding: 100px 24px 48px !important;
+          gap: 28px;
+        }
         .hero-sub {
-          max-width: 100%;
-          margin-top: 24px;
+          max-width: 100% !important;
+          margin-left: 0 !important;
+          font-size: 15px;
         }
         .hero-awards {
-          position: static;
-          margin-top: 48px;
           flex-wrap: wrap;
-          gap: 20px;
+          gap: 16px;
         }
       }
     </style>
