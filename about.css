@@ -425,7 +425,11 @@ nav.dark-nav #mobileMenuBtn{color:var(--yellow)}
   .nav-links-center{display:none}
 
   .hero-inner{width:100%;padding:0 24px;padding-top:80px}
-  .hero::before{width:100%;height:40%;top:auto;bottom:0;transform:none;left:0}
+ .hero::before{
+  width:90%;height:100%;
+  top:50%;left:auto;right:-20px;
+  transform:translateY(-50%);
+}
   .logo-track{display:none}
 
   .about-intro{padding:60px 24px;min-height:auto}
