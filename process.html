@@ -23,12 +23,12 @@
 
 <!-- NAV -->
 <nav id="mainNav">
- <div class="nav-left">
-  <div class="centle-logo" style="display:flex;align-items:center;gap:10px;">
-    <img src="centle-logo.png" alt="TOBOFU by Centle" style="height:40px;width:auto;display:block;" />
-    <span style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--black);">TOBOFU</span>
+  <div class="nav-left">
+    <div class="centle-logo" style="display:flex;align-items:center;gap:10px;">
+      <img src="centle-logo.png" alt="TOBOFU by Centle" style="height:40px;width:auto;display:block;" />
+      <span style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--black);">TOBOFU</span>
+    </div>
   </div>
-</div>
   <ul class="nav-links-center">
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About</a></li>
@@ -37,8 +37,24 @@
   </ul>
   <div class="nav-right">
     <a href="contact.html" class="pill-btn">Get Started ↗</a>
+    <button id="mobileMenuBtn" aria-label="Menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
   </div>
 </nav>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="tobofu-services.html">Services</a>
+  <a href="process.html">Process</a>
+  <a href="contact.html">Get Started ↗</a>
+</div>
 
 <!-- HERO -->
 <section class="hero" id="heroSection">
