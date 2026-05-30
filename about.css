@@ -424,11 +424,18 @@ nav.dark-nav #mobileMenuBtn{color:var(--yellow)}
   nav{padding:10px 20px}
   .nav-links-center{display:none}
 
-  .hero-inner{width:100%;padding:0 24px;padding-top:80px}
- .hero::before{
-  width:90%;height:100%;
-  top:50%;left:auto;right:-20px;
-  transform:translateY(-50%);
+  .hero{
+  min-height:100vh;
+  background:var(--yellow);
+  display:flex;align-items:center;
+}
+.hero::before{display:none}
+.hero-inner{
+  width:100%;
+  padding:100px 24px 60px;
+}
+.hero-bigword{
+  font-size:clamp(80px,20vw,140px);
 }
   .logo-track{display:none}
 
