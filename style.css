@@ -2069,3 +2069,71 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
 @media(max-width:768px){
   #mobileMenuBtn{display:block !important}
 }
+/* ─── RESPONSIVE: SERVICES PAGE ─── */
+@media(max-width:768px){
+
+  /* NAV */
+  nav{padding:10px 20px}
+  .nav-links-center{display:none}
+  .pill-btn{padding:8px 16px;font-size:12px}
+
+  /* HERO */
+  .hero{grid-template-columns:1fr;padding-top:70px}
+  .hero-right{display:none}
+  .hero-left{padding:48px 24px}
+  .hero h1{font-size:clamp(3rem,10vw,5rem)}
+  .hero-sub{font-size:.95rem;max-width:100%}
+  .hero-btns{flex-direction:column;gap:12px}
+  .btn-primary,.btn-outline{width:100%;justify-content:center;padding:14px 24px}
+
+  /* FLASHCARD SECTION */
+  .flashcard-section{padding:60px 24px}
+  .flashcard-layout{grid-template-columns:1fr;gap:32px}
+  .stack{height:400px;max-width:100%}
+  .card{width:88%}
+  .card-inner{padding:28px 20px;gap:10px}
+  .card-label{font-size:1.4rem}
+  .service-list{margin-top:0}
+  .sli-name{font-size:1.1rem}
+
+  /* FEATURED BAND */
+  .featured-band{
+    grid-template-columns:1fr;
+    padding:48px 24px;gap:32px;
+  }
+  .featured-metrics{grid-template-columns:1fr 1fr}
+
+  /* PROCESS */
+  .process{padding:60px 24px}
+  .process-steps{grid-template-columns:1fr 1fr}
+  .process-step{padding:28px 18px}
+  .step-connector{display:none}
+
+  /* WHY */
+  .why{padding:60px 24px}
+  .why-grid{grid-template-columns:1fr;margin-top:40px}
+  .why-item{padding:28px 20px}
+  .why-item:nth-child(2n){border-right:var(--border)}
+  .why-item:nth-child(n+5){border-bottom:var(--border)}
+  .why-item:last-child{border-bottom:none}
+
+  /* CTA */
+  .cta-section{padding:60px 24px}
+  .cta-btns{flex-direction:column;align-items:center;gap:12px}
+  .cta-btns .btn-primary,
+  .cta-btns .btn-outline{width:100%;justify-content:center}
+
+  /* FOOTER */
+  footer{
+    padding:40px 24px;
+    flex-direction:column;
+    gap:20px;text-align:center;
+  }
+  .footer-links{flex-wrap:wrap;justify-content:center;gap:16px}
+}
+
+@media(max-width:480px){
+  .process-steps{grid-template-columns:1fr}
+  .featured-metrics{grid-template-columns:1fr}
+  .stack{height:360px}
+}
