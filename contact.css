@@ -300,3 +300,70 @@ footer{
   .app-title span{margin-right:12px}
   .app-title::after{display:none}
 }
+/* ─── MOBILE MENU ─── */
+#mobileMenuBtn{
+  display:none;
+  background:none;border:none;
+  cursor:pointer;padding:6px;
+  color:var(--black);
+}
+nav.dark-nav #mobileMenuBtn{color:var(--yellow)}
+
+#mobileMenu{
+  display:none;
+  position:fixed;top:65px;left:0;right:0;
+  background:var(--white);
+  border-bottom:var(--border);
+  flex-direction:column;
+  z-index:199;
+  padding:16px 0;
+}
+#mobileMenu.open{display:flex}
+#mobileMenu a{
+  padding:14px 24px;
+  font-size:15px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.06em;
+  color:var(--black);text-decoration:none;
+  border-bottom:1px solid rgba(0,0,0,.06);
+  transition:background .15s;
+}
+#mobileMenu a:last-child{
+  color:var(--yellow);background:var(--black);
+  border-bottom:none;margin:8px 16px 0;
+  text-align:center;padding:12px;
+}
+#mobileMenu a:hover{background:var(--yellow)}
+
+/* ─── RESPONSIVE: CONTACT PAGE ─── */
+@media(max-width:768px){
+  #mobileMenuBtn{display:block}
+  .pill-btn{display:none}
+  nav{padding:10px 20px}
+  .nav-links-center{display:none}
+
+  .topbar{font-size:.6rem;padding:8px 16px}
+
+  .contact-section{
+    padding-top:calc(36px + 65px + 24px);
+    padding-bottom:40px;
+    padding-left:16px;
+    padding-right:16px;
+    align-items:flex-start;
+  }
+
+  .screen-body{flex-direction:column}
+  .screen-body-item{padding:32px 24px}
+  .screen-body-item.left{margin-bottom:0;border-bottom:1px solid rgba(255,255,255,.08)}
+  .app-title{flex-direction:row;gap:12px}
+  .app-title::after{display:none}
+  .app-contact{margin-top:16px}
+
+  footer{padding:40px 16px 0}
+  .footer-inner{grid-template-columns:1fr 1fr;gap:24px}
+  .footer-bottom{flex-direction:column;gap:8px;text-align:center;padding:16px 0}
+}
+
+@media(max-width:420px){
+  .footer-inner{grid-template-columns:1fr}
+  .screen-body-item{padding:24px 16px}
+}
