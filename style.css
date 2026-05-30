@@ -2137,3 +2137,41 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
   .featured-metrics{grid-template-columns:1fr}
   .stack{height:360px}
 }
+/* ─── MOBILE MENU ─── */
+#mobileMenuBtn{
+  display:none;
+  background:none;border:none;
+  cursor:pointer;padding:6px;
+  color:var(--black);
+}
+nav.dark-nav #mobileMenuBtn{color:var(--yellow)}
+
+#mobileMenu{
+  display:none;
+  position:fixed;top:65px;left:0;right:0;
+  background:var(--white);
+  border-bottom:var(--border);
+  flex-direction:column;
+  z-index:199;
+  padding:16px 0;
+}
+#mobileMenu.open{display:flex}
+#mobileMenu a{
+  padding:14px 24px;
+  font-size:15px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.06em;
+  color:var(--black);text-decoration:none;
+  border-bottom:1px solid rgba(0,0,0,.06);
+  transition:background .15s;
+}
+#mobileMenu a:last-child{
+  color:var(--yellow);background:var(--black);
+  border-bottom:none;margin:8px 16px 0;
+  text-align:center;padding:12px;
+}
+#mobileMenu a:hover{background:var(--yellow)}
+
+@media(max-width:768px){
+  #mobileMenuBtn{display:block}
+  .pill-btn{display:none}
+}
