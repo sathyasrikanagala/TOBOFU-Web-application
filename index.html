@@ -55,6 +55,55 @@
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+
+    <!-- ── HERO OVERLAP FIX ── -->
+    <style>
+      /* Remove absolute positioning from hero-sub so it flows
+         below the headline instead of floating over the spinning box */
+      .hero-sub {
+        position: static !important;
+        right: auto !important;
+        bottom: auto !important;
+        max-width: 420px;
+        margin-top: 32px;
+        align-self: flex-start;
+      }
+
+      /* Give the hero a flex column layout so sub sits naturally below headline */
+      #hero {
+        flex-direction: column;
+        justify-content: flex-end;
+        padding-bottom: 100px;
+      }
+
+      /* Keep awards row anchored at the bottom-left as before */
+      .hero-awards {
+        position: absolute;
+        left: 60px;
+        bottom: 44px;
+      }
+
+      /* Prevent the spinning O-box from being taller than the headline line-height */
+      .hero-o-wrap {
+        vertical-align: middle;
+        position: relative;
+        top: -4px;
+      }
+
+      /* On narrower screens, hero-sub goes full-width */
+      @media (max-width: 900px) {
+        .hero-sub {
+          max-width: 100%;
+          margin-top: 24px;
+        }
+        .hero-awards {
+          position: static;
+          margin-top: 48px;
+          flex-wrap: wrap;
+          gap: 20px;
+        }
+      }
+    </style>
 </head>
 
 <body>
