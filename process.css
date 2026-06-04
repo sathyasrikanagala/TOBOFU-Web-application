@@ -418,7 +418,7 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
   font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--yellow);
   letter-spacing:.5px;margin-bottom:8px;
 }
-.tl-phase-sub{font-size:.82rem;line-height:1.6;color:rgba(255,215,0,.38)}
+.tl-phase-sub{font-size:.82rem;line-height:1.6;color:rgba(255,215,0,.75)}
 .tl-deliverable{
   padding:32px 36px;display:flex;align-items:center;flex-wrap:wrap;gap:8px;
 }
