@@ -145,15 +145,14 @@ function makeCardSpinner(canvasId, opts = {}) {
   return { setScrollBoost: v => { scrollBoost = v; }, stop: () => cancelAnimationFrame(rafId) };
 }
 
-const heroSpinner = makeCardSpinner('spinCanvas', { size: 400, speed: 0.014, startAngle: 0.3 });
+const heroSpinner  = makeCardSpinner('spinCanvas',   { size: 400, speed: 0.014, startAngle: 0.3 });
 const valueSpinner = makeCardSpinner('purpleCanvas', { size: 340, speed: 0.009, startAngle: 1.8 });
 
 // ── SPINNER AMBIENT ELEMENTS ───────────────────────────────────
-(function() {
+(function () {
   const sticky = document.querySelector('.logo-sticky');
   if (!sticky) return;
 
-  // Orbit rings
   [{sz:370,op:1},{sz:510,op:0.4}].forEach(({sz,op}) => {
     const r = document.createElement('div');
     r.className = 'orbit-ring';
@@ -161,34 +160,25 @@ const valueSpinner = makeCardSpinner('purpleCanvas', { size: 340, speed: 0.009, 
     sticky.appendChild(r);
   });
 
-  // Clock-position elements
-  // FIX: 12 o'clock bumped from top:6% to top:18% so it clears the nav bar (~65px)
   const els = [
-    // 12 o'clock — pushed down to clear nav
-    { type:'tag', text:'FULL FUNNEL', cls:'yl',
+    { type:'tag',    text:'FULL FUNNEL',    cls:'yl',
       css:'top:18%;left:50%;transform:translateX(-50%);',
       anim:'spinFloatUp 4.4s ease-in-out 0s infinite' },
-    // 1–2 o'clock
-    { type:'metric', num:'1M+', lbl:'Users Scaled',
+    { type:'metric', num:'1M+',  lbl:'Users Scaled',
       css:'top:18%;right:6%;',
       anim:'spinFloatDown 4.0s ease-in-out 0.6s infinite' },
-    // 3 o'clock
-    { type:'tag', text:'CONTENT', cls:'blk',
+    { type:'tag',    text:'CONTENT', cls:'blk',
       css:'top:50%;right:2%;transform:translateY(-50%);',
       anim:'spinFloatUp 4.7s ease-in-out 0.3s infinite' },
-    // 4–5 o'clock
     { type:'metric', num:'−30%', lbl:'Lower CAC',
       css:'bottom:18%;right:6%;',
       anim:'spinFloatUp 3.8s ease-in-out 1.0s infinite' },
-    // 7–8 o'clock
     { type:'metric', num:'2.5×', lbl:'Conversion Rate',
       css:'bottom:18%;left:6%;',
       anim:'spinFloatUp 4.2s ease-in-out 0.8s infinite' },
-    // 9 o'clock
-    { type:'tag', text:'PERFORMANCE', cls:'yl',
+    { type:'tag',    text:'PERFORMANCE', cls:'yl',
       css:'top:50%;left:2%;transform:translateY(-50%);',
       anim:'spinFloatDown 4.5s ease-in-out 0.1s infinite' },
-    // 10–11 o'clock
     { type:'metric', num:'400%', lbl:'User Growth',
       css:'top:18%;left:6%;',
       anim:'spinFloatDown 3.9s ease-in-out 0.4s infinite' },
@@ -207,12 +197,10 @@ const valueSpinner = makeCardSpinner('purpleCanvas', { size: 340, speed: 0.009, 
     sticky.appendChild(el);
   });
 
-  // Diagonal gap-fill dots
-  [
-    {s:8,  c:'#FFD600', css:'top:28%;right:19%;', a:'spinFloatUp 3.6s ease-in-out 0.2s infinite'},
-    {s:10, c:'#3A86FF', css:'bottom:28%;right:19%;', a:'spinFloatDown 4.1s ease-in-out 0.9s infinite'},
-    {s:7,  c:'#E63946', css:'bottom:28%;left:19%;',  a:'spinFloatDown 3.7s ease-in-out 0.5s infinite'},
-    {s:9,  c:'#0D0D0D', css:'top:28%;left:19%;',    a:'spinFloatUp 4.3s ease-in-out 1.1s infinite'},
+  [{s:8,c:'#FFD600',css:'top:28%;right:19%;',a:'spinFloatUp 3.6s ease-in-out 0.2s infinite'},
+   {s:10,c:'#3A86FF',css:'bottom:28%;right:19%;',a:'spinFloatDown 4.1s ease-in-out 0.9s infinite'},
+   {s:7,c:'#E63946',css:'bottom:28%;left:19%;',a:'spinFloatDown 3.7s ease-in-out 0.5s infinite'},
+   {s:9,c:'#0D0D0D',css:'top:28%;left:19%;',a:'spinFloatUp 4.3s ease-in-out 1.1s infinite'},
   ].forEach(({s,c,css,a}) => {
     const d = document.createElement('div');
     d.className = 'spin-dot';
@@ -220,7 +208,6 @@ const valueSpinner = makeCardSpinner('purpleCanvas', { size: 340, speed: 0.009, 
     sticky.appendChild(d);
   });
 
-  // Mini funnel icon — between 12 and 1 o'clock
   const f = document.createElementNS('http://www.w3.org/2000/svg','svg');
   f.setAttribute('viewBox','0 0 28 34');
   f.setAttribute('width','28'); f.setAttribute('height','34');
@@ -232,7 +219,6 @@ const valueSpinner = makeCardSpinner('purpleCanvas', { size: 340, speed: 0.009, 
     <polygon points="11,25 17,25 14,33" fill="#0D0D0D"/>`;
   sticky.appendChild(f);
 
-  // Ticker bar
   const ticker = document.createElement('div');
   ticker.className = 'spin-ticker';
   ticker.style.position = 'absolute';
@@ -254,8 +240,8 @@ window.addEventListener('resize', setTrackHeight);
 window.addEventListener('scroll', () => {
   const y = window.scrollY;
   if (heroSpinner) heroSpinner.setScrollBoost(y * 0.003);
-  const fw1 = document.getElementById('fw1');
-  const fw2 = document.getElementById('fw2');
+  const fw1  = document.getElementById('fw1');
+  const fw2  = document.getElementById('fw2');
   const fSec = document.querySelector('.footer-cta');
   if (fw1 && fw2 && fSec) {
     const rect = fSec.getBoundingClientRect();
@@ -272,12 +258,12 @@ const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-document.querySelectorAll('.reveal, .stat-item, .value-card').forEach(el => io.observe(el));
+document.querySelectorAll('.reveal, .stat-item').forEach(el => io.observe(el));
 
 // ── NAV THEME ──────────────────────────────────────────────────
 function updateNavTheme() {
   const nav = document.getElementById('mainNav');
-  const darkSections = document.querySelectorAll('.ecosystem-section, .r-section');
+  const darkSections = document.querySelectorAll('.ecosystem-section, .r-section, .values-section');
   let isDark = false;
   darkSections.forEach(section => {
     const rect = section.getBoundingClientRect();
@@ -290,12 +276,57 @@ updateNavTheme();
 
 // ── MOBILE MENU ────────────────────────────────────────────────
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const mobileMenu = document.getElementById('mobileMenu');
+const mobileMenu    = document.getElementById('mobileMenu');
 if (mobileMenuBtn && mobileMenu) {
-  mobileMenuBtn.addEventListener('click', () => {
-    mobileMenu.classList.toggle('open');
-  });
+  mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('open'));
   mobileMenu.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => mobileMenu.classList.remove('open'));
   });
 }
+
+// ── 3D VALUES CARD HOVER EFFECT ────────────────────────────────
+(function () {
+  const angle = 20;
+
+  const lerp = (s, e, a) => (1 - a) * s + a * e;
+
+  const remap = (v, oldMax, newMax) => {
+    const nv = ((v + oldMax) * (newMax * 2)) / (oldMax * 2) - newMax;
+    return Math.min(Math.max(nv, -newMax), newMax);
+  };
+
+  const cards = document.querySelectorAll('.card');
+
+  cards.forEach(e => {
+    e.dataset.rotateX = 0;
+    e.dataset.rotateY = 0;
+
+    e.addEventListener('mousemove', event => {
+      const rect   = e.getBoundingClientRect();
+      const cx     = (rect.left + rect.right)  / 2;
+      const cy     = (rect.top  + rect.bottom) / 2;
+      const posX   = event.clientX - cx;
+      const posY   = event.clientY - cy;
+      e.dataset.rotateX =  remap(posX, rect.width  / 2, angle);
+      e.dataset.rotateY = -remap(posY, rect.height / 2, angle);
+    });
+
+    e.addEventListener('mouseout', () => {
+      e.dataset.rotateX = 0;
+      e.dataset.rotateY = 0;
+    });
+  });
+
+  const update = () => {
+    cards.forEach(e => {
+      let curX = parseFloat(e.style.getPropertyValue('--rotateY')) || 0;
+      let curY = parseFloat(e.style.getPropertyValue('--rotateX')) || 0;
+      const x  = lerp(curX, parseFloat(e.dataset.rotateX) || 0, 0.07);
+      const y  = lerp(curY, parseFloat(e.dataset.rotateY) || 0, 0.07);
+      e.style.setProperty('--rotateY', x + 'deg');
+      e.style.setProperty('--rotateX', y + 'deg');
+    });
+  };
+
+  setInterval(update, 1000 / 60);
+})();
