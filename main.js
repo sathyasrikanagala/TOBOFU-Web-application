@@ -100,3 +100,33 @@ function updateNavTheme() {
     nav.classList.remove('dark-nav');
   }
 }
+/* ─── HERO WAVE MORPH ─── */
+(function () {
+    const wave1 = document.getElementById('wave1');
+    const wave2 = document.getElementById('wave2');
+    if (!wave1 || !wave2) return;
+
+    const path1 = wave1.getAttribute('d');
+    const path2 = wave2.getAttribute('d');
+
+    let t = 0;
+    let forward = true;
+
+    function lerp(a, b, f) { return a + (b - a) * f; }
+
+    // Parse both paths into point arrays for simple morph
+    function animateWave() {
+        t += forward ? 0.008 : -0.008;
+        if (t >= 1) forward = false;
+        if (t <= 0) forward = true;
+
+        // Smooth oscillation on wave1 translateX
+        const shift = Math.sin(t * Math.PI) * 40;
+        wave1.style.transform = `translateX(${-shift}px)`;
+        wave2.style.transform = `translateX(${shift * 0.6}px)`;
+        wave1.style.opacity = 0.85 + Math.sin(t * Math.PI) * 0.15;
+
+        requestAnimationFrame(animateWave);
+    }
+    animateWave();
+})();
