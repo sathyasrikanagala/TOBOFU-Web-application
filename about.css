@@ -1,4 +1,4 @@
-/* ─── Import centle-about style ─────────────────────────────── */
+/* ─── Reset & Variables ─────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --yellow:#FFD600;
@@ -94,13 +94,11 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
 .logo-track{
   position:absolute;right:0;top:0;width:50%;
   pointer-events:none;z-index:10;
-  /* FIX: ensure ambient elements above the spinner are not clipped */
   overflow:visible;
 }
 .logo-sticky{
   position:sticky;top:0;height:100vh;
   display:flex;align-items:center;justify-content:center;
-  /* FIX: must be overflow:visible so top elements clear the nav bar */
   overflow:visible;
 }
 #spinCanvas{width:300px;height:300px;display:block}
@@ -188,36 +186,10 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
   font-size:clamp(70px,11vw,160px);color:var(--black);
   letter-spacing:2px;line-height:0.85;user-select:none;
 }
-.story-text h3{
+.story-text h2{
   font-size:clamp(16px,1.7vw,22px);font-weight:600;color:var(--black);line-height:1.6;
 }
-.story-text h3 strong{font-weight:800}
-
-/* ─── VALUES GRID ─── */
-.values-section{
-  background:var(--white);border-bottom:var(--border);
-  padding:80px 48px;
-}
-.values-section .sec-label{
-  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  color:var(--midgray);margin-bottom:48px;display:block;
-}
-.values-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:var(--border)}
-.value-card{
-  padding:40px 32px;border-right:var(--border);
-  opacity:0;transform:translateY(20px);
-  transition:opacity .6s ease,transform .6s cubic-bezier(.16,1,.3,1),background .2s;
-}
-.value-card:last-child{border-right:none}
-.value-card.vis{opacity:1;transform:translateY(0)}
-.value-card:hover{background:var(--yellow)}
-.value-num{
-  font-family:'Bebas Neue',sans-serif;font-size:48px;color:rgba(0,0,0,.12);
-  line-height:1;margin-bottom:16px;transition:color .3s;
-}
-.value-card:hover .value-num{color:rgba(0,0,0,.25)}
-.value-card h4{font-size:16px;font-weight:800;margin-bottom:10px;color:var(--black)}
-.value-card p{font-size:14px;line-height:1.7;color:#555}
+.story-text h2 strong{font-weight:800}
 
 /* ─── STATS ─── */
 .stats-strip{
@@ -236,6 +208,151 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
   font-size:clamp(52px,6vw,80px);color:var(--black);line-height:1;margin-bottom:6px;
 }
 .stat-label{font-size:14px;font-weight:600;color:var(--black);opacity:.65}
+
+/* ═══════════════════════════════════════════════════════════════
+   VALUES SECTION — 3D HOVER CARDS
+   ═══════════════════════════════════════════════════════════════ */
+.values-section{
+  background:var(--black);
+  border-top:var(--border);
+  border-bottom:var(--border);
+  padding:80px 48px 100px;
+}
+
+.values-section .sec-label{
+  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--yellow);margin-bottom:64px;display:block;
+}
+
+/* Grid wrapper */
+.values-grid-3d{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:flex-start;
+  justify-content:center;
+  gap:3rem;
+}
+
+/* ── Core card ── */
+.card{
+  position:relative;
+  height:28rem;
+  width:20rem;
+  aspect-ratio:5/7;
+  color:var(--white);
+  perspective:50rem;
+  cursor:none;
+}
+
+/* Glow shadow behind card */
+.card-shadow{
+  position:absolute;inset:0;
+  background:var(--yellow);
+  opacity:0.55;
+  filter:blur(2.2rem) saturate(0.85);
+  box-shadow:0 -1.5rem 2rem -0.5rem rgba(0,0,0,0.8);
+  transform:rotateX(var(--rotateX,0deg)) rotateY(var(--rotateY,0deg))
+    translate3d(0,2rem,-2rem);
+  border-radius:2px;
+}
+
+/* Background panel */
+.card-bg{
+  position:absolute;inset:0;
+  background:var(--black);
+  border:var(--border);
+  transform:rotateX(var(--rotateX,0deg)) rotateY(var(--rotateY,0deg))
+    translate3d(0,0,0rem);
+}
+
+/* Gradient overlay — depth layer */
+.card-overlay{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(160deg,rgba(255,214,0,0.10) 0%,transparent 55%),
+    linear-gradient(to top,rgba(0,0,0,0.75) 0%,transparent 55%);
+  transform:rotateX(var(--rotateX,0deg)) rotateY(var(--rotateY,0deg))
+    translate3d(0,0,4rem) scale(0.92);
+  z-index:3;
+  pointer-events:none;
+}
+
+/* Content */
+.card .content{
+  position:absolute;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  inset:0;
+  padding:2.5rem;
+  transform:rotateX(var(--rotateX,0deg)) rotateY(var(--rotateY,0deg))
+    translate3d(0,0,6rem);
+  z-index:4;
+}
+
+.card .content h3{
+  font-size:1.1rem;
+  font-weight:800;
+  margin-bottom:0.55rem;
+  color:var(--yellow);
+  font-family:'DM Sans',sans-serif;
+  letter-spacing:0.01em;
+  text-shadow:0 0 1.5rem rgba(0,0,0,0.6);
+}
+
+.card .content p{
+  font-size:0.78rem;
+  font-weight:400;
+  line-height:1.65;
+  color:rgba(255,255,255,0.72);
+  text-shadow:0 0 1rem rgba(0,0,0,0.5);
+}
+
+/* Number badge */
+.value-num-3d{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:3.2rem;
+  color:rgba(255,214,0,0.14);
+  line-height:1;
+  margin-bottom:1.1rem;
+  transition:color 0.3s;
+}
+.card:hover .value-num-3d{color:rgba(255,214,0,0.4)}
+
+/* ── Yellow border frame (::before front / ::after back) ── */
+.card::after,
+.card::before{
+  content:'';
+  position:absolute;
+  inset:1.5rem;
+  border:var(--yellow) 0.35rem solid;
+  transform:rotateX(var(--rotateX,0deg)) rotateY(var(--rotateY,0deg))
+    translate3d(0,0,2rem);
+  pointer-events:none;
+}
+.card::before{z-index:5}
+.card::after{z-index:0}
+
+.card.border-left-behind::before  {border-left:  transparent}
+.card.border-right-behind::before {border-right: transparent}
+.card.border-bottom-behind::before{border-bottom:transparent}
+
+/* ── Wide (4th) card ── */
+.value-card-wide{
+  width:43rem;
+  height:18rem;
+  aspect-ratio:unset;
+}
+.value-card-wide .content{
+  flex-direction:row;
+  align-items:center;
+  justify-content:flex-start;
+  gap:2.5rem;
+  padding:2rem 3rem;
+}
+.value-card-wide .value-num-3d{font-size:5rem;margin-bottom:0;flex-shrink:0}
+.value-card-wide .wide-text{}
+.value-card-wide .content h3{font-size:1.3rem;margin-bottom:0.4rem}
 
 /* ─── ECOSYSTEM ─── */
 .ecosystem-section{
@@ -276,7 +393,7 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
 .eco-card.highlight .eco-link{color:var(--black)}
 .eco-link:hover{opacity:.7}
 
-/* ─── VALUE SECTION (dark) ─── */
+/* ─── PROMISE SECTION ─── */
 .r-section{
   padding:120px 48px;background:var(--black);
   display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:center;
@@ -363,6 +480,67 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.16,1,.3,1)}
 .reveal.vis{opacity:1;transform:translateY(0)}
 
+/* ─── SPINNER AMBIENT ELEMENTS ─── */
+.spin-tag{
+  position:absolute;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:12px;letter-spacing:1.5px;text-transform:uppercase;
+  border:2px solid var(--black);
+  padding:5px 12px;white-space:nowrap;
+  box-shadow:3px 3px 0 var(--black);
+  pointer-events:none;z-index:3;
+}
+.spin-tag.yl {background:var(--yellow);color:var(--black)}
+.spin-tag.blk{background:var(--black);color:var(--yellow)}
+.spin-tag.wh {background:var(--white);color:var(--black)}
+
+.spin-metric{
+  position:absolute;
+  display:flex;flex-direction:column;align-items:center;
+  pointer-events:none;z-index:3;
+}
+.spin-metric .mn{
+  font-family:'Bebas Neue',sans-serif;font-size:28px;
+  color:var(--black);line-height:1;
+}
+.spin-metric .ml{
+  font-size:9px;font-weight:700;color:var(--midgray);
+  letter-spacing:1px;text-transform:uppercase;
+  margin-top:2px;text-align:center;
+}
+
+.spin-dot{
+  position:absolute;border-radius:50%;
+  border:2px solid var(--black);pointer-events:none;z-index:3;
+}
+
+.orbit-ring{
+  position:absolute;border-radius:50%;
+  border:1.5px dashed rgba(0,0,0,0.10);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  pointer-events:none;z-index:1;
+}
+
+.spin-ticker{
+  position:absolute;left:50%;transform:translateX(-50%);bottom:40px;
+  background:var(--black);color:var(--yellow);
+  font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:1.5px;
+  padding:5px 14px;border:2px solid var(--yellow);box-shadow:2px 2px 0 var(--yellow);
+  white-space:nowrap;display:flex;align-items:center;gap:8px;
+  pointer-events:none;z-index:3;
+}
+.spin-tdot{
+  width:5px;height:5px;border-radius:50%;
+  background:var(--yellow);
+  animation:spinBlink 1.2s ease-in-out infinite;
+}
+.spin-funnel{position:absolute;pointer-events:none;z-index:3}
+
+/* ─── SPINNER KEYFRAMES ─── */
+@keyframes spinFloatUp   {0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)}}
+@keyframes spinFloatDown {0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)}}
+@keyframes spinBlink     {0%,100%{opacity:1} 50%{opacity:.2}}
+
 /* ─── RESPONSIVE ─── */
 @media(max-width:900px){
   nav{padding:12px 20px}
@@ -372,9 +550,6 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
   .about-intro{padding:80px 24px;min-height:auto}
   .about-intro-content{width:100%}
   .story-section{grid-template-columns:1fr;gap:40px;padding:60px 24px}
-  .values-grid{grid-template-columns:1fr 1fr}
-  .value-card:nth-child(2n){border-right:none}
-  .value-card{border-bottom:var(--border)}
   .stats-strip{grid-template-columns:1fr 1fr}
   .stat-item:nth-child(2n){border-right:none}
   .stat-item{border-bottom:var(--border)}
@@ -386,34 +561,31 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
   .footer-cta{padding:60px 24px 60px}
   .footer-grid{grid-template-columns:1fr 1fr;gap:24px}
   .logo-track{display:none}
+  /* values cards */
+  .values-section{padding:60px 24px 80px}
+  .values-grid-3d{gap:2rem}
+  .value-card-wide{width:20rem;height:28rem;aspect-ratio:5/7}
+  .value-card-wide .content{flex-direction:column;align-items:flex-start;justify-content:flex-end;padding:2.5rem;gap:0}
+  .value-card-wide .value-num-3d{font-size:3.2rem;margin-bottom:1.1rem}
 }
 
 /* ─── MOBILE MENU ─── */
 #mobileMenuBtn{
-  display:none;
-  background:none;border:none;
-  cursor:pointer;padding:6px;
-  color:var(--black);
+  display:none;background:none;border:none;
+  cursor:pointer;padding:6px;color:var(--black);
 }
 nav.dark-nav #mobileMenuBtn{color:var(--yellow)}
-
 #mobileMenu{
-  display:none;
-  position:fixed;top:65px;left:0;right:0;
-  background:var(--white);
-  border-bottom:var(--border);
-  flex-direction:column;
-  z-index:199;
-  padding:16px 0;
+  display:none;position:fixed;top:65px;left:0;right:0;
+  background:var(--white);border-bottom:var(--border);
+  flex-direction:column;z-index:199;padding:16px 0;
 }
 #mobileMenu.open{display:flex}
 #mobileMenu a{
-  padding:14px 24px;
-  font-size:15px;font-weight:700;
+  padding:14px 24px;font-size:15px;font-weight:700;
   text-transform:uppercase;letter-spacing:.06em;
   color:var(--black);text-decoration:none;
-  border-bottom:1px solid rgba(0,0,0,.06);
-  transition:background .15s;
+  border-bottom:1px solid rgba(0,0,0,.06);transition:background .15s;
 }
 #mobileMenu a:last-child{
   color:var(--yellow);background:var(--black);
@@ -422,131 +594,43 @@ nav.dark-nav #mobileMenuBtn{color:var(--yellow)}
 }
 #mobileMenu a:hover{background:var(--yellow)}
 
-/* ─── RESPONSIVE: ABOUT PAGE ─── */
 @media(max-width:768px){
   #mobileMenuBtn{display:block}
   .pill-btn{display:none}
   nav{padding:10px 20px}
   .nav-links-center{display:none}
-
-  .hero{
-    min-height:100vh;
-    background:var(--yellow);
-    display:flex;align-items:center;
-  }
+  .hero{min-height:100vh;background:var(--yellow);display:flex;align-items:center}
   .hero::before{display:none}
-  .hero-inner{
-    width:100%;
-    padding:100px 24px 60px;
-  }
-  .hero-bigword{
-    font-size:clamp(80px,20vw,140px);
-  }
+  .hero-inner{width:100%;padding:100px 24px 60px}
+  .hero-bigword{font-size:clamp(80px,20vw,140px)}
   .logo-track{display:none}
-
   .about-intro{padding:60px 24px;min-height:auto}
   .about-intro-content{width:100%}
-
   .story-section{grid-template-columns:1fr;gap:32px;padding:60px 24px}
-
-  .values-section{padding:60px 24px}
-  .values-grid{grid-template-columns:1fr 1fr}
-  .value-card:nth-child(2n){border-right:none}
-  .value-card{border-bottom:var(--border)}
-
+  .values-section{padding:60px 24px 80px}
+  .card{height:24rem;width:16rem}
+  .value-card-wide{width:16rem;height:24rem;aspect-ratio:5/7}
   .stats-strip{grid-template-columns:1fr 1fr}
   .stat-item:nth-child(2n){border-right:none}
   .stat-item{border-bottom:var(--border);padding:32px 20px}
-
   .ecosystem-section{padding:60px 24px}
   .eco-grid{grid-template-columns:1fr 1fr}
   .eco-card:nth-child(2n){border-right:none}
   .eco-card{border-bottom:1px solid rgba(255,255,255,.1)}
-
   .r-section{grid-template-columns:1fr;padding:60px 24px;gap:32px}
   #purpleCanvas{width:260px;height:260px}
-
   .footer-cta{padding:60px 24px}
   .footer-bigwords{font-size:clamp(52px,13vw,100px);margin-bottom:48px}
   .footer-grid{grid-template-columns:1fr 1fr;gap:24px}
   .footer-arrow{right:24px;bottom:160px}
-
   .start-btn{bottom:16px;right:16px;padding:10px 18px;font-size:12px}
 }
 
 @media(max-width:480px){
-  .values-grid{grid-template-columns:1fr}
-  .value-card:nth-child(2n){border-right:var(--border)}
+  .values-grid-3d{gap:1.5rem}
   .eco-grid{grid-template-columns:1fr}
   .eco-card:nth-child(2n){border-right:none}
   .stats-strip{grid-template-columns:1fr}
   .stat-item:nth-child(2n){border-right:var(--border)}
   .footer-grid{grid-template-columns:1fr}
 }
-
-/* ─── SPINNER AMBIENT ELEMENTS ─── */
-.spin-tag {
-  position: absolute;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
-  border: 2px solid var(--black);
-  padding: 5px 12px; white-space: nowrap;
-  box-shadow: 3px 3px 0 var(--black);
-  pointer-events: none;
-  z-index: 3;
-}
-.spin-tag.yl  { background: var(--yellow); color: var(--black); }
-.spin-tag.blk { background: var(--black);  color: var(--yellow); }
-.spin-tag.wh  { background: var(--white);  color: var(--black); }
-
-.spin-metric {
-  position: absolute;
-  display: flex; flex-direction: column; align-items: center;
-  pointer-events: none; z-index: 3;
-}
-.spin-metric .mn {
-  font-family: 'Bebas Neue', sans-serif; font-size: 28px;
-  color: var(--black); line-height: 1;
-}
-.spin-metric .ml {
-  font-size: 9px; font-weight: 700; color: var(--midgray);
-  letter-spacing: 1px; text-transform: uppercase;
-  margin-top: 2px; text-align: center;
-}
-
-.spin-dot {
-  position: absolute; border-radius: 50%;
-  border: 2px solid var(--black); pointer-events: none; z-index: 3;
-}
-
-.orbit-ring {
-  position: absolute; border-radius: 50%;
-  border: 1.5px dashed rgba(0,0,0,0.10);
-  top: 50%; left: 50%; transform: translate(-50%,-50%);
-  pointer-events: none; z-index: 1;
-}
-
-.spin-ticker {
-  position: absolute; left: 50%; transform: translateX(-50%); bottom: 40px;
-  background: var(--black); color: var(--yellow);
-  font-family: 'Bebas Neue', sans-serif; font-size: 10px; letter-spacing: 1.5px;
-  padding: 5px 14px; border: 2px solid var(--yellow); box-shadow: 2px 2px 0 var(--yellow);
-  white-space: nowrap; display: flex; align-items: center; gap: 8px;
-  pointer-events: none; z-index: 3;
-}
-.spin-tdot {
-  width: 5px; height: 5px; border-radius: 50%;
-  background: var(--yellow);
-  animation: spinBlink 1.2s ease-in-out infinite;
-}
-.spin-funnel { position: absolute; pointer-events: none; z-index: 3; }
-
-/* ─── SPINNER KEYFRAMES ─── */
-@keyframes spinFloatUp   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-@keyframes spinFloatDown { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)}  }
-@keyframes spinBlink     { 0%,100%{opacity:1} 50%{opacity:0.2} }
-
-/* ─── FIX: spin-tag and spin-metric with translateY need animation override ─── */
-/* Elements at 9 o'clock and 3 o'clock already use translateY(-50%) via inline css.
-   The float animations add to that via animation — this is fine as both are on transform.
-   The 12 o'clock tag uses translateX(-50%) inline; floatUp animates Y — no conflict. */
