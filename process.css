@@ -615,3 +615,146 @@ nav.dark-nav #mobileMenuBtn{color:var(--yellow)}
   footer{padding:40px 24px;flex-direction:column;gap:20px;text-align:center}
   .footer-links{flex-wrap:wrap;justify-content:center}
 }
+/* ─── WHAT TO EXPECT — FLIP CARDS ─────────────────────────── */
+
+/* Section wrapper — replaces old .expect-section padding only,
+   everything else stays the same */
+.expect-section {
+  padding: 100px 60px;
+  border-bottom: var(--border);
+  background: #FFFBEA;
+}
+
+.expect-hint {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(0,0,0,.3);
+  margin-top: 14px;
+}
+
+/* Grid of 3 columns */
+.flip-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 56px;
+}
+
+/* ── Flip card container ── */
+.flip-card {
+  background: transparent;
+  height: 280px;
+  perspective: 1000px;
+  cursor: none;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* ── Shared face styles ── */
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 36px 32px;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border: var(--border);
+}
+
+/* ── FRONT: yellow bg, black text ── */
+.flip-card-front {
+  background: var(--yellow);
+  box-shadow: 5px 5px 0 var(--black);
+  gap: 16px;
+}
+
+.flip-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.flip-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: .5px;
+  color: var(--black);
+  line-height: 1;
+}
+
+.flip-hint {
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(0,0,0,.35);
+  margin-top: auto;
+}
+
+/* ── BACK: black bg, yellow text ── */
+.flip-card-back {
+  background: var(--black);
+  box-shadow: 5px 5px 0 rgba(255,215,0,.3);
+  transform: rotateY(180deg);
+  gap: 10px;
+}
+
+.flip-back-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 4rem;
+  line-height: 1;
+  color: rgba(255,215,0,.08);
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  letter-spacing: 2px;
+}
+
+.flip-back-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: .5px;
+  color: var(--yellow);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.flip-back-desc {
+  font-size: .85rem;
+  line-height: 1.7;
+  color: rgba(255,215,0,.65);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .flip-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .flip-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .flip-card {
+    height: 240px;
+  }
+  .expect-section {
+    padding: 60px 24px;
+  }
+}
