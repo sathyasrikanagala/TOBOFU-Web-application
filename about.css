@@ -478,3 +478,37 @@ nav.dark-nav #mobileMenuBtn{color:var(--yellow)}
   .stat-item:nth-child(2n){border-right:var(--border)}
   .footer-grid{grid-template-columns:1fr}
 }
+.spin-tag {
+  position: absolute;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+  border: 2px solid var(--black);
+  padding: 5px 12px; white-space: nowrap;
+  box-shadow: 3px 3px 0 var(--black);
+  pointer-events: none;
+}
+.spin-tag.yl  { background: var(--yellow); color: var(--black); }
+.spin-tag.blk { background: var(--black);  color: var(--yellow); }
+.spin-tag.wh  { background: var(--white);  color: var(--black); }
+
+.spin-metric { position: absolute; display: flex; flex-direction: column; align-items: center; pointer-events: none; }
+.spin-metric .mn { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--black); line-height: 1; }
+.spin-metric .ml { font-size: 9px; font-weight: 700; color: var(--midgray); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; text-align: center; }
+
+.spin-dot { position: absolute; border-radius: 50%; border: 2px solid var(--black); pointer-events: none; }
+
+.orbit-ring { position: absolute; border-radius: 50%; border: 1.5px dashed rgba(0,0,0,0.10); top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; }
+
+.spin-ticker {
+  position: absolute; left: 50%; transform: translateX(-50%); bottom: 40px;
+  background: var(--black); color: var(--yellow);
+  font-family: 'Bebas Neue', sans-serif; font-size: 10px; letter-spacing: 1.5px;
+  padding: 5px 14px; border: 2px solid var(--yellow); box-shadow: 2px 2px 0 var(--yellow);
+  white-space: nowrap; display: flex; align-items: center; gap: 8px; pointer-events: none;
+}
+.spin-tdot { width: 5px; height: 5px; border-radius: 50%; background: var(--yellow); animation: spinBlink 1.2s ease-in-out infinite; }
+.spin-funnel { position: absolute; pointer-events: none; }
+
+@keyframes spinFloatUp   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+@keyframes spinFloatDown { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+@keyframes spinBlink     { 0%,100%{opacity:1} 50%{opacity:0.2} }
