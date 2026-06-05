@@ -62,17 +62,17 @@ function drawLogoFace(ctx, cx, cy, W, H, scaleX) {
   const lineH = fontSize * 1.05;
   const totalTextH = lineH * 3;
   const textTop = -totalTextH / 2 + lineH * 0.1;
- ctx.textAlign = 'center';
-ctx.fillText('TO', 0, textTop);
-ctx.fillText('BO', 0, textTop + lineH);
-const rowY = textTop + lineH * 2;
-const fWidth = ctx.measureText('F').width;
-const funnelWTemp = fontSize * 0.72;
-const totalRowW = fWidth + W * 0.04 * Math.abs(scaleX) + funnelWTemp;
-const rowX = -totalRowW / 2;
-ctx.textAlign = 'left';
-ctx.fillText('F', rowX, rowY);
- const funnelX = rowX + fWidth + W * 0.04 * Math.abs(scaleX);
+  ctx.textAlign = 'center';
+  ctx.fillText('TO', 0, textTop);
+  ctx.fillText('BO', 0, textTop + lineH);
+  const rowY = textTop + lineH * 2;
+  const fWidth = ctx.measureText('F').width;
+  const funnelWTemp = fontSize * 0.72;
+  const totalRowW = fWidth + W * 0.04 * Math.abs(scaleX) + funnelWTemp;
+  const rowX = -totalRowW / 2;
+  ctx.textAlign = 'left';
+  ctx.fillText('F', rowX, rowY);
+  const funnelX = rowX + fWidth + W * 0.04 * Math.abs(scaleX);
   const funnelW = fontSize * 0.72;
   const funnelH = fontSize * 0.85;
   const fy = rowY - funnelH / 2;
@@ -87,7 +87,7 @@ ctx.fillText('F', rowX, rowY);
   ctx.lineTo(funnelX + funnelW * 0.55, fy + funnelH * 0.70); ctx.lineTo(funnelX + funnelW * 0.50, fy + funnelH);
   ctx.closePath(); ctx.fillStyle = '#FFD600'; ctx.fill();
   ctx.restore();
-  ctx.restore(); 
+  ctx.restore();
 }
 
 function makeCardSpinner(canvasId, opts = {}) {
@@ -116,14 +116,14 @@ function makeCardSpinner(canvasId, opts = {}) {
         ctx.beginPath(); roundRect(ctx, cx - hw, cy - hh, hw * 2, hh * 2, 6 * Math.abs(cosA));
         ctx.strokeStyle = '#111'; ctx.lineWidth = 3 * Math.abs(cosA); ctx.stroke();
       }
-     if (Math.abs(cosA) > 0.08) {
-  ctx.save();
-  ctx.transform(Math.abs(cosA), 0, 0, 1, cx, cy);
-  const imgW = CW * 0.7 * Math.abs(cosA);
-  const imgH = imgW * 0.5;
-  ctx.drawImage(centleLogoImg, -imgW / 2, -imgH / 2, imgW, imgH);
-  ctx.restore();
-}
+      if (Math.abs(cosA) > 0.08) {
+        ctx.save();
+        ctx.transform(Math.abs(cosA), 0, 0, 1, cx, cy);
+        const imgW = CW * 0.7 * Math.abs(cosA);
+        const imgH = imgW * 0.5;
+        ctx.drawImage(centleLogoImg, -imgW / 2, -imgH / 2, imgW, imgH);
+        ctx.restore();
+      }
       ctx.restore();
     } else {
       drawLogoFace(ctx, cx, cy, CW, CH, cosA);
@@ -147,6 +147,8 @@ function makeCardSpinner(canvasId, opts = {}) {
 
 const heroSpinner = makeCardSpinner('spinCanvas', { size: 400, speed: 0.014, startAngle: 0.3 });
 const valueSpinner = makeCardSpinner('purpleCanvas', { size: 340, speed: 0.009, startAngle: 1.8 });
+
+// ── SPINNER AMBIENT ELEMENTS ───────────────────────────────────
 (function() {
   const sticky = document.querySelector('.logo-sticky');
   if (!sticky) return;
@@ -159,22 +161,37 @@ const valueSpinner = makeCardSpinner('purpleCanvas', { size: 340, speed: 0.009, 
     sticky.appendChild(r);
   });
 
-  // Clock-position elements — no overlaps
+  // Clock-position elements
+  // FIX: 12 o'clock bumped from top:6% to top:18% so it clears the nav bar (~65px)
   const els = [
-    // 12 o'clock
-    { type:'tag', text:'FULL FUNNEL', cls:'yl',  css:'top:6%;left:50%;transform:translateX(-50%);', anim:'spinFloatUp 4.4s ease-in-out 0s infinite' },
+    // 12 o'clock — pushed down to clear nav
+    { type:'tag', text:'FULL FUNNEL', cls:'yl',
+      css:'top:18%;left:50%;transform:translateX(-50%);',
+      anim:'spinFloatUp 4.4s ease-in-out 0s infinite' },
     // 1–2 o'clock
-    { type:'metric', num:'1M+', lbl:'Users Scaled', css:'top:14%;right:6%;', anim:'spinFloatDown 4.0s ease-in-out 0.6s infinite' },
+    { type:'metric', num:'1M+', lbl:'Users Scaled',
+      css:'top:18%;right:6%;',
+      anim:'spinFloatDown 4.0s ease-in-out 0.6s infinite' },
     // 3 o'clock
-    { type:'tag', text:'CONTENT', cls:'blk', css:'top:50%;right:2%;transform:translateY(-50%);', anim:'spinFloatUp 4.7s ease-in-out 0.3s infinite' },
+    { type:'tag', text:'CONTENT', cls:'blk',
+      css:'top:50%;right:2%;transform:translateY(-50%);',
+      anim:'spinFloatUp 4.7s ease-in-out 0.3s infinite' },
     // 4–5 o'clock
-    { type:'metric', num:'−30%', lbl:'Lower CAC', css:'bottom:14%;right:6%;', anim:'spinFloatUp 3.8s ease-in-out 1.0s infinite' },
+    { type:'metric', num:'−30%', lbl:'Lower CAC',
+      css:'bottom:18%;right:6%;',
+      anim:'spinFloatUp 3.8s ease-in-out 1.0s infinite' },
     // 7–8 o'clock
-    { type:'metric', num:'2.5×', lbl:'Conversion Rate', css:'bottom:14%;left:6%;', anim:'spinFloatUp 4.2s ease-in-out 0.8s infinite' },
+    { type:'metric', num:'2.5×', lbl:'Conversion Rate',
+      css:'bottom:18%;left:6%;',
+      anim:'spinFloatUp 4.2s ease-in-out 0.8s infinite' },
     // 9 o'clock
-    { type:'tag', text:'PERFORMANCE', cls:'yl', css:'top:50%;left:2%;transform:translateY(-50%);', anim:'spinFloatDown 4.5s ease-in-out 0.1s infinite' },
+    { type:'tag', text:'PERFORMANCE', cls:'yl',
+      css:'top:50%;left:2%;transform:translateY(-50%);',
+      anim:'spinFloatDown 4.5s ease-in-out 0.1s infinite' },
     // 10–11 o'clock
-    { type:'metric', num:'400%', lbl:'User Growth', css:'top:14%;left:6%;', anim:'spinFloatDown 3.9s ease-in-out 0.4s infinite' },
+    { type:'metric', num:'400%', lbl:'User Growth',
+      css:'top:18%;left:6%;',
+      anim:'spinFloatDown 3.9s ease-in-out 0.4s infinite' },
   ];
 
   els.forEach(({type,text,cls,num,lbl,css,anim}) => {
@@ -192,10 +209,10 @@ const valueSpinner = makeCardSpinner('purpleCanvas', { size: 340, speed: 0.009, 
 
   // Diagonal gap-fill dots
   [
-    {s:8,  c:'#FFD600', css:'top:25%;right:19%;', a:'spinFloatUp 3.6s ease-in-out 0.2s infinite'},
-    {s:10, c:'#3A86FF', css:'bottom:25%;right:19%;', a:'spinFloatDown 4.1s ease-in-out 0.9s infinite'},
-    {s:7,  c:'#E63946', css:'bottom:25%;left:19%;',  a:'spinFloatDown 3.7s ease-in-out 0.5s infinite'},
-    {s:9,  c:'#0D0D0D', css:'top:25%;left:19%;',    a:'spinFloatUp 4.3s ease-in-out 1.1s infinite'},
+    {s:8,  c:'#FFD600', css:'top:28%;right:19%;', a:'spinFloatUp 3.6s ease-in-out 0.2s infinite'},
+    {s:10, c:'#3A86FF', css:'bottom:28%;right:19%;', a:'spinFloatDown 4.1s ease-in-out 0.9s infinite'},
+    {s:7,  c:'#E63946', css:'bottom:28%;left:19%;',  a:'spinFloatDown 3.7s ease-in-out 0.5s infinite'},
+    {s:9,  c:'#0D0D0D', css:'top:28%;left:19%;',    a:'spinFloatUp 4.3s ease-in-out 1.1s infinite'},
   ].forEach(({s,c,css,a}) => {
     const d = document.createElement('div');
     d.className = 'spin-dot';
@@ -203,19 +220,19 @@ const valueSpinner = makeCardSpinner('purpleCanvas', { size: 340, speed: 0.009, 
     sticky.appendChild(d);
   });
 
-  // Mini funnel icon between 12 and 1
+  // Mini funnel icon — between 12 and 1 o'clock
   const f = document.createElementNS('http://www.w3.org/2000/svg','svg');
   f.setAttribute('viewBox','0 0 28 34');
   f.setAttribute('width','28'); f.setAttribute('height','34');
   f.className.baseVal = 'spin-funnel';
-  f.style.cssText = 'position:absolute;top:11%;right:20%;animation:spinFloatUp 5s ease-in-out 0.7s infinite;';
+  f.style.cssText = 'position:absolute;top:14%;right:20%;animation:spinFloatUp 5s ease-in-out 0.7s infinite;';
   f.innerHTML = `<rect width="28" height="34" fill="#FFD600" rx="2" stroke="#0D0D0D" stroke-width="2"/>
     <polygon points="3,8 25,8 19,17 9,17" fill="#3A86FF"/>
     <polygon points="9,17 19,17 17,25 11,25" fill="#E63946"/>
     <polygon points="11,25 17,25 14,33" fill="#0D0D0D"/>`;
   sticky.appendChild(f);
 
-  // Ticker
+  // Ticker bar
   const ticker = document.createElement('div');
   ticker.className = 'spin-ticker';
   ticker.style.position = 'absolute';
@@ -223,6 +240,7 @@ const valueSpinner = makeCardSpinner('purpleCanvas', { size: 340, speed: 0.009, 
   sticky.appendChild(ticker);
 })();
 
+// ── TRACK HEIGHT ───────────────────────────────────────────────
 function setTrackHeight() {
   const hero  = document.querySelector('.hero');
   const intro = document.getElementById('aboutIntro');
@@ -232,6 +250,7 @@ function setTrackHeight() {
 setTrackHeight();
 window.addEventListener('resize', setTrackHeight);
 
+// ── SCROLL HANDLERS ────────────────────────────────────────────
 window.addEventListener('scroll', () => {
   const y = window.scrollY;
   if (heroSpinner) heroSpinner.setScrollBoost(y * 0.003);
@@ -255,7 +274,7 @@ const io = new IntersectionObserver(entries => {
 
 document.querySelectorAll('.reveal, .stat-item, .value-card').forEach(el => io.observe(el));
 
-/* ─── NAV THEME ─── */
+// ── NAV THEME ──────────────────────────────────────────────────
 function updateNavTheme() {
   const nav = document.getElementById('mainNav');
   const darkSections = document.querySelectorAll('.ecosystem-section, .r-section');
@@ -266,10 +285,10 @@ function updateNavTheme() {
   });
   nav.classList.toggle('dark-nav', isDark);
 }
-
 window.addEventListener('scroll', updateNavTheme, { passive: true });
 updateNavTheme();
 
+// ── MOBILE MENU ────────────────────────────────────────────────
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const mobileMenu = document.getElementById('mobileMenu');
 if (mobileMenuBtn && mobileMenu) {
