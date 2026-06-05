@@ -1992,7 +1992,23 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
     width:clamp(48px,8vw,80px);
     height:clamp(48px,8vw,80px);
   }
+/* ─── HERO WAVE ─── */
+.hero-wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+.hero-wave svg {
+    display: block;
+    width: calc(147% + 1.3px);
+    height: 120px;
+}
 
+/* ─── REMOVE O-WRAP ─── */
+.hero-o-wrap { display: none; }
   /* SERVICES STICKY CARDS */
   .sticky-cards-outer{padding:0 12px 24px}
   .card-inner{
