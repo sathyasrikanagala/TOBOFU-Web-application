@@ -874,15 +874,6 @@ nav.dark-nav #mobileMenuBtn{color:var(--yellow)}
 #heroGlowOrb.active { animation: none; }
 
 /* Circular scramble list */
-.hero-circle-wrap {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 #scrambleList {
   --count: 9;
@@ -915,16 +906,6 @@ nav.dark-nav #mobileMenuBtn{color:var(--yellow)}
     0 0 40px rgba(255,214,0,0.25);
 }
 
-/* Centre content sits above circle */
-.hero-center-content {
-  position: relative;
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  padding: 0 60px;
-  pointer-events: none;
-}
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
