@@ -1,4 +1,4 @@
-/* ─── CURSOR ─────────────────────────────────────────────── */
+/* ─── CURSOR ─── */
 const cursor = document.getElementById('cursor');
 const dot    = document.getElementById('cursorDot');
 document.addEventListener('mousemove', e => {
@@ -12,64 +12,55 @@ document.querySelectorAll('a,button').forEach(el => {
   el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
 });
 
-/* ─── SECTION ROWS ──────────────────────────────────────── */
+/* ─── SECTION ROWS ─── */
 const rows = document.querySelectorAll('.section-row');
 let activeRow = null;
-
 rows.forEach(row => {
-    row.addEventListener('mouseenter', () => {
-        if (activeRow && activeRow !== row) activeRow.classList.remove('active');
-        row.classList.add('active');
-        activeRow = row;
-        TweenMax.to($bigBall, .3, { scale: 4 });
-        const label = row.getAttribute('data-label');
-        cursorImg.textContent = label;
-        cursorImg.classList.add('show');
-    });
-    row.addEventListener('mouseleave', () => {
-        row.classList.remove('active');
-        if (activeRow === row) activeRow = null;
-        TweenMax.to($bigBall, .3, { scale: 1 });
-        cursorImg.classList.remove('show');
-    });
+  row.addEventListener('mouseenter', () => {
+    if (activeRow && activeRow !== row) activeRow.classList.remove('active');
+    row.classList.add('active');
+    activeRow = row;
+  });
+  row.addEventListener('mouseleave', () => {
+    row.classList.remove('active');
+    if (activeRow === row) activeRow = null;
+  });
 });
-
 function updateRowsByScroll() {
-    rows.forEach(row => {
-        const rect = row.getBoundingClientRect();
-        const mid = window.innerHeight / 2;
-        if (rect.top < mid && rect.bottom > mid) {
-            if (!row.matches(':hover')) row.classList.add('active');
-        } else {
-            if (!row.matches(':hover')) row.classList.remove('active');
-        }
-    });
+  rows.forEach(row => {
+    const rect = row.getBoundingClientRect();
+    const mid = window.innerHeight / 2;
+    if (rect.top < mid && rect.bottom > mid) {
+      if (!row.matches(':hover')) row.classList.add('active');
+    } else {
+      if (!row.matches(':hover')) row.classList.remove('active');
+    }
+  });
 }
 
-/* ─── FADE UP OBSERVER ──────────────────────────────────── */
+/* ─── FADE UP OBSERVER ─── */
 const fadeEls = document.querySelectorAll('.fade-up');
 const fadeObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
 }, { threshold: 0.12 });
 fadeEls.forEach(el => fadeObs.observe(el));
 
-/* ─── SCROLL LISTENER ───────────────────────────────────── */
+/* ─── SCROLL LISTENER ─── */
 window.addEventListener('scroll', () => {
-    updateNavTheme();
-    updateRowsByScroll();
-    updateCursorMode();
+  updateNavTheme();
+  updateRowsByScroll();
+  updateCursorMode();
 }, { passive: true });
 
-/* ─── HERO PARALLAX ─────────────────────────────────────── */
+/* ─── HERO PARALLAX ─── */
 const heroHeadline = document.querySelector('.hero-headline');
 if (heroHeadline) {
-    window.addEventListener('scroll', () => {
-        heroHeadline.style.transform = `translateY(${window.scrollY * 0.22}px)`;
-    }, { passive: true });
+  window.addEventListener('scroll', () => {
+    heroHeadline.style.transform = `translateY(${window.scrollY * 0.22}px)`;
+  }, { passive: true });
 }
 
-
-/* ─── DARK CURSOR MODE ──────────────────────────────────── */
+/* ─── DARK CURSOR MODE ─── */
 function updateCursorMode() {
   const darkSections = document.querySelectorAll('.dark-section, footer');
   let isDark = false;
@@ -77,18 +68,17 @@ function updateCursorMode() {
     const rect = section.getBoundingClientRect();
     if (rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 2) isDark = true;
   });
-  document.body.classList.toggle('dark-cursor', isDark); // ← was cursor.classList
+  document.body.classList.toggle('dark-cursor', isDark);
 }
 
-/* ─── NAV MOBILE MENU ───────────────────────────────────── */
+/* ─── NAV MOBILE MENU ─── */
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const mobileMenu = document.getElementById('mobileMenu');
 if (mobileMenuBtn && mobileMenu) {
-    mobileMenuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('open');
-    });
+  mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('open'));
 }
-/* ─── NAV THEME ─────────────────────────────────────────── */
+
+/* ─── NAV THEME ─── */
 function updateNavTheme() {
   const nav = document.getElementById('mainNav');
   const darkSection = document.querySelector('.dark-section');
@@ -100,33 +90,30 @@ function updateNavTheme() {
     nav.classList.remove('dark-nav');
   }
 }
-/* ─── HERO WAVE MORPH ─── */
+
+/* ─── HERO WAVE ANIMATION ─── */
 (function () {
-    const wave1 = document.getElementById('wave1');
-    const wave2 = document.getElementById('wave2');
-    if (!wave1 || !wave2) return;
+  const wave1 = document.getElementById('wave1');
+  const wave2 = document.getElementById('wave2');
+  const wave3 = document.getElementById('wave3');
+  if (!wave1 || !wave2 || !wave3) return;
 
-    const path1 = wave1.getAttribute('d');
-    const path2 = wave2.getAttribute('d');
+  let tick = 0;
 
-    let t = 0;
-    let forward = true;
+  function animateWave() {
+    tick += 0.008;
 
-    function lerp(a, b, f) { return a + (b - a) * f; }
+    // Each wave shifts independently at different speeds & directions
+    const s1 = Math.sin(tick)        * 18;
+    const s2 = Math.sin(tick * 0.7 + 1) * 24;
+    const s3 = Math.sin(tick * 0.5 + 2) * 30;
 
-    // Parse both paths into point arrays for simple morph
-    function animateWave() {
-        t += forward ? 0.008 : -0.008;
-        if (t >= 1) forward = false;
-        if (t <= 0) forward = true;
+    wave1.style.transform = `translateX(${s1}px)`;
+    wave2.style.transform = `translateX(${-s2}px)`;
+    wave3.style.transform = `translateX(${s3}px)`;
 
-        // Smooth oscillation on wave1 translateX
-        const shift = Math.sin(t * Math.PI) * 40;
-        wave1.style.transform = `translateX(${-shift}px)`;
-        wave2.style.transform = `translateX(${shift * 0.6}px)`;
-        wave1.style.opacity = 0.85 + Math.sin(t * Math.PI) * 0.15;
+    requestAnimationFrame(animateWave);
+  }
 
-        requestAnimationFrame(animateWave);
-    }
-    animateWave();
+  animateWave();
 })();
