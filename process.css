@@ -771,4 +771,140 @@ nav.dark-nav #mobileMenuBtn{color:var(--yellow)}
   top: 0;
   left: 0;
 }
+/* ══════════════════════════════════════════════════════════
+   PROCESS HERO — SCROLL SCRAMBLE EFFECT
+   Paste at the bottom of process.css
+   ══════════════════════════════════════════════════════════ */
+
+@property --hero-rotate {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+:root {
+  --circle-size: min(54vw, 480px);
+  --radius: calc(var(--circle-size) / 2);
+  --letter-spacing-circ: 1.1ch;
+  --letter-angle-delta: 44deg;
+}
+
+/* Override hero to dark */
+.hero {
+  background: #0D0D0D !important;
+  border-bottom: 2px solid rgba(255, 214, 0, 0.15) !important;
+  overflow: hidden !important;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Headline + sub adapt to dark */
+.hero h1 { color: #FFD600 !important; }
+.hero h1 .outline {
+  -webkit-text-stroke: 3px #FFD600 !important;
+  color: transparent !important;
+}
+.hero-eyebrow {
+  background: #FFD600 !important;
+  color: #0D0D0D !important;
+}
+.hero-sub { color: rgba(255, 214, 0, 0.5) !important; }
+.hero-scroll-hint { color: rgba(255, 214, 0, 0.3) !important; }
+.hero-scroll-hint span { background: rgba(255, 214, 0, 0.2) !important; }
+
+/* Triangle canvas */
+#heroTriCanvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Glow orb */
+#heroGlowOrb {
+  position: absolute;
+  width: 50vw;
+  height: 50vw;
+  max-width: 560px;
+  max-height: 560px;
+  border-radius: 50%;
+  background: radial-gradient(circle closest-side, rgba(255,214,0,0.13), transparent);
+  pointer-events: none;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: heroGlowIdle 5s ease-in-out infinite alternate;
+}
+@keyframes heroGlowIdle {
+  from { opacity: 0.6; transform: translate(-50%,-50%) scale(0.85); }
+  to   { opacity: 1;   transform: translate(-50%,-50%) scale(1.1);  }
+}
+#heroGlowOrb.active { animation: none; }
+
+/* Circular scramble list */
+.hero-circle-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#scrambleList {
+  --count: 9;
+  position: relative;
+  width: var(--circle-size);
+  height: var(--circle-size);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-radius: 50%;
+}
+
+#scrambleList > li {
+  position: absolute;
+  inset: 50%;
+}
+
+#scrambleList > li > span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: 0 0;
+  display: inline-block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(0.9rem, 2.2vw, 1.5rem);
+  color: #FFD600;
+  text-shadow:
+    0 0 8px rgba(255,214,0,0.9),
+    0 0 20px rgba(255,214,0,0.5),
+    0 0 40px rgba(255,214,0,0.25);
+}
+
+/* Centre content sits above circle */
+.hero-center-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0 60px;
+  pointer-events: none;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  :root {
+    --circle-size: 85vw;
+    --letter-angle-delta: 40deg;
+  }
+  .hero-center-content { padding: 0 24px; }
+  #scrambleList > li > span { font-size: clamp(0.75rem, 3.5vw, 1rem); }
+}
  
