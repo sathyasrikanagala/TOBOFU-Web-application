@@ -31,9 +31,9 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
 .page{position:relative;z-index:1}
 
 /* ─── HERO ─── */
-#hero{
-  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
-  padding:120px 60px 80px;position:relative;
+#hero {
+  min-height:70vh;display:flex;flex-direction:column;justify-content:center;
+  padding:80px 60px 60px;position:relative;
   background:var(--yellow);border-bottom:var(--border);overflow:hidden;
 }
 .hero-bg-text{
