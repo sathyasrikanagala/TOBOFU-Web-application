@@ -314,6 +314,8 @@ nav.dark-nav #mobileMenuBtn{color:var(--yellow)}
 
 /* Override hero to dark */
 #hero {
+  min-height: 70vh !important;
+  padding: 80px 60px 60px !important;
   background: #0D0D0D !important;
   border-bottom: 2px solid rgba(255, 214, 0, 0.15) !important;
 }
