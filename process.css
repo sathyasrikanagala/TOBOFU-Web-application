@@ -13,7 +13,7 @@ html{scroll-behavior:smooth}
   --midgray:#888;
   --border:3px solid #0A0A0A;
   --shadow:6px 6px 0px #0A0A0A;
-  --circle-size: min(40vw, 380px);
+  --circle-size: min(34vw, 320px);
 }
 body{
   background:#FFFBEA;
@@ -100,13 +100,10 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
 #heroTriCanvas{ display:none }
 #heroGlowOrb  { display:none }
 
-/* ─── RING — left column, centred ─── */
+/* ─── RING — left column, upper-centre ─── */
 .hero-circle-wrap{
   position:relative;
   grid-column:1;
-  top:unset;
-  left:unset;
-  transform:none;
   z-index:2;
   pointer-events:none;
   display:flex;
@@ -114,6 +111,7 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
   justify-content:center;
   width:100%;
   align-self:center;
+  margin-top:-80px; /* pull up toward nav */
 }
 
 /* The UL that rotates */
