@@ -378,9 +378,9 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
   margin-bottom:28px;position:relative;z-index:1;
 }
 .step-panel-1 .step-desc{color:rgba(0,0,0,.55)}
-.step-panel-2 .step-desc{color:rgba(255,215,0,.45)}
+.step-panel-2 .step-desc{color:rgba(255,215,0,.75)}
 .step-panel-3 .step-desc{color:rgba(0,0,0,.6)}
-.step-panel-4 .step-desc{color:rgba(255,215,0,.45)}
+.step-panel-4 .step-desc{color:rgba(255,215,0,.75)}
 .step-panel-5 .step-desc{color:rgba(0,0,0,.55)}
 
 .step-chips{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:1}
