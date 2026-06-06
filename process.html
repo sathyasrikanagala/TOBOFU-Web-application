@@ -85,15 +85,67 @@
 </div>
 
 <!-- HERO -->
+<!-- ══════════════════════════════════════════════════════
+     REPLACE your existing <section class="hero"> block
+     with this entire block
+     ══════════════════════════════════════════════════════ -->
 <section class="hero" id="heroSection" aria-label="The Innovation Process — How Tobofu Works">
-  <div class="hero-bg-text" aria-hidden="true">PROCESS&nbsp;</div>
-  <div class="hero-eyebrow">Our Protocol</div>
-  <h1>THE <span class="outline">INNOVATION</span><br>PROCESS</h1>
-  <p class="hero-sub">A collaborative and considered five-step system engineered to ensure consistent project success — from the first brief to the final delivery and beyond. No surprises. No guesswork. Just a proven framework that works every time.</p>
-  <div class="hero-scroll-hint">
-    <span></span>
-    Scroll to explore the process
+
+  <!-- Triangle grid canvas -->
+  <canvas id="heroTriCanvas"></canvas>
+
+  <!-- Glow orb -->
+  <div id="heroGlowOrb"></div>
+
+  <!-- Scroll-scramble circular text -->
+  <div class="hero-circle-wrap" aria-hidden="true">
+    <ul id="scrambleList">
+      <!-- THE -->
+      <li aria-label="THE">
+        <span>T</span><span>H</span><span>E</span>
+      </li>
+      <!-- BRIEF -->
+      <li aria-label="BRIEF">
+        <span>B</span><span>R</span><span>I</span><span>E</span><span>F</span>
+      </li>
+      <!-- · -->
+      <li aria-label="·"><span>·</span></li>
+      <!-- RESEARCH -->
+      <li aria-label="RESEARCH">
+        <span>R</span><span>E</span><span>S</span><span>E</span><span>A</span><span>R</span><span>C</span><span>H</span>
+      </li>
+      <!-- · -->
+      <li aria-label="·"><span>·</span></li>
+      <!-- IDEATION -->
+      <li aria-label="IDEATION">
+        <span>I</span><span>D</span><span>E</span><span>A</span><span>T</span><span>I</span><span>O</span><span>N</span>
+      </li>
+      <!-- · -->
+      <li aria-label="·"><span>·</span></li>
+      <!-- PRODUCTION -->
+      <li aria-label="PRODUCTION">
+        <span>P</span><span>R</span><span>O</span><span>D</span><span>U</span><span>C</span><span>T</span><span>I</span><span>O</span><span>N</span>
+      </li>
+      <!-- · -->
+      <li aria-label="·"><span>·</span></li>
+      <!-- DELIVERY -->
+      <li aria-label="DELIVERY">
+        <span>D</span><span>E</span><span>L</span><span>I</span><span>V</span><span>E</span><span>R</span><span>Y</span>
+      </li>
+    </ul>
   </div>
+
+  <!-- Centre content -->
+  <div class="hero-center-content">
+    <div class="hero-eyebrow">Our Protocol</div>
+    <h1>THE <span class="outline">INNOVATION</span><br>PROCESS</h1>
+    <p class="hero-sub">A collaborative and considered five-step system engineered to ensure consistent project success — from the first brief to the final delivery and beyond.</p>
+    <div class="hero-scroll-hint">
+      <span></span>
+      Scroll to uncover the process
+    </div>
+  </div>
+
 </section>
 
 <!-- MARQUEE -->
