@@ -95,7 +95,8 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
 .logo-track{
   position:absolute;right:0;top:0;width:50%;
   pointer-events:none;z-index:10;
-  overflow:visible;
+  overflow:hidden;
+}
 }
 .logo-sticky{
   position:sticky;top:0;height:100vh;
