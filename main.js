@@ -117,3 +117,54 @@ function updateNavTheme() {
 
   animateWave();
 })();
+/* ─── TRIANGLE HERO GRID ─────────────────────────────────── */
+(function () {
+  const TRI_BASE = 48;
+  const hero = document.getElementById('hero');
+  const triContainer = document.getElementById('hero-tri-container');
+  const glowEl = document.getElementById('hero-glow');
+
+  if (!hero || !triContainer || !glowEl) return;
+
+  function buildTriGrid() {
+    triContainer.innerHTML = '';
+    const w = hero.clientWidth;
+    const h = hero.clientHeight;
+    const columns = Math.ceil(w / (TRI_BASE * 2)) + 1;
+    const rows    = Math.ceil(h / (TRI_BASE * 1.733)) + 1;
+    triContainer.style.setProperty('--columns', columns);
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < columns; x++) {
+        const el = document.createElement('div');
+        el.classList.add('tri-set');
+        if (y % 2 === 0) el.classList.add('tri-set--offset');
+        triContainer.appendChild(el);
+      }
+    }
+  }
+
+  buildTriGrid();
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(buildTriGrid, 150);
+  }, { passive: true });
+
+  /* Glow starts centered */
+  glowEl.style.top  = '50%';
+  glowEl.style.left = '50%';
+
+  hero.addEventListener('mousemove', (e) => {
+    const rect = hero.getBoundingClientRect();
+    glowEl.style.top  = (e.clientY - rect.top)  + 'px';
+    glowEl.style.left = (e.clientX - rect.left) + 'px';
+    glowEl.classList.add('cursor-active');
+  }, { passive: true });
+
+  hero.addEventListener('mouseleave', () => {
+    glowEl.style.top  = '50%';
+    glowEl.style.left = '50%';
+    glowEl.classList.remove('cursor-active');
+  });
+})();
