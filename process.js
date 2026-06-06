@@ -105,8 +105,8 @@
   function onScroll() {
     const heroH    = hero.offsetHeight;
     const scrollY  = window.scrollY;
-    const progress = Math.min(Math.max(scrollY / (heroH * 0.8), 0), 1);
-
+    const parentH = hero.parentElement.offsetHeight;
+    const progress = Math.min(Math.max(scrollY / (parentH * 0.75), 0), 1);
     /* overall ring rotation */
     list.style.transform = `rotate(${progress * 360}deg)`;
 
