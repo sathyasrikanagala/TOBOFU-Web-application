@@ -527,7 +527,7 @@ footer{background:var(--black);padding:56px 60px;display:flex;align-items:center
   display:none;
   background:none;border:none;
   cursor:pointer;padding:6px;
-  color:var(--black);
+  color:var(--yellow);
 }
 nav.dark-nav #mobileMenuBtn{color:var(--yellow)}
 
