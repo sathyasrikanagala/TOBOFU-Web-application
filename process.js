@@ -14,49 +14,55 @@
   const items = Array.from(list.querySelectorAll('li'));
   const COUNT = items.length;
 
-  function positionLetters(progress) {
-    const R = list.offsetWidth / 2;
+  /* Seeded pseudo-random — deterministic so positions never jump */
+  function makeRand(seed) {
+    let s = seed;
+    return function() { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; };
+  }
+
+  const letterData = []; // pre-computed per-letter positions
+
+  function buildLetterData() {
+    letterData.length = 0;
+    const R    = list.offsetWidth / 2;
+    const rand = makeRand(137);
 
     items.forEach((li, liIdx) => {
-      const wordAngleDeg = (360 / COUNT) * liIdx - 90; // top-start
+      const wordAngleDeg = (360 / COUNT) * liIdx - 90;
       const wordAngleRad = wordAngleDeg * Math.PI / 180;
-
-      const spans    = Array.from(li.querySelectorAll('span'));
-      const nLetters = spans.length;
-
-      // Tangent direction (perpendicular to radius, clockwise)
-      const tanAngleDeg = wordAngleDeg + 90;
-      const tanAngleRad = tanAngleDeg * Math.PI / 180;
+      const tanAngleRad  = (wordAngleDeg + 90) * Math.PI / 180;
+      const spans        = Array.from(li.querySelectorAll('span'));
+      const nLetters     = spans.length;
 
       spans.forEach((span, sIdx) => {
-        // --- ASSEMBLED position: on the ring, letters spaced along tangent ---
-        const charSpacing = 13;
-        const totalWidth  = (nLetters - 1) * charSpacing;
-        const offsetAlong = sIdx * charSpacing - totalWidth / 2;
+        /* ASSEMBLED: evenly spaced along tangent on ring circumference */
+        const charSpacing = 14;
+        const offsetAlong = sIdx * charSpacing - ((nLetters - 1) * charSpacing) / 2;
+        const ax  = R + Math.cos(wordAngleRad) * R + Math.cos(tanAngleRad) * offsetAlong;
+        const ay  = R + Math.sin(wordAngleRad) * R + Math.sin(tanAngleRad) * offsetAlong;
+        const aRot = wordAngleDeg + 90;
 
-        const ax = R + Math.cos(wordAngleRad) * R + Math.cos(tanAngleRad) * offsetAlong;
-        const ay = R + Math.sin(wordAngleRad) * R + Math.sin(tanAngleRad) * offsetAlong;
+        /* SCRAMBLED: random loose cloud — vary angle AND radius AND tilt */
+        const angle   = rand() * Math.PI * 2;
+        const rx      = R * (0.25 + rand() * 0.65);
+        const ry      = R * (0.20 + rand() * 0.65);
+        const sx      = R + Math.cos(angle) * rx;
+        const sy      = R + Math.sin(angle) * ry;
+        const sRot    = rand() * 340 - 170;
 
-        // --- SCRAMBLED position: each letter at its own wild orbit angle ---
-        const scramAngleDeg = wordAngleDeg + (sIdx + 1) * 60 + liIdx * 15;
-        const scramAngleRad = scramAngleDeg * Math.PI / 180;
-        const scramR        = R * 0.65; // orbit inside the ring
-
-        const sx = R + Math.cos(scramAngleRad) * scramR;
-        const sy = R + Math.sin(scramAngleRad) * scramR;
-
-        // Interpolate
-        const x = sx + (ax - sx) * progress;
-        const y = sy + (ay - sy) * progress;
-
-        // Letter rotation: scrambled = random, assembled = along wordAngleDeg + 90
-        const assembledRot = wordAngleDeg + 90;
-        const scrambledRot = scramAngleDeg + 90;
-        const rot = scrambledRot + (assembledRot - scrambledRot) * progress;
-
-        span.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg)`;
-        span.style.opacity   = String(0.3 + progress * 0.7);
+        letterData.push({ span, sx, sy, sRot, ax, ay, aRot });
       });
+    });
+  }
+
+  function positionLetters(progress) {
+    if (letterData.length === 0) buildLetterData();
+    letterData.forEach(({ span, sx, sy, sRot, ax, ay, aRot }) => {
+      const x   = sx + (ax - sx) * progress;
+      const y   = sy + (ay - sy) * progress;
+      const rot = sRot + (aRot - sRot) * progress;
+      span.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg)`;
+      span.style.opacity   = String(0.35 + progress * 0.65);
     });
   }
 
@@ -70,6 +76,7 @@
 
   positionLetters(0); // initial scrambled state
   window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', () => { letterData.length = 0; onScroll(); }, { passive: true });
 
 })();
 
