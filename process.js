@@ -1,7 +1,7 @@
 "use strict";
 /* ══════════════════════════════════════════════════════════
    PROCESS HERO — SCROLL SCRAMBLE + TRIANGLE + GLOW
-   Paste at the TOP of process.js (before existing code)
+   Fixed: ring centred, letters fully in-frame at rest & post-scroll
    ══════════════════════════════════════════════════════════ */
 (function () {
 
@@ -64,56 +64,70 @@
   const list = document.getElementById('scrambleList');
   if (!list) return;
 
-  const LETTER_ANGLE_DELTA = 44;
-  const LETTER_SPACING     = 18;
+  const items = Array.from(list.querySelectorAll('li'));
+  const COUNT = items.length;
 
-  const items    = Array.from(list.querySelectorAll('li'));
-  const COUNT    = items.length;
-  let   cachedR  = 0;
+  /* ── Position every letter for a given progress (0 = scrambled, 1 = ring) ── */
+  function positionLetters(progress) {
+    const R = list.offsetWidth / 2;           // ring radius
 
-  function getRadius() {
-    return list.offsetWidth / 2;
-  }
-
-  function positionLetters(rotateProgress) {
-    const R = getRadius();
+    /* Evenly distribute words around the ring */
     items.forEach((li, liIdx) => {
-      const wordAngleDeg = (360 / COUNT) * liIdx;
+      const wordAngleDeg = (360 / COUNT) * liIdx - 90;  // -90 so first word starts at top
       const wordAngleRad = (wordAngleDeg * Math.PI) / 180;
-      const spans        = Array.from(li.querySelectorAll('span'));
+
+      const spans = Array.from(li.querySelectorAll('span'));
+      const nLetters = spans.length;
 
       spans.forEach((span, sIdx) => {
-        const scrambleAngleDeg = (sIdx + 1) * LETTER_ANGLE_DELTA;
-        const finalAngleDeg    = scrambleAngleDeg * (1 - rotateProgress);
-        const finalAngleRad    = (finalAngleDeg   * Math.PI) / 180;
+        /* Scrambled state: each letter orbits independently at a big offset angle */
+        const scrambleAngleDeg = wordAngleDeg + (sIdx + 1) * 55;
+        const scrambleAngleRad = (scrambleAngleDeg * Math.PI) / 180;
 
-        const translateX = R + Math.cos(wordAngleRad + finalAngleRad) * R
-                             + sIdx * LETTER_SPACING * rotateProgress
-                             + (sIdx + 1) * LETTER_SPACING * (1 - rotateProgress) * Math.cos(finalAngleRad);
-        const translateY = R + Math.sin(wordAngleRad + finalAngleRad) * R
-                             + (sIdx + 1) * LETTER_SPACING * (1 - rotateProgress) * Math.sin(finalAngleRad);
+        /* Assembled state: letters fan out slightly along the word's tangent */
+        /* For a circle, tangent direction is perpendicular to the radius */
+        const tangentAngleDeg = wordAngleDeg + 90; /* 90° CCW from radius = tangent */
+        const tangentAngleRad = (tangentAngleDeg * Math.PI) / 180;
 
-        const rotDeg = wordAngleDeg + finalAngleDeg;
+        /* Letter offset along tangent, centred on the word position */
+        const charSpacing = 14; /* px between assembled letters */
+        const totalWidth  = (nLetters - 1) * charSpacing;
+        const offsetAlong = (sIdx * charSpacing) - totalWidth / 2;
 
-        span.style.transform =
-          `rotate(${rotDeg}deg) translateX(${R}px) translateX(${sIdx * LETTER_SPACING}px)`;
-        span.style.opacity   = 0.5 + rotateProgress * 0.5;
+        /* Assembled position on the ring */
+        const assembledX = R + Math.cos(wordAngleRad) * R + Math.cos(tangentAngleRad) * offsetAlong;
+        const assembledY = R + Math.sin(wordAngleRad) * R + Math.sin(tangentAngleRad) * offsetAlong;
+
+        /* Scrambled position */
+        const scrambledX = R + Math.cos(scrambleAngleRad) * R * 0.7;
+        const scrambledY = R + Math.sin(scrambleAngleRad) * R * 0.7;
+
+        const x = scrambledX + (assembledX - scrambledX) * progress;
+        const y = scrambledY + (assembledY - scrambledY) * progress;
+
+        /* Assembled: letter faces outward along the radius */
+        const assembledRot = wordAngleDeg + 90;
+        /* Scrambled: letter at the scrambled angle */
+        const scrambledRot = scrambleAngleDeg + 90;
+        const rot = scrambledRot + (assembledRot - scrambledRot) * progress;
+
+        span.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg)`;
+        span.style.opacity   = String(0.35 + progress * 0.65);
       });
     });
   }
 
   function onScroll() {
-    const heroH    = hero.offsetHeight;
-    const scrollY  = window.scrollY;
-    const parentH = hero.parentElement.offsetHeight;
-    const progress = Math.min(Math.max(scrollY / (parentH * 0.75), 0), 1);
-    /* overall ring rotation */
-    list.style.transform = `rotate(${progress * 360}deg)`;
+    const parentH  = hero.parentElement.offsetHeight;
+    const progress = Math.min(Math.max(window.scrollY / (parentH * 0.6), 0), 1);
 
-    /* letter unscramble */
+    /* Overall ring rotation driven by scroll */
+    list.style.transform = `rotate(${progress * -30}deg)`;   /* gentle final rotation */
+
     positionLetters(progress);
   }
 
+  /* Initial state — scrambled */
   positionLetters(0);
   window.addEventListener('scroll', onScroll, { passive: true });
 
@@ -166,129 +180,6 @@ const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
 reveals.forEach(el => observer.observe(el));
-
-/* ══════════════════════════════════════════════════════
-   IMAGE TRAIL — Hero section, Tobofu logo only
-   Adapted from Codrops ImageTrailEffects (demo2)
-   ══════════════════════════════════════════════════════ */
-(function initImageTrail() {
-
-  const heroSection = document.getElementById('heroSection');
-  if (!heroSection) return;
-
-  /* ── Helpers ── */
-  const MathUtils = {
-    lerp:     (a, b, n) => (1 - n) * a + n * b,
-    distance: (x1, y1, x2, y2) => Math.hypot(x2 - x1, y2 - y1)
-  };
-
-  const getMousePos = (ev) => {
-    let posx = 0, posy = 0;
-    if (!ev) ev = window.event;
-    if (ev.pageX || ev.pageY) {
-      posx = ev.pageX;
-      posy = ev.pageY;
-    } else if (ev.clientX || ev.clientY) {
-      posx = ev.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-      posy = ev.clientY + document.body.scrollTop  + document.documentElement.scrollTop;
-    }
-    return { x: posx, y: posy };
-  };
-
-  /* ── Create trail image elements inside the hero ── */
-  const TRAIL_COUNT = 12;   // number of ghost logos in the pool
-  const trailImgs   = [];
-
-  for (let i = 0; i < TRAIL_COUNT; i++) {
-    const img = document.createElement('img');
-    img.src   = 'centle-logo.png';
-    img.alt   = '';
-    img.setAttribute('aria-hidden', 'true');
-    img.classList.add('hero-trail-img');
-    heroSection.appendChild(img);
-    trailImgs.push(img);
-  }
-
-  /* ── State ── */
-  let mousePos      = { x: 0, y: 0 };
-  let lastMousePos  = { x: 0, y: 0 };
-  let cacheMousePos = { x: 0, y: 0 };
-  let imgPosition   = 0;
-  let zIndexVal     = 1;
-  const THRESHOLD   = 90;   // px mouse must travel before next logo appears
-
-  /* ── Track mouse only inside hero ── */
-  heroSection.addEventListener('mousemove', ev => {
-    mousePos = getMousePos(ev);
-  });
-
-  /* ── Per-image rect cache ── */
-  const rects = trailImgs.map(img => img.getBoundingClientRect());
-  window.addEventListener('resize', () => {
-    trailImgs.forEach((img, i) => {
-      gsap.set(img, { opacity: 0, x: 0, y: 0 });
-      rects[i] = img.getBoundingClientRect();
-    });
-  });
-
-  const isActive = (img) =>
-    gsap.isTweening(img) || parseFloat(img.style.opacity || 0) !== 0;
-
-  /* ── Show next logo in pool ── */
-  function showNextImage() {
-    const img  = trailImgs[imgPosition];
-    const rect = rects[imgPosition];
-
-    gsap.killTweensOf(img);
-
-    gsap.timeline()
-      .set(img, {
-        opacity:  1,
-        scale:    1,
-        zIndex:   zIndexVal,
-        x: cacheMousePos.x - heroSection.getBoundingClientRect().left - rect.width  / 2,
-        y: cacheMousePos.y - heroSection.getBoundingClientRect().top  - rect.height / 2,
-        yPercent: 0
-      }, 0)
-      .to(img, {
-        duration: 1.6,
-        ease:     'expo.out',
-        x: mousePos.x - heroSection.getBoundingClientRect().left - rect.width  / 2,
-        y: mousePos.y - heroSection.getBoundingClientRect().top  - rect.height / 2
-      }, 0)
-      .to(img, {
-        duration: 1.6,
-        ease:     'power2.in',
-        yPercent: 60,
-        opacity:  0
-      }, 0.7);
-  }
-
-  /* ── Render loop ── */
-  function render() {
-    const distance = MathUtils.distance(mousePos.x, mousePos.y, lastMousePos.x, lastMousePos.y);
-
-    cacheMousePos.x = MathUtils.lerp(cacheMousePos.x || mousePos.x, mousePos.x, 0.1);
-    cacheMousePos.y = MathUtils.lerp(cacheMousePos.y || mousePos.y, mousePos.y, 0.1);
-
-    if (distance > THRESHOLD) {
-      showNextImage();
-      zIndexVal++;
-      imgPosition = (imgPosition + 1) % TRAIL_COUNT;
-      lastMousePos = { ...mousePos };
-    }
-
-    // reset z-index when all idle
-    if (trailImgs.every(img => !isActive(img)) && zIndexVal !== 1) {
-      zIndexVal = 1;
-    }
-
-    requestAnimationFrame(render);
-  }
-
-  requestAnimationFrame(render);
-
-})();
 
 /* ── Mobile menu ── */
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
