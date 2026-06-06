@@ -32,9 +32,13 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
 
 /* ─── HERO ─── */
 #hero {
-  min-height:70vh;display:flex;flex-direction:column;justify-content:center;
-  padding:80px 60px 60px;position:relative;
-  background:var(--yellow);border-bottom:var(--border);overflow:hidden;
+  min-height: 70vh !important;
+  max-height: 70vh !important;
+  height: 70vh !important;
+  padding: 80px 60px 60px !important;
+  background: #0D0D0D !important;
+  border-bottom: 2px solid rgba(255, 214, 0, 0.15) !important;
+  overflow: hidden !important;
 }
 .hero-bg-text{
   position:absolute;top:50%;left:0;transform:translateY(-50%);
@@ -367,6 +371,7 @@ nav.dark-nav #mobileMenuBtn{color:var(--yellow)}
   z-index: 2;
   pointer-events: none;
   overflow: hidden;
+  align-content: start;
 }
 .tri-set {
   display: inline-block;
