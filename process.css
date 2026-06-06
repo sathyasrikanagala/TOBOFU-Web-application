@@ -126,8 +126,10 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
 }
 #scrambleList > li{
   position:absolute;
-  inset:50%;
+  top:0;left:0;
+  width:0;height:0;
 }
+
 #scrambleList > li > span{
   position:absolute;
   top:0;left:0;
