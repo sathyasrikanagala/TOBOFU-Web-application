@@ -13,7 +13,7 @@ html{scroll-behavior:smooth}
   --midgray:#888;
   --border:3px solid #0A0A0A;
   --shadow:6px 6px 0px #0A0A0A;
-  --circle-size: min(54vw, 480px);
+  --circle-size: min(40vw, 380px);
 }
 body{
   background:#FFFBEA;
@@ -89,7 +89,7 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
   top:0;
   height:100vh;
   min-height:unset;
-  /* two-column: title left | ring right */
+  /* two-column: ring left | title right */
   display:grid;
   grid-template-columns:1fr 1fr;
   align-items:center;
@@ -100,9 +100,10 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
 #heroTriCanvas{ display:none }
 #heroGlowOrb  { display:none }
 
-/* ─── RING — right column, centred ─── */
+/* ─── RING — left column, centred ─── */
 .hero-circle-wrap{
   position:relative;
+  grid-column:1;
   top:unset;
   left:unset;
   transform:none;
@@ -112,7 +113,7 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
   align-items:center;
   justify-content:center;
   width:100%;
-  height:100%;
+  align-self:center;
 }
 
 /* The UL that rotates */
@@ -123,6 +124,7 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
   margin:0;padding:0;list-style:none;
   border-radius:50%;
   overflow:visible;
+  flex-shrink:0;
 }
 #scrambleList > li{
   position:absolute;
@@ -142,15 +144,16 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
     0 0 40px rgba(255,214,0,0.25);
 }
 
-/* ─── HERO LEFT COLUMN — title content ─── */
+/* ─── HERO RIGHT COLUMN — title content ─── */
 .hero-center-content{
+  grid-column:2;
   position:relative;
   z-index:3;
   display:flex;
   flex-direction:column;
   align-items:flex-start;
   gap:0;
-  padding:0 48px 0 60px;
+  padding:0 60px 0 48px;
   pointer-events:none;
   width:100%;
   margin-top:0;
