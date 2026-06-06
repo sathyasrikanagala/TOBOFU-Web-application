@@ -1,4 +1,123 @@
 "use strict";
+/* ══════════════════════════════════════════════════════════
+   PROCESS HERO — SCROLL SCRAMBLE + TRIANGLE + GLOW
+   Paste at the TOP of process.js (before existing code)
+   ══════════════════════════════════════════════════════════ */
+(function () {
+
+  /* ── Triangle grid ── */
+  const triCanvas = document.getElementById('heroTriCanvas');
+  const hero      = document.getElementById('heroSection');
+  const glowOrb   = document.getElementById('heroGlowOrb');
+
+  if (!triCanvas || !hero) return;
+
+  const ctx = triCanvas.getContext('2d');
+
+  function drawTris() {
+    const W = hero.clientWidth, H = hero.clientHeight;
+    triCanvas.width  = W;
+    triCanvas.height = H;
+    const base = 48, h = base * 1.733;
+    ctx.clearRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(255,214,0,0.035)';
+    ctx.lineWidth   = 0.5;
+    for (let row = 0; row * h < H + h; row++) {
+      const offset = row % 2 === 0 ? 0 : base;
+      for (let col = -1; col * base * 2 < W + base * 2; col++) {
+        const x = col * base * 2 + offset;
+        const y = row * h;
+        ctx.beginPath();
+        ctx.moveTo(x, y + h); ctx.lineTo(x + base, y); ctx.lineTo(x + base * 2, y + h);
+        ctx.closePath(); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x + base, y); ctx.lineTo(x + base * 2, y + h); ctx.lineTo(x + base * 2 + base, y);
+        ctx.closePath(); ctx.stroke();
+      }
+    }
+  }
+  drawTris();
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(drawTris, 150);
+  }, { passive: true });
+
+  /* ── Glow follows cursor ── */
+  if (glowOrb) {
+    hero.addEventListener('mousemove', (e) => {
+      const rect = hero.getBoundingClientRect();
+      glowOrb.style.left      = (e.clientX - rect.left) + 'px';
+      glowOrb.style.top       = (e.clientY - rect.top)  + 'px';
+      glowOrb.style.transform = 'translate(-50%, -50%)';
+      glowOrb.classList.add('active');
+    }, { passive: true });
+    hero.addEventListener('mouseleave', () => {
+      glowOrb.style.left      = '50%';
+      glowOrb.style.top       = '50%';
+      glowOrb.style.transform = 'translate(-50%, -50%)';
+      glowOrb.classList.remove('active');
+    });
+  }
+
+  /* ── Scroll scramble ── */
+  const list = document.getElementById('scrambleList');
+  if (!list) return;
+
+  const LETTER_ANGLE_DELTA = 44;
+  const LETTER_SPACING     = 18;
+
+  const items    = Array.from(list.querySelectorAll('li'));
+  const COUNT    = items.length;
+  let   cachedR  = 0;
+
+  function getRadius() {
+    return list.offsetWidth / 2;
+  }
+
+  function positionLetters(rotateProgress) {
+    const R = getRadius();
+    items.forEach((li, liIdx) => {
+      const wordAngleDeg = (360 / COUNT) * liIdx;
+      const wordAngleRad = (wordAngleDeg * Math.PI) / 180;
+      const spans        = Array.from(li.querySelectorAll('span'));
+
+      spans.forEach((span, sIdx) => {
+        const scrambleAngleDeg = (sIdx + 1) * LETTER_ANGLE_DELTA;
+        const finalAngleDeg    = scrambleAngleDeg * (1 - rotateProgress);
+        const finalAngleRad    = (finalAngleDeg   * Math.PI) / 180;
+
+        const translateX = R + Math.cos(wordAngleRad + finalAngleRad) * R
+                             + sIdx * LETTER_SPACING * rotateProgress
+                             + (sIdx + 1) * LETTER_SPACING * (1 - rotateProgress) * Math.cos(finalAngleRad);
+        const translateY = R + Math.sin(wordAngleRad + finalAngleRad) * R
+                             + (sIdx + 1) * LETTER_SPACING * (1 - rotateProgress) * Math.sin(finalAngleRad);
+
+        const rotDeg = wordAngleDeg + finalAngleDeg;
+
+        span.style.transform =
+          `rotate(${rotDeg}deg) translateX(${R}px) translateX(${sIdx * LETTER_SPACING}px)`;
+        span.style.opacity   = 0.5 + rotateProgress * 0.5;
+      });
+    });
+  }
+
+  function onScroll() {
+    const heroH    = hero.offsetHeight;
+    const scrollY  = window.scrollY;
+    const progress = Math.min(Math.max(scrollY / (heroH * 0.8), 0), 1);
+
+    /* overall ring rotation */
+    list.style.transform = `rotate(${progress * 360}deg)`;
+
+    /* letter unscramble */
+    positionLetters(progress);
+  }
+
+  positionLetters(0);
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+})();
 
 /* ── Custom cursor ── */
 const cursor = document.getElementById('cursor');
