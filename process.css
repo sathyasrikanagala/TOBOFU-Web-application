@@ -799,8 +799,29 @@ nav.dark-nav #mobileMenuBtn{color:var(--yellow)}
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-height: 300vh !important;
+}
+.hero-center-content {
+  position: sticky !important;
+  top: 40vh;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0 60px;
+  pointer-events: none;
 }
 
+.hero-circle-wrap {
+  position: sticky !important;
+  top: 0;
+  height: 100vh;
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 /* Headline + sub adapt to dark */
 .hero h1 { color: #FFD600 !important; }
 .hero h1 .outline {
