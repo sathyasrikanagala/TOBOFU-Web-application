@@ -70,135 +70,66 @@
         left: auto !important; bottom: auto !important;
         align-self: end; padding-bottom: 4px;
       }
-      .hero-sub {
-        grid-area: sub; position: static !important;
-        right: auto !important; bottom: auto !important;
-        max-width: 380px; margin-left: auto; align-self: end;
-        padding-bottom: 4px; font-size: 17px;
-      }
       .hero-bg-text { position: absolute; pointer-events: none; }
 
       @media (max-width: 900px) {
         #hero {
           grid-template-columns: 1fr !important;
-          grid-template-areas: "headline" "sub" "awards" !important;
+          grid-template-areas: "headline" "awards" !important;
           padding: 100px 24px 48px !important;
           gap: 28px;
         }
-        .hero-sub { max-width: 100% !important; margin-left: 0 !important; font-size: 15px; }
         .hero-awards { flex-wrap: wrap; gap: 16px; }
       }
 
       /* ══════════════════════════════════════════════════════════
          CARD VISUAL OVERRIDES
-         The .card-visual container in the sticky cards is already
-         position:relative; overflow:hidden. We make the vis-inner
-         fill it completely so the rich visuals sit flush.
          ══════════════════════════════════════════════════════════ */
       .card-visual .vis-inner {
         width: 100%;
         height: 100%;
         min-height: 100%;
-        display: block;          /* override flex so children use position:absolute */
+        display: block;
         position: relative;
         overflow: hidden;
       }
 
       /* ── CV1: STRATEGY ── */
       .cv1 .vis-inner { background: #0D0D0D; font-family: 'DM Sans', sans-serif; }
-
       .cv1 .vis-inner .grid-line { position:absolute; background:rgba(255,255,255,0.035); }
       .cv1 .vis-inner .gl-h { width:100%; height:1px; left:0; }
       .cv1 .vis-inner .gl-v { width:1px; top:0; bottom:0; }
-
-      .cv1 .vis-inner .ghost {
-        position:absolute; font-family:'Bebas Neue',sans-serif; font-size:180px;
-        color:rgba(255,214,0,0.04); left:-8px; top:50%; transform:translateY(-50%);
-        white-space:nowrap; pointer-events:none; line-height:1; letter-spacing:-2px;
-      }
-      .cv1 .vis-inner .spine {
-        position:absolute; left:40px; top:36px; bottom:36px;
-        width:3px; background:rgba(255,255,255,0.07); border-radius:2px;
-      }
-      .cv1 .vis-inner .step-dot {
-        position:absolute; left:34px; width:16px; height:16px; border-radius:50%;
-      }
+      .cv1 .vis-inner .ghost { position:absolute; font-family:'Bebas Neue',sans-serif; font-size:180px; color:rgba(255,214,0,0.04); left:-8px; top:50%; transform:translateY(-50%); white-space:nowrap; pointer-events:none; line-height:1; letter-spacing:-2px; }
+      .cv1 .vis-inner .spine { position:absolute; left:40px; top:36px; bottom:36px; width:3px; background:rgba(255,255,255,0.07); border-radius:2px; }
+      .cv1 .vis-inner .step-dot { position:absolute; left:34px; width:16px; height:16px; border-radius:50%; }
       .cv1 .vis-inner .step { position:absolute; left:60px; right:200px; }
-      .cv1 .vis-inner .step-label {
-        font-family:'Bebas Neue',sans-serif; font-size:10px; letter-spacing:3px; margin-bottom:3px;
-      }
-      .cv1 .vis-inner .step-title {
-        font-size:13px; font-weight:700; color:rgba(255,255,255,0.85); margin-bottom:2px;
-      }
+      .cv1 .vis-inner .step-label { font-family:'Bebas Neue',sans-serif; font-size:10px; letter-spacing:3px; margin-bottom:3px; }
+      .cv1 .vis-inner .step-title { font-size:13px; font-weight:700; color:rgba(255,255,255,0.85); margin-bottom:2px; }
       .cv1 .vis-inner .step-desc { font-size:10px; color:rgba(255,255,255,0.3); line-height:1.4; }
-      .cv1 .vis-inner .step-active-bg {
-        position:absolute; left:54px; right:196px; border-radius:3px;
-        background:rgba(255,214,0,0.07); border-left:3px solid #FFD600;
-      }
-      .cv1 .vis-inner .bullseye {
-        position:absolute; right:-10px; top:50%; transform:translateY(-50%);
-        width:210px; height:210px;
-      }
-      .cv1 .vis-inner .ring {
-        position:absolute; border-radius:50%; border:1px solid;
-        top:50%; left:50%; transform:translate(-50%,-50%);
-      }
-      .cv1 .vis-inner .orbit-badge {
-        position:absolute; background:rgba(255,255,255,0.05); border-radius:20px;
-        padding:3px 10px; font-size:8px; font-weight:700; color:rgba(255,255,255,0.35);
-        letter-spacing:1px; white-space:nowrap;
-      }
+      .cv1 .vis-inner .step-active-bg { position:absolute; left:54px; right:196px; border-radius:3px; background:rgba(255,214,0,0.07); border-left:3px solid #FFD600; }
+      .cv1 .vis-inner .bullseye { position:absolute; right:-10px; top:50%; transform:translateY(-50%); width:210px; height:210px; }
+      .cv1 .vis-inner .ring { position:absolute; border-radius:50%; border:1px solid; top:50%; left:50%; transform:translate(-50%,-50%); }
+      .cv1 .vis-inner .orbit-badge { position:absolute; background:rgba(255,255,255,0.05); border-radius:20px; padding:3px 10px; font-size:8px; font-weight:700; color:rgba(255,255,255,0.35); letter-spacing:1px; white-space:nowrap; }
       .cv1 .vis-inner .orbit-badge.red { background:rgba(230,57,70,0.15); color:rgba(230,57,70,0.7); }
       .cv1 .vis-inner .ch { position:absolute; background:rgba(255,255,255,0.07); }
       .cv1 .vis-inner .ch-v { width:1px; top:0; bottom:0; left:50%; transform:translateX(-50%); }
       .cv1 .vis-inner .ch-h { height:1px; left:0; right:0; top:50%; transform:translateY(-50%); }
-
       @keyframes cv1-dotBeat { 0%,100%{transform:scale(1)} 50%{transform:scale(1.4)} }
       @keyframes cv1-dartIn { from{opacity:0;transform:translate(30px,-30px)} to{opacity:1;transform:translate(0,0)} }
 
       /* ── CV2: BRANDING ── */
       .cv2 .vis-inner { background:#0D0D0D; font-family:'DM Sans',sans-serif; }
-
-      .cv2 .vis-inner .ghost2 {
-        position:absolute; font-family:'Bebas Neue',sans-serif; font-size:160px;
-        color:rgba(255,255,255,0.025); left:-6px; top:50%; transform:translateY(-50%);
-        white-space:nowrap; pointer-events:none; letter-spacing:-2px;
-      }
-      .cv2 .vis-inner .aa-block {
-        position:absolute; left:36px; top:36px; width:180px; height:136px;
-        background:#FFD600; display:flex; align-items:flex-end; justify-content:flex-start;
-        padding:8px 12px; overflow:hidden;
-      }
-      .cv2 .vis-inner .aa-letter {
-        font-family:'Bebas Neue',sans-serif; font-size:108px; color:#0D0D0D;
-        line-height:1; letter-spacing:-2px;
-      }
-      .cv2 .vis-inner .type-label-bar {
-        position:absolute; left:36px; top:172px; width:180px; height:26px;
-        background:#0D0D0D; display:flex; align-items:center; justify-content:center;
-      }
-      .cv2 .vis-inner .type-label-text {
-        font-size:9px; font-weight:700; letter-spacing:2px; color:#FFD600; text-transform:uppercase;
-      }
+      .cv2 .vis-inner .ghost2 { position:absolute; font-family:'Bebas Neue',sans-serif; font-size:160px; color:rgba(255,255,255,0.025); left:-6px; top:50%; transform:translateY(-50%); white-space:nowrap; pointer-events:none; letter-spacing:-2px; }
+      .cv2 .vis-inner .aa-block { position:absolute; left:36px; top:36px; width:180px; height:136px; background:#FFD600; display:flex; align-items:flex-end; justify-content:flex-start; padding:8px 12px; overflow:hidden; }
+      .cv2 .vis-inner .aa-letter { font-family:'Bebas Neue',sans-serif; font-size:108px; color:#0D0D0D; line-height:1; letter-spacing:-2px; }
+      .cv2 .vis-inner .type-label-bar { position:absolute; left:36px; top:172px; width:180px; height:26px; background:#0D0D0D; display:flex; align-items:center; justify-content:center; }
+      .cv2 .vis-inner .type-label-text { font-size:9px; font-weight:700; letter-spacing:2px; color:#FFD600; text-transform:uppercase; }
       .cv2 .vis-inner .swatches { position:absolute; left:36px; top:212px; display:flex; gap:0; }
       .cv2 .vis-inner .swatch { width:44px; height:44px; }
-      .cv2 .vis-inner .swatch-label {
-        position:absolute; left:36px; top:268px; font-size:8px; font-weight:700;
-        letter-spacing:2px; color:rgba(255,255,255,0.25); text-transform:uppercase;
-        width:180px; text-align:center;
-      }
-      .cv2 .vis-inner .r-panel {
-        position:absolute; right:20px; top:36px; bottom:36px; width:224px;
-        background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.07); overflow:hidden;
-      }
-      .cv2 .vis-inner .r-ghost {
-        position:absolute; top:6px; left:8px; font-family:'Bebas Neue',sans-serif; font-size:56px;
-        color:rgba(255,255,255,0.06); letter-spacing:3px; pointer-events:none;
-      }
-      .cv2 .vis-inner .logo-mark {
-        position:absolute; top:48px; left:14px; width:44px; height:44px; background:#FFD600;
-        display:flex; align-items:center; justify-content:center;
-      }
+      .cv2 .vis-inner .swatch-label { position:absolute; left:36px; top:268px; font-size:8px; font-weight:700; letter-spacing:2px; color:rgba(255,255,255,0.25); text-transform:uppercase; width:180px; text-align:center; }
+      .cv2 .vis-inner .r-panel { position:absolute; right:20px; top:36px; bottom:36px; width:224px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.07); overflow:hidden; }
+      .cv2 .vis-inner .r-ghost { position:absolute; top:6px; left:8px; font-family:'Bebas Neue',sans-serif; font-size:56px; color:rgba(255,255,255,0.06); letter-spacing:3px; pointer-events:none; }
+      .cv2 .vis-inner .logo-mark { position:absolute; top:48px; left:14px; width:44px; height:44px; background:#FFD600; display:flex; align-items:center; justify-content:center; }
       .cv2 .vis-inner .logo-mark span { font-family:'Bebas Neue',sans-serif; font-size:22px; color:#0D0D0D; }
       .cv2 .vis-inner .logo-name { position:absolute; top:54px; left:64px; }
       .cv2 .vis-inner .logo-name-big { font-family:'Bebas Neue',sans-serif; font-size:22px; color:#fff; letter-spacing:2px; }
@@ -221,27 +152,15 @@
       .cv2 .vis-inner .rule-pill { padding:3px 10px; border-radius:1px; font-size:8px; font-weight:700; }
       .cv2 .vis-inner .rule-pill.muted { background:rgba(255,255,255,0.05); color:rgba(255,255,255,0.2); }
       .cv2 .vis-inner .rule-pill.yel { background:#FFD600; color:#0D0D0D; }
-      .cv2 .vis-inner .bottom-strip {
-        position:absolute; bottom:0; left:36px; right:20px; height:28px;
-        background:rgba(255,255,255,0.02); display:flex; align-items:center; justify-content:center;
-      }
+      .cv2 .vis-inner .bottom-strip { position:absolute; bottom:0; left:36px; right:20px; height:28px; background:rgba(255,255,255,0.02); display:flex; align-items:center; justify-content:center; }
       .cv2 .vis-inner .bottom-strip span { font-size:9px; font-weight:700; letter-spacing:3px; color:rgba(255,255,255,0.15); text-transform:uppercase; }
-
       @keyframes cv2-fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
 
       /* ── CV3: DIGITAL MARKETING ── */
       .cv3 .vis-inner { background:#0D0D0D; font-family:'DM Sans',sans-serif; filter:none; }
-
-      .cv3 .vis-inner .ghost3 {
-        position:absolute; font-family:'Bebas Neue',sans-serif; font-size:180px;
-        color:rgba(255,214,0,0.025); left:-8px; top:50%; transform:translateY(-50%);
-        white-space:nowrap; pointer-events:none; letter-spacing:-4px;
-      }
+      .cv3 .vis-inner .ghost3 { position:absolute; font-family:'Bebas Neue',sans-serif; font-size:180px; color:rgba(255,214,0,0.025); left:-8px; top:50%; transform:translateY(-50%); white-space:nowrap; pointer-events:none; letter-spacing:-4px; }
       .cv3 .vis-inner .badges3 { position:absolute; top:22px; left:28px; right:28px; display:flex; gap:10px; }
-      .cv3 .vis-inner .badge3 {
-        flex:1; height:32px; background:rgba(255,255,255,0.05); border-radius:3px;
-        display:flex; align-items:center; overflow:hidden; position:relative;
-      }
+      .cv3 .vis-inner .badge3 { flex:1; height:32px; background:rgba(255,255,255,0.05); border-radius:3px; display:flex; align-items:center; overflow:hidden; position:relative; }
       .cv3 .vis-inner .badge-stripe { width:4px; height:100%; flex-shrink:0; border-radius:2px 0 0 2px; }
       .cv3 .vis-inner .badge-text3 { padding:0 8px; display:flex; flex-direction:column; gap:1px; }
       .cv3 .vis-inner .badge-name3 { font-size:9px; font-weight:700; color:rgba(255,255,255,0.6); letter-spacing:1px; }
@@ -249,7 +168,6 @@
       .cv3 .vis-inner .badge-cert3 { background:#FFD600; }
       .cv3 .vis-inner .badge-cert3 .badge-name3 { color:#0D0D0D; }
       .cv3 .vis-inner .badge-cert3 .badge-sub3 { color:rgba(0,0,0,0.45); }
-
       .cv3 .vis-inner .chart3 { position:absolute; left:28px; right:150px; top:74px; bottom:56px; }
       .cv3 .vis-inner .y-grid3 { position:absolute; left:34px; right:0; }
       .cv3 .vis-inner .y-line3 { position:absolute; left:0; right:0; height:1px; background:rgba(255,255,255,0.05); }
@@ -261,97 +179,48 @@
       .cv3 .vis-inner .bar-x3.active { color:#FFD600; }
       .cv3 .vis-inner .x-axis3 { position:absolute; left:34px; right:0; bottom:0; height:1px; background:rgba(255,255,255,0.1); }
       .cv3 .vis-inner .trend-svg3 { position:absolute; left:34px; right:0; bottom:0; pointer-events:none; overflow:visible; }
-
-      .cv3 .vis-inner .stat-panel3 {
-        position:absolute; right:22px; top:74px; width:116px; bottom:56px;
-        background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); border-radius:3px;
-        display:flex; flex-direction:column; align-items:center; justify-content:center;
-        overflow:hidden;
-      }
+      .cv3 .vis-inner .stat-panel3 { position:absolute; right:22px; top:74px; width:116px; bottom:56px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); border-radius:3px; display:flex; flex-direction:column; align-items:center; justify-content:center; overflow:hidden; }
       .cv3 .vis-inner .stat-panel-title3 { font-size:8px; font-weight:700; color:rgba(255,255,255,0.22); letter-spacing:2px; text-align:center; padding:10px 0 6px; border-bottom:1px solid rgba(255,255,255,0.06); width:100%; }
       .cv3 .vis-inner .stat-row3 { width:100%; padding:12px 0 6px; display:flex; flex-direction:column; align-items:center; gap:3px; border-bottom:1px solid rgba(255,255,255,0.05); }
       .cv3 .vis-inner .stat-row3:last-child { border-bottom:none; }
       .cv3 .vis-inner .stat-num3 { font-family:'Bebas Neue',sans-serif; font-size:44px; line-height:1; letter-spacing:-1px; }
       .cv3 .vis-inner .stat-label3 { font-size:8px; font-weight:700; color:rgba(255,255,255,0.28); letter-spacing:1px; text-align:center; }
-      .cv3 .vis-inner .bottom-label3 {
-        position:absolute; bottom:16px; left:28px; right:22px; height:28px;
-        background:rgba(255,255,255,0.02); border-radius:2px; display:flex; align-items:center; justify-content:center;
-      }
+      .cv3 .vis-inner .bottom-label3 { position:absolute; bottom:16px; left:28px; right:22px; height:28px; background:rgba(255,255,255,0.02); border-radius:2px; display:flex; align-items:center; justify-content:center; }
       .cv3 .vis-inner .bottom-label3 span { font-size:8px; font-weight:700; color:rgba(255,255,255,0.12); letter-spacing:2px; text-transform:uppercase; }
-
       @keyframes cv3-barUp { from{transform:scaleY(0)} to{transform:scaleY(1)} }
       @keyframes cv3-statIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
 
       /* ── CV4: CONTENT PRODUCTION ── */
       .cv4 .vis-inner { background:#0D0D0D; font-family:'DM Sans',sans-serif; }
-
-      .cv4 .vis-inner .ghost4 {
-        position:absolute; font-family:'Bebas Neue',sans-serif; font-size:130px;
-        color:rgba(255,255,255,0.04); left:16px; top:50%; transform:translateY(-50%);
-        white-space:nowrap; pointer-events:none; letter-spacing:4px;
-      }
+      .cv4 .vis-inner .ghost4 { position:absolute; font-family:'Bebas Neue',sans-serif; font-size:130px; color:rgba(255,255,255,0.04); left:16px; top:50%; transform:translateY(-50%); white-space:nowrap; pointer-events:none; letter-spacing:4px; }
       .cv4 .vis-inner .clapper { position:absolute; left:56px; top:52px; width:220px; height:180px; }
-      .cv4 .vis-inner .clapper-body {
-        position:absolute; inset:0; background:#1a1a1a;
-        border:1.5px solid rgba(255,255,255,0.12); border-radius:3px; overflow:hidden;
-      }
+      .cv4 .vis-inner .clapper-body { position:absolute; inset:0; background:#1a1a1a; border:1.5px solid rgba(255,255,255,0.12); border-radius:3px; overflow:hidden; }
       .cv4 .vis-inner .clapper-stripes { position:absolute; top:0; left:0; right:0; height:40px; overflow:hidden; }
       .cv4 .vis-inner .clapper-sep { position:absolute; top:40px; left:0; right:0; height:14px; background:#0D0D0D; }
-      .cv4 .vis-inner .clapper-info {
-        position:absolute; top:62px; left:0; right:0; bottom:0; padding:8px 14px;
-        display:flex; flex-direction:column; gap:7px;
-      }
+      .cv4 .vis-inner .clapper-info { position:absolute; top:62px; left:0; right:0; bottom:0; padding:8px 14px; display:flex; flex-direction:column; gap:7px; }
       .cv4 .vis-inner .ci-row { display:flex; align-items:baseline; gap:12px; }
       .cv4 .vis-inner .ci-key { font-family:'Bebas Neue',sans-serif; font-size:11px; letter-spacing:2px; color:rgba(255,255,255,0.4); }
       .cv4 .vis-inner .ci-val { font-family:'Bebas Neue',sans-serif; font-size:22px; color:#FFD600; }
       .cv4 .vis-inner .ci-val.white { color:#fff; }
       .cv4 .vis-inner .ci-brand { font-family:'Bebas Neue',sans-serif; font-size:11px; letter-spacing:2px; color:rgba(255,255,255,0.4); margin-top:2px; }
       .cv4 .vis-inner .ci-sub { font-size:9px; font-weight:700; color:rgba(255,255,255,0.2); letter-spacing:1px; margin-top:2px; }
-
-      .cv4 .vis-inner .play-wrap {
-        position:absolute; right:38px; top:42px; width:150px; height:150px;
-        display:flex; align-items:center; justify-content:center;
-      }
-      .cv4 .vis-inner .play-ring-outer {
-        position:absolute; inset:0; border-radius:50%; border:1.5px solid rgba(255,255,255,0.07);
-        animation:cv4-pulseRing 2.4s ease-in-out infinite;
-      }
-      .cv4 .vis-inner .play-circle {
-        width:120px; height:120px; border-radius:50%; background:#FFD600;
-        display:flex; align-items:center; justify-content:center;
-        position:relative; z-index:1; animation:cv4-scaleIn .5s .3s both;
-      }
-      .cv4 .vis-inner .play-triangle {
-        width:0; height:0; border-top:22px solid transparent;
-        border-bottom:22px solid transparent; border-left:38px solid #0D0D0D; margin-left:6px;
-      }
-      .cv4 .vis-inner .rec-dot {
-        position:absolute; top:54px; right:48px; width:12px; height:12px; border-radius:50%;
-        background:#E63946; animation:cv4-recBlink 1s step-end infinite;
-      }
-      .cv4 .vis-inner .rec-text {
-        position:absolute; top:56px; right:28px;
-        font-size:10px; font-weight:700; color:rgba(255,255,255,0.4); letter-spacing:1px;
-      }
-      .cv4 .vis-inner .waveform {
-        position:absolute; bottom:86px; left:56px; right:200px;
-        display:flex; align-items:center; justify-content:center; gap:6px; height:52px;
-      }
-      .cv4 .vis-inner .wv-bar {
-        width:4px; border-radius:2px; background:#FFD600;
-        animation:cv4-wave 1.1s ease-in-out infinite alternate;
-      }
+      .cv4 .vis-inner .play-wrap { position:absolute; right:38px; top:42px; width:150px; height:150px; display:flex; align-items:center; justify-content:center; }
+      .cv4 .vis-inner .play-ring-outer { position:absolute; inset:0; border-radius:50%; border:1.5px solid rgba(255,255,255,0.07); animation:cv4-pulseRing 2.4s ease-in-out infinite; }
+      .cv4 .vis-inner .play-circle { width:120px; height:120px; border-radius:50%; background:#FFD600; display:flex; align-items:center; justify-content:center; position:relative; z-index:1; animation:cv4-scaleIn .5s .3s both; }
+      .cv4 .vis-inner .play-triangle { width:0; height:0; border-top:22px solid transparent; border-bottom:22px solid transparent; border-left:38px solid #0D0D0D; margin-left:6px; }
+      .cv4 .vis-inner .rec-dot { position:absolute; top:54px; right:48px; width:12px; height:12px; border-radius:50%; background:#E63946; animation:cv4-recBlink 1s step-end infinite; }
+      .cv4 .vis-inner .rec-text { position:absolute; top:56px; right:28px; font-size:10px; font-weight:700; color:rgba(255,255,255,0.4); letter-spacing:1px; }
+      .cv4 .vis-inner .waveform { position:absolute; bottom:86px; left:56px; right:200px; display:flex; align-items:center; justify-content:center; gap:6px; height:52px; }
+      .cv4 .vis-inner .wv-bar { width:4px; border-radius:2px; background:#FFD600; animation:cv4-wave 1.1s ease-in-out infinite alternate; }
       .cv4 .vis-inner .badges4 { position:absolute; bottom:38px; left:52px; right:28px; display:flex; gap:10px; }
       .cv4 .vis-inner .fmt-badge { padding:6px 16px; border-radius:2px; font-size:10px; font-weight:700; letter-spacing:1px; }
       .cv4 .vis-inner .fmt-active { background:#E63946; color:#fff; }
       .cv4 .vis-inner .fmt-muted { background:rgba(255,255,255,0.07); color:rgba(255,255,255,0.55); }
-
       @keyframes cv4-pulseRing { 0%,100%{transform:scale(1);opacity:.6} 50%{transform:scale(1.1);opacity:.15} }
       @keyframes cv4-scaleIn { from{transform:scale(0)} to{transform:scale(1)} }
       @keyframes cv4-recBlink { 0%,100%{opacity:1} 50%{opacity:0} }
       @keyframes cv4-wave { from{transform:scaleY(var(--from))} to{transform:scaleY(var(--to))} }
 
-      /* Stat panel animation for cv3 */
       .cv3 .vis-inner .stat-panel3 { animation: cv3-statIn .6s .5s both; }
       .cv2 .vis-inner .r-panel { animation: cv2-fadeUp .6s .2s both; }
       .cv2 .vis-inner .aa-block { animation: cv2-fadeUp .5s .1s both; }
@@ -429,23 +298,38 @@
         <!-- ══════════ HERO ══════════ -->
         <section id="hero" aria-label="Hero — Tobofu Marketing Agency">
             <div class="hero-bg-text" aria-hidden="true">TOBOFU</div>
+
+            <!-- ─── HEADLINE: plain O, no sub paragraph ─── -->
             <h1 class="hero-headline">
                 Attention<br>
                 <span class="accent">is Rented.</span><br>
                 Results are Owned.
             </h1>
+
             <div class="hero-awards" aria-label="Partnerships and recognitions">
                 <div class="award-item">GOOGLE<span>Official Partner</span></div>
                 <div class="award-item">META<span>Official Partner</span></div>
                 <div class="award-item">CENTLE<span>Venture Studio</span></div>
                 <div class="award-item">HYDERABAD<span>T-Hub HQ</span></div>
             </div>
+
+            <!-- ─── SQUIGGLY WAVE ─── -->
             <div class="hero-wave" aria-hidden="true">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-        <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="#0D0D0D" id="wave1"></path>
-        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#0D0D0D" id="wave2"></path>
-    </svg>
-</div>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 140" preserveAspectRatio="none">
+                    <!-- back layer: subtle, high up -->
+                    <path id="wave3"
+                        d="M0,70 C120,20 280,110 480,55 C680,0 900,90 1200,40 L1200,140 L0,140 Z"
+                        fill="#0D0D0D" opacity="0.10"/>
+                    <!-- mid layer -->
+                    <path id="wave2"
+                        d="M0,90 C150,40 350,125 580,75 C810,25 1020,105 1200,65 L1200,140 L0,140 Z"
+                        fill="#0D0D0D" opacity="0.20"/>
+                    <!-- front layer: solid black, sits at bottom -->
+                    <path id="wave1"
+                        d="M0,112 C160,75 340,138 560,105 C780,72 1000,128 1200,95 L1200,140 L0,140 Z"
+                        fill="#0D0D0D" opacity="1"/>
+                </svg>
+            </div>
         </section>
 
         <!-- ══════════ SERVICES STICKY CARDS ══════════ -->
@@ -470,51 +354,39 @@
                             <p class="card-body">Data-driven roadmaps that align your business goals with market opportunities and competitive advantages. We turn insight into action.</p>
                             <a href="tobofu-services.html" class="card-link" style="text-decoration:none;">Find out more →</a>
                         </div>
-
-                        <!-- ── RICH VISUAL: STRATEGY ── -->
                         <div class="card-visual cv1" aria-hidden="true">
                             <div class="vis-inner">
-                                <!-- grid lines -->
                                 <div class="grid-line gl-h" style="top:92px"></div>
                                 <div class="grid-line gl-h" style="top:184px"></div>
                                 <div class="grid-line gl-h" style="top:276px"></div>
                                 <div class="grid-line gl-v" style="left:136px"></div>
                                 <div class="grid-line gl-v" style="left:272px"></div>
-                                <!-- ghost -->
                                 <div class="ghost">STRAT</div>
-                                <!-- spine -->
                                 <div class="spine"></div>
-                                <!-- dots -->
                                 <div class="step-dot" style="top:78px;background:#FFD600;animation:cv1-dotBeat 3s 0s infinite;"></div>
                                 <div class="step-dot" style="top:168px;background:#E63946;"></div>
                                 <div class="step-dot" style="top:258px;background:#3A86FF;"></div>
                                 <div class="step-dot" style="top:348px;background:rgba(255,255,255,0.2);"></div>
-                                <!-- active bg -->
                                 <div class="step-active-bg" style="top:248px;height:70px;padding:14px 16px;"></div>
-                                <!-- Step 01 -->
                                 <div class="step" style="top:68px;">
                                     <div class="step-label" style="color:#FFD600">01 — AUDIT</div>
                                     <div class="step-title">Market &amp; Competitor Analysis</div>
                                     <div class="step-desc">Deep intelligence before any execution.</div>
                                 </div>
-                                <!-- Step 02 -->
                                 <div class="step" style="top:158px;">
                                     <div class="step-label" style="color:#E63946">02 — POSITIONING</div>
                                     <div class="step-title">Audience Mapping &amp; Brand Angle</div>
                                     <div class="step-desc">Precision targeting for high-intent segments.</div>
                                 </div>
-                                <!-- Step 03 active -->
                                 <div class="step" style="top:252px;">
                                     <div class="step-label" style="color:#FFD600;padding-left:5px;">03 — STRATEGY</div>
                                     <div class="step-title" style="color:#FFD600;padding-left:5px;">90-Day Roadmap &amp; Blueprint</div>
                                     <div class="step-desc" style="color:rgba(255,214,0,0.45);padding-left:5px;">Channels · Budget · KPIs</div>
                                 </div>
-                                <!-- Step 04 -->
                                 <div class="step" style="top:342px;">
                                     <div class="step-label" style="color:rgba(255,255,255,0.25)">04 — EXECUTION</div>
                                     <div class="step-title" style="color:rgba(255,255,255,0.45)">Launch, Measure &amp; Iterate</div>
                                 </div>
-                                <!-- Bullseye -->
                                 <div class="bullseye">
                                     <div class="ch ch-v"></div>
                                     <div class="ch ch-h"></div>
@@ -551,19 +423,11 @@
                             <p class="card-body">Identity systems that command attention and build immediate trust through premium editorial aesthetics. Your brand, unforgettable.</p>
                             <a href="tobofu-services.html" class="card-link" style="text-decoration:none;">Find out more →</a>
                         </div>
-
-                        <!-- ── RICH VISUAL: BRANDING ── -->
                         <div class="card-visual cv2" aria-hidden="true">
                             <div class="vis-inner">
                                 <div class="ghost2">BRAND</div>
-                                <!-- Aa block -->
-                                <div class="aa-block">
-                                    <div class="aa-letter">Aa</div>
-                                </div>
-                                <div class="type-label-bar">
-                                    <div class="type-label-text">Typography System</div>
-                                </div>
-                                <!-- Swatches -->
+                                <div class="aa-block"><div class="aa-letter">Aa</div></div>
+                                <div class="type-label-bar"><div class="type-label-text">Typography System</div></div>
                                 <div class="swatches">
                                     <div class="swatch" style="background:#FFD600"></div>
                                     <div class="swatch" style="background:#E63946"></div>
@@ -571,7 +435,6 @@
                                     <div class="swatch" style="background:#0D0D0D;border:1px solid rgba(255,255,255,0.1)"></div>
                                 </div>
                                 <div class="swatch-label">Colour Palette</div>
-                                <!-- Right panel -->
                                 <div class="r-panel">
                                     <div class="r-ghost">IDENTITY</div>
                                     <div class="logo-mark"><span>TF</span></div>
@@ -580,7 +443,6 @@
                                         <div class="logo-name-sub">BY CENTLE</div>
                                     </div>
                                     <div class="r-divider" style="top:104px;"></div>
-                                    <!-- Layout mock -->
                                     <div class="lm" style="top:118px;right:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px;">
                                         <div class="lm-hero" style="height:74px;">
                                             <div class="lm-hero-bar" style="height:22px;"><span style="font-size:8px;font-weight:700;color:#0D0D0D;letter-spacing:1px;">HERO</span></div>
@@ -597,26 +459,14 @@
                                         </div>
                                     </div>
                                     <div class="r-divider" style="top:206px;"></div>
-                                    <!-- Brand rules -->
                                     <div class="rules" style="top:216px;">
                                         <div class="rules-title">Brand Guidelines</div>
-                                        <div class="rule-row">
-                                            <span class="rule-name">Logo Usage</span>
-                                            <span class="rule-pill muted">DEFINED</span>
-                                        </div>
-                                        <div class="rule-row">
-                                            <span class="rule-name">Typography</span>
-                                            <span class="rule-pill muted">DEFINED</span>
-                                        </div>
-                                        <div class="rule-row">
-                                            <span class="rule-name">Colour System</span>
-                                            <span class="rule-pill yel">DEFINED</span>
-                                        </div>
+                                        <div class="rule-row"><span class="rule-name">Logo Usage</span><span class="rule-pill muted">DEFINED</span></div>
+                                        <div class="rule-row"><span class="rule-name">Typography</span><span class="rule-pill muted">DEFINED</span></div>
+                                        <div class="rule-row"><span class="rule-name">Colour System</span><span class="rule-pill yel">DEFINED</span></div>
                                     </div>
                                 </div>
-                                <div class="bottom-strip">
-                                    <span>Premium Editorial Aesthetics · Identity Systems</span>
-                                </div>
+                                <div class="bottom-strip"><span>Premium Editorial Aesthetics · Identity Systems</span></div>
                             </div>
                         </div>
                     </div>
@@ -635,42 +485,15 @@
                             <p class="card-body">Precision-targeted SEO and PPC campaigns that capture high-intent traffic and turn clicks into customers. Every rupee accountable.</p>
                             <a href="tobofu-services.html" class="card-link" style="text-decoration:none;">Find out more →</a>
                         </div>
-
-                        <!-- ── RICH VISUAL: DIGITAL MARKETING ── -->
                         <div class="card-visual cv3" aria-hidden="true">
                             <div class="vis-inner">
                                 <div class="ghost3">PPC</div>
-                                <!-- Partner badges -->
                                 <div class="badges3">
-                                    <div class="badge3">
-                                        <div class="badge-stripe" style="background:#4285F4;"></div>
-                                        <div class="badge-text3">
-                                            <div class="badge-name3">GOOGLE</div>
-                                            <div class="badge-sub3">Official Partner</div>
-                                        </div>
-                                    </div>
-                                    <div class="badge3">
-                                        <div class="badge-stripe" style="background:#1877F2;"></div>
-                                        <div class="badge-text3">
-                                            <div class="badge-name3">META</div>
-                                            <div class="badge-sub3">Official Partner</div>
-                                        </div>
-                                    </div>
-                                    <div class="badge3">
-                                        <div class="badge-stripe" style="background:#25D366;"></div>
-                                        <div class="badge-text3">
-                                            <div class="badge-name3">WHATSAPP</div>
-                                            <div class="badge-sub3">Automation</div>
-                                        </div>
-                                    </div>
-                                    <div class="badge3 badge-cert3">
-                                        <div class="badge-text3" style="width:100%;text-align:center;padding:0 8px;">
-                                            <div class="badge-name3" style="text-align:center;font-size:9px;">CERTIFIED 2024</div>
-                                            <div class="badge-sub3" style="text-align:center;">Google · Meta · SEO</div>
-                                        </div>
-                                    </div>
+                                    <div class="badge3"><div class="badge-stripe" style="background:#4285F4;"></div><div class="badge-text3"><div class="badge-name3">GOOGLE</div><div class="badge-sub3">Official Partner</div></div></div>
+                                    <div class="badge3"><div class="badge-stripe" style="background:#1877F2;"></div><div class="badge-text3"><div class="badge-name3">META</div><div class="badge-sub3">Official Partner</div></div></div>
+                                    <div class="badge3"><div class="badge-stripe" style="background:#25D366;"></div><div class="badge-text3"><div class="badge-name3">WHATSAPP</div><div class="badge-sub3">Automation</div></div></div>
+                                    <div class="badge3 badge-cert3"><div class="badge-text3" style="width:100%;text-align:center;padding:0 8px;"><div class="badge-name3" style="text-align:center;font-size:9px;">CERTIFIED 2024</div><div class="badge-sub3" style="text-align:center;">Google · Meta · SEO</div></div></div>
                                 </div>
-                                <!-- Chart -->
                                 <div class="chart3">
                                     <div class="y-grid3">
                                         <div class="y-line3" style="top:0%"><span class="y-label3" style="top:0">100k</span></div>
@@ -679,63 +502,31 @@
                                         <div class="y-line3" style="top:75%"><span class="y-label3" style="top:0">25k</span></div>
                                     </div>
                                     <div class="bars3" style="height:100%">
-                                        <div class="bar-wrap3">
-                                            <div class="bar3" style="height:12%;background:rgba(255,214,0,0.12);animation-delay:.1s"></div>
-                                            <span class="bar-x3">M1</span>
-                                        </div>
-                                        <div class="bar-wrap3">
-                                            <div class="bar3" style="height:22%;background:rgba(255,214,0,0.18);animation-delay:.2s"></div>
-                                            <span class="bar-x3">M2</span>
-                                        </div>
-                                        <div class="bar-wrap3">
-                                            <div class="bar3" style="height:38%;background:rgba(255,214,0,0.26);animation-delay:.3s"></div>
-                                            <span class="bar-x3">M3</span>
-                                        </div>
-                                        <div class="bar-wrap3">
-                                            <div class="bar3" style="height:54%;background:rgba(255,214,0,0.34);animation-delay:.4s"></div>
-                                            <span class="bar-x3">M4</span>
-                                        </div>
-                                        <div class="bar-wrap3">
-                                            <div class="bar3" style="height:72%;background:rgba(255,214,0,0.44);animation-delay:.5s"></div>
-                                            <span class="bar-x3">M5</span>
-                                        </div>
-                                        <div class="bar-wrap3">
-                                            <div class="bar3" style="height:94%;background:#FFD600;animation-delay:.6s;position:relative;">
-                                                <div style="position:absolute;top:0;left:0;right:0;height:5px;background:rgba(255,255,255,0.25);border-radius:2px 2px 0 0;"></div>
-                                            </div>
-                                            <span class="bar-x3 active">M6</span>
-                                        </div>
+                                        <div class="bar-wrap3"><div class="bar3" style="height:12%;background:rgba(255,214,0,0.12);animation-delay:.1s"></div><span class="bar-x3">M1</span></div>
+                                        <div class="bar-wrap3"><div class="bar3" style="height:22%;background:rgba(255,214,0,0.18);animation-delay:.2s"></div><span class="bar-x3">M2</span></div>
+                                        <div class="bar-wrap3"><div class="bar3" style="height:38%;background:rgba(255,214,0,0.26);animation-delay:.3s"></div><span class="bar-x3">M3</span></div>
+                                        <div class="bar-wrap3"><div class="bar3" style="height:54%;background:rgba(255,214,0,0.34);animation-delay:.4s"></div><span class="bar-x3">M4</span></div>
+                                        <div class="bar-wrap3"><div class="bar3" style="height:72%;background:rgba(255,214,0,0.44);animation-delay:.5s"></div><span class="bar-x3">M5</span></div>
+                                        <div class="bar-wrap3"><div class="bar3" style="height:94%;background:#FFD600;animation-delay:.6s;position:relative;"><div style="position:absolute;top:0;left:0;right:0;height:5px;background:rgba(255,255,255,0.25);border-radius:2px 2px 0 0;"></div></div><span class="bar-x3 active">M6</span></div>
                                     </div>
                                     <div class="x-axis3"></div>
                                     <svg class="trend-svg3" style="height:100%;width:100%;" preserveAspectRatio="none" viewBox="0 0 300 200">
                                         <polyline points="25,173 75,158 125,132 175,111 225,103 275,68" fill="none" stroke="#E63946" stroke-width="2" stroke-dasharray="5 3"/>
-                                        <circle cx="25"  cy="173" r="3" fill="#E63946"/>
-                                        <circle cx="75"  cy="158" r="3" fill="#E63946"/>
+                                        <circle cx="25" cy="173" r="3" fill="#E63946"/>
+                                        <circle cx="75" cy="158" r="3" fill="#E63946"/>
                                         <circle cx="125" cy="132" r="3" fill="#E63946"/>
                                         <circle cx="175" cy="111" r="3" fill="#E63946"/>
                                         <circle cx="225" cy="103" r="3" fill="#E63946"/>
-                                        <circle cx="275" cy="68"  r="5" fill="#E63946"/>
+                                        <circle cx="275" cy="68" r="5" fill="#E63946"/>
                                     </svg>
                                 </div>
-                                <!-- Stat panel -->
                                 <div class="stat-panel3">
                                     <div class="stat-panel-title3">RESULTS</div>
-                                    <div class="stat-row3">
-                                        <div class="stat-num3" style="color:#FFD600">400%</div>
-                                        <div class="stat-label3">USER GROWTH</div>
-                                    </div>
-                                    <div class="stat-row3">
-                                        <div class="stat-num3" style="color:#fff">2.5×</div>
-                                        <div class="stat-label3">CONVERSION</div>
-                                    </div>
-                                    <div class="stat-row3">
-                                        <div class="stat-num3" style="color:#E63946;font-size:38px;">−30%</div>
-                                        <div class="stat-label3">COST REDUCTION</div>
-                                    </div>
+                                    <div class="stat-row3"><div class="stat-num3" style="color:#FFD600">400%</div><div class="stat-label3">USER GROWTH</div></div>
+                                    <div class="stat-row3"><div class="stat-num3" style="color:#fff">2.5×</div><div class="stat-label3">CONVERSION</div></div>
+                                    <div class="stat-row3"><div class="stat-num3" style="color:#E63946;font-size:38px;">−30%</div><div class="stat-label3">COST REDUCTION</div></div>
                                 </div>
-                                <div class="bottom-label3">
-                                    <span>Precision-Targeted · Every Rupee Accountable · Zero Guesswork</span>
-                                </div>
+                                <div class="bottom-label3"><span>Precision-Targeted · Every Rupee Accountable · Zero Guesswork</span></div>
                             </div>
                         </div>
                     </div>
@@ -754,12 +545,9 @@
                             <p class="card-body">Cinematic video and viral-ready content that cuts through the noise and amplifies your brand's voice across every platform.</p>
                             <a href="tobofu-services.html" class="card-link" style="text-decoration:none;">Find out more →</a>
                         </div>
-
-                        <!-- ── RICH VISUAL: CONTENT PRODUCTION ── -->
                         <div class="card-visual cv4" aria-hidden="true">
                             <div class="vis-inner">
                                 <div class="ghost4">FILM</div>
-                                <!-- Clapperboard -->
                                 <div class="clapper">
                                     <div class="clapper-body">
                                         <div class="clapper-stripes">
@@ -776,31 +564,20 @@
                                         </div>
                                         <div class="clapper-sep"></div>
                                         <div class="clapper-info">
-                                            <div class="ci-row">
-                                                <span class="ci-key">SCENE</span>
-                                                <span class="ci-val">01</span>
-                                            </div>
-                                            <div class="ci-row">
-                                                <span class="ci-key">TAKE</span>
-                                                <span class="ci-val white">01</span>
-                                            </div>
+                                            <div class="ci-row"><span class="ci-key">SCENE</span><span class="ci-val">01</span></div>
+                                            <div class="ci-row"><span class="ci-key">TAKE</span><span class="ci-val white">01</span></div>
                                             <div class="ci-brand">TOBOFU</div>
                                             <div class="ci-brand" style="color:rgba(255,255,255,0.25)">CENTLE INDIA</div>
                                             <div class="ci-sub">IN-HOUSE STUDIO</div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- REC -->
                                 <div class="rec-dot"></div>
                                 <div class="rec-text">REC</div>
-                                <!-- Play button -->
                                 <div class="play-wrap">
                                     <div class="play-ring-outer"></div>
-                                    <div class="play-circle">
-                                        <div class="play-triangle"></div>
-                                    </div>
+                                    <div class="play-circle"><div class="play-triangle"></div></div>
                                 </div>
-                                <!-- Waveform -->
                                 <div class="waveform">
                                     <div class="wv-bar" style="height:30px;opacity:.4;--from:.5;--to:1.1;animation-delay:0s;"></div>
                                     <div class="wv-bar" style="height:52px;opacity:.6;--from:.4;--to:1;animation-delay:.18s;"></div>
@@ -809,7 +586,6 @@
                                     <div class="wv-bar" style="height:44px;opacity:.6;--from:.5;--to:.95;animation-delay:.14s;"></div>
                                     <div class="wv-bar" style="height:30px;opacity:.4;--from:.6;--to:1.05;animation-delay:.35s;"></div>
                                 </div>
-                                <!-- Format badges -->
                                 <div class="badges4">
                                     <div class="fmt-badge fmt-active">REELS</div>
                                     <div class="fmt-badge fmt-muted">BRAND FILM</div>
@@ -831,40 +607,20 @@
             </div>
             <div class="rows-wrapper">
                 <div class="section-row" data-grad="linear-gradient(135deg,#FFD600,#F5A623)" data-label="360° Integrated">
-                    <div style="padding-left:0;">
-                        <p class="row-num">01/</p>
-                        <h2 class="row-heading">360°<br>Integrated.</h2>
-                    </div>
-                    <div class="row-right">
-                        <p class="row-body">From visual identity to large-scale lead generation, we offer a complete suite under one roof — no gaps, no handoffs, no excuses.</p>
-                    </div>
+                    <div style="padding-left:0;"><p class="row-num">01/</p><h2 class="row-heading">360°<br>Integrated.</h2></div>
+                    <div class="row-right"><p class="row-body">From visual identity to large-scale lead generation, we offer a complete suite under one roof — no gaps, no handoffs, no excuses.</p></div>
                 </div>
                 <div class="section-row" data-grad="linear-gradient(135deg,#E63946,#c02030)" data-label="Official Partners">
-                    <div>
-                        <p class="row-num">02/</p>
-                        <h2 class="row-heading">Official<br>Partners.</h2>
-                    </div>
-                    <div class="row-right">
-                        <p class="row-body">As certified Google &amp; Meta Partners, we provide expert, high-converting campaign management backed by platform-level intelligence.</p>
-                    </div>
+                    <div><p class="row-num">02/</p><h2 class="row-heading">Official<br>Partners.</h2></div>
+                    <div class="row-right"><p class="row-body">As certified Google &amp; Meta Partners, we provide expert, high-converting campaign management backed by platform-level intelligence.</p></div>
                 </div>
                 <div class="section-row" data-grad="linear-gradient(135deg,#3A86FF,#0057c2)" data-label="Creative Studio">
-                    <div>
-                        <p class="row-num">03/</p>
-                        <h2 class="row-heading">Creative<br>Studio.</h2>
-                    </div>
-                    <div class="row-right">
-                        <p class="row-body">With 35+ in-house content creators, we produce high-velocity photo and video content daily — built for the scroll, engineered for results.</p>
-                    </div>
+                    <div><p class="row-num">03/</p><h2 class="row-heading">Creative<br>Studio.</h2></div>
+                    <div class="row-right"><p class="row-body">With 35+ in-house content creators, we produce high-velocity photo and video content daily — built for the scroll, engineered for results.</p></div>
                 </div>
                 <div class="section-row" data-grad="linear-gradient(135deg,#8338EC,#4e17a8)" data-label="12 Years Mastery">
-                    <div>
-                        <p class="row-num">04/</p>
-                        <h2 class="row-heading">12 Years<br>Mastery.</h2>
-                    </div>
-                    <div class="row-right">
-                        <p class="row-body">A decade of engineering success for global brands with measurable, market-leading ROI — and the track record to prove every word of it.</p>
-                    </div>
+                    <div><p class="row-num">04/</p><h2 class="row-heading">12 Years<br>Mastery.</h2></div>
+                    <div class="row-right"><p class="row-body">A decade of engineering success for global brands with measurable, market-leading ROI — and the track record to prove every word of it.</p></div>
                 </div>
             </div>
         </section>
@@ -878,22 +634,10 @@
                     <p>For themselves. Funnels that don't just look good — they perform. Here's proof that beauty and conversions aren't opposites.</p>
                 </div>
                 <div class="work-list">
-                    <div class="work-item fade-up">
-                        <div class="work-item-left"><span class="work-arrow" aria-hidden="true">↗</span><span class="work-name">Scaling a Disruptive Neo-Bank to 1M+ Users</span></div>
-                        <span class="work-year">Fintech</span>
-                    </div>
-                    <div class="work-item fade-up fade-up-d1">
-                        <div class="work-item-left"><span class="work-arrow" aria-hidden="true">↗</span><span class="work-name">Driving Sales via WhatsApp Automation</span></div>
-                        <span class="work-year">E-Commerce</span>
-                    </div>
-                    <div class="work-item fade-up fade-up-d2">
-                        <div class="work-item-left"><span class="work-arrow" aria-hidden="true">↗</span><span class="work-name">400% Growth in Active Monthly Users</span></div>
-                        <span class="work-year">SaaS</span>
-                    </div>
-                    <div class="work-item fade-up fade-up-d3">
-                        <div class="work-item-left"><span class="work-arrow" aria-hidden="true">↗</span><span class="work-name">2.5x Conversion Rate via Chat Funnels</span></div>
-                        <span class="work-year">D2C</span>
-                    </div>
+                    <div class="work-item fade-up"><div class="work-item-left"><span class="work-arrow" aria-hidden="true">↗</span><span class="work-name">Scaling a Disruptive Neo-Bank to 1M+ Users</span></div><span class="work-year">Fintech</span></div>
+                    <div class="work-item fade-up fade-up-d1"><div class="work-item-left"><span class="work-arrow" aria-hidden="true">↗</span><span class="work-name">Driving Sales via WhatsApp Automation</span></div><span class="work-year">E-Commerce</span></div>
+                    <div class="work-item fade-up fade-up-d2"><div class="work-item-left"><span class="work-arrow" aria-hidden="true">↗</span><span class="work-name">400% Growth in Active Monthly Users</span></div><span class="work-year">SaaS</span></div>
+                    <div class="work-item fade-up fade-up-d3"><div class="work-item-left"><span class="work-arrow" aria-hidden="true">↗</span><span class="work-name">2.5x Conversion Rate via Chat Funnels</span></div><span class="work-year">D2C</span></div>
                 </div>
                 <div class="work-grid fade-up">
                     <div class="work-thumb wt1"><div class="wt-inner">Neo-Bank — 400% Growth</div></div>
@@ -905,48 +649,24 @@
             <section id="results" aria-label="Our Results">
                 <h2 class="fade-up">OUR<br>RESULTS</h2>
                 <div class="stats-grid">
-                    <div class="stat-item fade-up">
-                        <div class="stat-num">400%</div>
-                        <div class="stat-label">Growth in active monthly users for a neo-bank within 6 months</div>
-                    </div>
-                    <div class="stat-item fade-up fade-up-d1">
-                        <div class="stat-num">2.5×</div>
-                        <div class="stat-label">Conversion rate lift through WhatsApp automation funnels</div>
-                    </div>
-                    <div class="stat-item fade-up fade-up-d2">
-                        <div class="stat-num">−30%</div>
-                        <div class="stat-label">Customer acquisition cost reduction for high-growth fintech clients</div>
-                    </div>
+                    <div class="stat-item fade-up"><div class="stat-num">400%</div><div class="stat-label">Growth in active monthly users for a neo-bank within 6 months</div></div>
+                    <div class="stat-item fade-up fade-up-d1"><div class="stat-num">2.5×</div><div class="stat-label">Conversion rate lift through WhatsApp automation funnels</div></div>
+                    <div class="stat-item fade-up fade-up-d2"><div class="stat-num">−30%</div><div class="stat-label">Customer acquisition cost reduction for high-growth fintech clients</div></div>
                 </div>
             </section>
 
             <section id="clients" aria-label="Brands We Work With">
                 <h2>Trusted by growing brands</h2>
                 <div class="clients-grid">
-                    <div class="client-name">Centle India</div>
-                    <div class="client-name">Saasum AI</div>
-                    <div class="client-name">Promtal</div>
-                    <div class="client-name">Maceco</div>
-                    <div class="client-name">Vriddhi</div>
-                    <div class="client-name">FinTech Ventures</div>
-                    <div class="client-name">E-Commerce Brands</div>
-                    <div class="client-name">SaaS Startups</div>
-                    <div class="client-name">D2C Labels</div>
-                    <div class="client-name">EdTech Platforms</div>
-                    <div class="client-name">HealthTech</div>
-                    <div class="client-name">Neo-Banks</div>
-                    <div class="client-name">Real Estate</div>
-                    <div class="client-name">B2B Enterprises</div>
-                    <div class="client-name">Global Brands</div>
+                    <div class="client-name">Centle India</div><div class="client-name">Saasum AI</div><div class="client-name">Promtal</div><div class="client-name">Maceco</div><div class="client-name">Vriddhi</div>
+                    <div class="client-name">FinTech Ventures</div><div class="client-name">E-Commerce Brands</div><div class="client-name">SaaS Startups</div><div class="client-name">D2C Labels</div><div class="client-name">EdTech Platforms</div>
+                    <div class="client-name">HealthTech</div><div class="client-name">Neo-Banks</div><div class="client-name">Real Estate</div><div class="client-name">B2B Enterprises</div><div class="client-name">Global Brands</div>
                 </div>
             </section>
 
             <section id="testimonial" aria-label="Client Testimonial">
                 <div class="testimonial-card fade-up">
-                    <div class="test-logo">
-                        <div class="test-icon" aria-hidden="true">⚡</div>
-                        CENTLE INDIA
-                    </div>
+                    <div class="test-logo"><div class="test-icon" aria-hidden="true">⚡</div>CENTLE INDIA</div>
                     <blockquote class="test-quote">"Tobofu completely transformed how we think about acquisition. Our campaigns went from generating noise to generating revenue — measurable, predictable, and scalable. Remarkable work, remarkable people."</blockquote>
                     <p class="test-author">— Vamshi Guguloth, Founder, Centle India</p>
                 </div>
@@ -968,48 +688,12 @@
             <section id="blog" aria-label="Recent Insights and Perspectives">
                 <h2>Recent Insights &amp; Perspectives</h2>
                 <div class="blog-grid">
-                    <article class="blog-card fade-up">
-                        <div class="blog-img bi1"></div>
-                        <div class="blog-content">
-                            <p class="blog-tag">Strategy · 8 Min Read</p>
-                            <h3 class="blog-title">The Venture Studio Blueprint: Why 2024 is the Year of Ecosystem Building</h3>
-                        </div>
-                    </article>
-                    <article class="blog-card fade-up fade-up-d1">
-                        <div class="blog-img bi2"></div>
-                        <div class="blog-content">
-                            <p class="blog-tag">Deep Tech · 12 Min Read</p>
-                            <h3 class="blog-title">Attention vs. Results: Engineering Marketing Pipelines that Perform</h3>
-                        </div>
-                    </article>
-                    <article class="blog-card fade-up fade-up-d2">
-                        <div class="blog-img bi3"></div>
-                        <div class="blog-content">
-                            <p class="blog-tag">Capital · 10 Min Read</p>
-                            <h3 class="blog-title">Beyond the Hallucination: Scaling Vision with Strategic Capital</h3>
-                        </div>
-                    </article>
-                    <article class="blog-card fade-up">
-                        <div class="blog-img bi4"></div>
-                        <div class="blog-content">
-                            <p class="blog-tag">Performance</p>
-                            <h3 class="blog-title">Why high-conversion marketing requires more than attention — it requires predictive intelligence architecture</h3>
-                        </div>
-                    </article>
-                    <article class="blog-card fade-up fade-up-d1">
-                        <div class="blog-img bi5"></div>
-                        <div class="blog-content">
-                            <p class="blog-tag">Ecosystem</p>
-                            <h3 class="blog-title">How the IIT-IIM led conglomerate model is disrupting traditional VC structures</h3>
-                        </div>
-                    </article>
-                    <article class="blog-card fade-up fade-up-d2">
-                        <div class="blog-img bi6"></div>
-                        <div class="blog-content">
-                            <p class="blog-tag">Capital</p>
-                            <h3 class="blog-title">Vriddhi Capital's outlook on the Indian venture landscape and sustainable dominance</h3>
-                        </div>
-                    </article>
+                    <article class="blog-card fade-up"><div class="blog-img bi1"></div><div class="blog-content"><p class="blog-tag">Strategy · 8 Min Read</p><h3 class="blog-title">The Venture Studio Blueprint: Why 2024 is the Year of Ecosystem Building</h3></div></article>
+                    <article class="blog-card fade-up fade-up-d1"><div class="blog-img bi2"></div><div class="blog-content"><p class="blog-tag">Deep Tech · 12 Min Read</p><h3 class="blog-title">Attention vs. Results: Engineering Marketing Pipelines that Perform</h3></div></article>
+                    <article class="blog-card fade-up fade-up-d2"><div class="blog-img bi3"></div><div class="blog-content"><p class="blog-tag">Capital · 10 Min Read</p><h3 class="blog-title">Beyond the Hallucination: Scaling Vision with Strategic Capital</h3></div></article>
+                    <article class="blog-card fade-up"><div class="blog-img bi4"></div><div class="blog-content"><p class="blog-tag">Performance</p><h3 class="blog-title">Why high-conversion marketing requires more than attention — it requires predictive intelligence architecture</h3></div></article>
+                    <article class="blog-card fade-up fade-up-d1"><div class="blog-img bi5"></div><div class="blog-content"><p class="blog-tag">Ecosystem</p><h3 class="blog-title">How the IIT-IIM led conglomerate model is disrupting traditional VC structures</h3></div></article>
+                    <article class="blog-card fade-up fade-up-d2"><div class="blog-img bi6"></div><div class="blog-content"><p class="blog-tag">Capital</p><h3 class="blog-title">Vriddhi Capital's outlook on the Indian venture landscape and sustainable dominance</h3></div></article>
                 </div>
             </section>
 
@@ -1068,7 +752,6 @@
 
     <script>
         document.body.classList.add('loading');
-
         function runLoader() {
             const ring    = document.getElementById('tlRing');
             const dot     = document.getElementById('tlDot');
@@ -1078,10 +761,8 @@
             const pctEl   = document.getElementById('tlPercent');
             const loader  = document.getElementById('tobofu-loader');
             const cornerR = document.getElementById('tlCornerRight');
-
             const spinAnim = anime({ targets: ring, rotate: '20turn', duration: 2500, loop: true, easing: 'easeInOutExpo', autoplay: false });
             const quirk    = anime({ targets: letters, rotate: function(){ return anime.random(-38,38); }, duration: function(){ return anime.random(900,1800); }, delay: function(el,i){ return i*350; }, direction: 'alternate', easing: 'easeInOutExpo', loop: true, autoplay: false });
-
             anime.timeline({ easing: 'easeOutExpo' })
                 .add({ targets: dot,     scale: [0,.55], opacity: [0,1], duration: 240, easing: 'easeOutBack' })
                 .add({ targets: ring,    scale: [0,1],   duration: 270, easing: 'easeOutElastic(1,.5)', complete: function(){ spinAnim.play(); } })
@@ -1093,7 +774,6 @@
                 .add({ targets: barFill, height: '100%', duration: 300, easing: 'easeInOutQuart', complete: function(){ spinAnim.pause(); quirk.pause(); } })
                 .add({ targets: loader, translateY: [0,'-100%'], duration: 500, easing: 'cubicBezier(0.76,0,0.24,1)', complete: function(){ loader.style.display='none'; document.body.classList.remove('loading'); } });
         }
-
         (function(){
             var s = document.createElement('script');
             s.src = 'https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js';
