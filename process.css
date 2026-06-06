@@ -916,4 +916,99 @@ nav.dark-nav #mobileMenuBtn{color:var(--yellow)}
   .hero-center-content { padding: 0 24px; }
   #scrambleList > li > span { font-size: clamp(0.75rem, 3.5vw, 1rem); }
 }
- 
+ /* ══════════════════════════════════════════════════════════
+   HERO FIX — centered title + scramble ring fully visible
+   Replace / merge these rules into process.css
+   ══════════════════════════════════════════════════════════ */
+
+/* 1. Hero is the sticky viewport, centred flex column */
+.hero {
+  background: #0D0D0D !important;
+  border-bottom: 2px solid rgba(255, 214, 0, 0.15) !important;
+  overflow: hidden !important;
+  position: sticky !important;
+  top: 0 !important;
+  height: 100vh !important;
+  min-height: unset !important;
+  /* Use a single-layer grid so children can truly overlap */
+  display: grid !important;
+  place-items: center !important;
+  padding: 0 !important;
+}
+
+/* 2. Circular ring — absolutely centred, slightly above centre
+      so the title text below it still has space */
+.hero-circle-wrap {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  height: auto !important;
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 3. Centre-content: stacked below mid, centred */
+.hero-center-content {
+  position: relative !important;
+  top: unset !important;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  padding: 0 60px;
+  pointer-events: none;
+  width: 100%;
+  max-width: 1200px;
+  /* push it to the lower half so it sits under the ring */
+  margin-top: min(calc(var(--circle-size) * 0.5 + 32px), 280px);
+}
+
+/* 4. Scramble list — keep inside its own box, clip overflow */
+#scrambleList {
+  --count: 9;
+  position: relative;
+  width: var(--circle-size);
+  height: var(--circle-size);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-radius: 50%;
+  /* ensure letters that drift out are visible — no clip */
+  overflow: visible;
+}
+
+#scrambleList > li {
+  position: absolute;
+  inset: 50%;
+}
+
+#scrambleList > li > span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  display: inline-block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(0.9rem, 2.2vw, 1.5rem);
+  color: #FFD600;
+  text-shadow:
+    0 0 8px  rgba(255,214,0,0.9),
+    0 0 20px rgba(255,214,0,0.5),
+    0 0 40px rgba(255,214,0,0.25);
+}
+
+/* 5. Responsive */
+@media (max-width: 768px) {
+  :root {
+    --circle-size: 78vw;
+  }
+  .hero-center-content {
+    padding: 0 24px;
+    margin-top: min(calc(var(--circle-size) * 0.5 + 16px), 180px);
+  }
+}
