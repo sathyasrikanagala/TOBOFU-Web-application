@@ -51,7 +51,7 @@ nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
   display:flex;align-items:center;justify-content:space-between;
   padding:12px 48px;
-  background:var(--white);border-bottom:var(--border);
+  background:var(--black);border-bottom:var(--border);
   transition:background .3s,border-color .3s;
 }
 nav.dark-nav .centle-logo span{color:var(--yellow);}
@@ -70,8 +70,9 @@ nav.dark-nav{background:var(--black);border-bottom-color:rgba(255,255,255,.1)}
   position:absolute;left:50%;transform:translateX(-50%);
   display:flex;align-items:center;gap:32px;list-style:none;
 }
+  
 .nav-links-center a{
-  color:var(--black);text-decoration:none;font-size:14px;font-weight:700;
+ color:rgba(255,255,255,.8);text-decoration:none;font-size:14px;font-weight:700;
   position:relative;transition:color .2s;text-transform:uppercase;letter-spacing:.04em;cursor:none;
 }
 nav.dark-nav .nav-links-center a{color:rgba(255,255,255,.8)}
@@ -82,7 +83,7 @@ nav.dark-nav .nav-links-center a{color:rgba(255,255,255,.8)}
 .nav-links-center a:hover::after,.nav-links-center a.active::after{transform:scaleX(1)}
 .pill-btn{
   display:inline-flex;align-items:center;gap:8px;padding:11px 24px;
-  background:var(--black);color:var(--yellow);font-size:14px;font-weight:700;
+  background:var(--yellow);color:var(--black);border-color:var(--yellow);
   border:var(--border);cursor:none;font-family:'DM Sans',sans-serif;
   text-transform:uppercase;letter-spacing:.04em;text-decoration:none;
   transition:background .2s,color .2s;
@@ -613,7 +614,7 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
 /* ─── MOBILE MENU ─── */
 #mobileMenuBtn{
   display:none;background:none;border:none;
-  cursor:pointer;padding:6px;color:var(--black);
+  cursor:pointer;padding:6px;color:var(--yellow);
 }
 nav.dark-nav #mobileMenuBtn{color:var(--yellow)}
 #mobileMenu{
