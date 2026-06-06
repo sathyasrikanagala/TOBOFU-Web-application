@@ -297,3 +297,129 @@ nav.dark-nav #mobileMenuBtn{color:var(--yellow)}
   .award-item{font-size:10px}
   .footer-newsletter{width:100%;text-align:center}
 }
+/* ─── TRIANGLE HERO EFFECT ─────────────────────────────── */
+@property --glow-color {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #FFD600;
+}
+
+:root {
+  --tri-gap: 0.125rem;
+  --tri-base: 3rem;
+  --tri-base-height: calc(1.733 * var(--tri-base));
+  --tri-width: calc(var(--tri-base) - var(--tri-gap));
+  --tri-height: calc(var(--tri-base-height) - var(--tri-gap));
+}
+
+/* Override hero to dark */
+#hero {
+  background: #0D0D0D !important;
+  border-bottom: 2px solid rgba(255, 214, 0, 0.15) !important;
+}
+
+/* Headline and awards adapt to dark bg */
+.hero-headline {
+  color: #FAFAFA !important;
+}
+.hero-headline .accent {
+  color: #FFD600 !important;
+}
+.award-item {
+  color: rgba(255, 255, 255, 0.45) !important;
+}
+
+/* Glow blob that follows cursor */
+#hero-glow {
+  position: absolute;
+  width: 50vw;
+  height: 80vw;
+  background: radial-gradient(circle closest-side, var(--glow-color), transparent);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1;
+  animation: hero-glow-idle 7s ease infinite alternate;
+}
+@keyframes hero-glow-idle {
+  from {
+    --glow-color: rgba(255, 214, 0, 0.12);
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  to {
+    --glow-color: rgba(255, 214, 0, 0.2);
+    transform: translate(-50%, -50%) scale(1.1) rotate(25deg);
+  }
+}
+#hero-glow.cursor-active {
+  animation: none;
+}
+
+/* Triangle grid */
+#hero-tri-container {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--columns), calc(var(--tri-base) * 2 + var(--tri-gap)));
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+.tri-set {
+  display: inline-block;
+  position: relative;
+  width: calc(var(--tri-base) * 2 + var(--tri-gap));
+  height: var(--tri-base-height);
+}
+.tri-set--offset {
+  transform: translateX(calc(-1 * var(--tri-base) - 0.5 * var(--tri-gap)));
+}
+.tri-set::before,
+.tri-set::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: var(--tri-gap);
+  border-right: var(--tri-width) solid transparent;
+  border-left: var(--tri-width) solid transparent;
+}
+.tri-set::before {
+  left: calc(-1 * var(--tri-base));
+  border-bottom: var(--tri-height) solid rgba(255, 255, 255, 0.03);
+}
+.tri-set::after {
+  right: calc(var(--tri-gap) * 2.5);
+  border-top: var(--tri-height) solid rgba(255, 255, 255, 0.03);
+}
+
+/* Hero content sits above grid and glow */
+#hero .hero-bg-text,
+#hero .hero-headline,
+#hero .hero-awards {
+  position: relative;
+  z-index: 3;
+}
+
+/* Hero wave — hide it, no longer needed */
+.hero-wave {
+  display: none !important;
+}
+
+/* Nav fix — already dark on dark hero, force yellow logo text */
+#mainNav .centle-logo span {
+  color: #FFD600 !important;
+}
+#mainNav {
+  background: #0D0D0D !important;
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+#mainNav .nav-links-center a {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+#mainNav .pill-btn {
+  background: #FFD600 !important;
+  color: #0D0D0D !important;
+  border-color: #FFD600 !important;
+}
