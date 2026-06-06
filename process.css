@@ -13,7 +13,7 @@ html{scroll-behavior:smooth}
   --midgray:#888;
   --border:3px solid #0A0A0A;
   --shadow:6px 6px 0px #0A0A0A;
-  --circle-size: min(34vw, 320px);
+  --circle-size: min(46vw, 440px);
 }
 body{
   background:#FFFBEA;
@@ -89,18 +89,18 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
   top:0;
   height:100vh;
   min-height:unset;
-  /* two-column: ring left | title right */
   display:grid;
   grid-template-columns:1fr 1fr;
-  align-items:center;
-  padding:90px 0 0;
+  grid-template-rows:1fr;
+  align-items:stretch;
+  padding-top:70px; /* nav height offset */
 }
 
 /* Canvas + glow orb removed intentionally */
 #heroTriCanvas{ display:none }
 #heroGlowOrb  { display:none }
 
-/* ─── RING — left column, upper-centre ─── */
+/* ─── RING — left column, centred ─── */
 .hero-circle-wrap{
   position:relative;
   grid-column:1;
@@ -110,8 +110,8 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
   align-items:center;
   justify-content:center;
   width:100%;
-  align-self:center;
-  margin-top:-80px; /* pull up toward nav */
+  height:100%;
+  margin-top:0;
 }
 
 /* The UL that rotates */
@@ -134,7 +134,7 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
   transform-origin:0 0;
   display:inline-block;
   font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(0.9rem,2.2vw,1.5rem);
+  font-size:clamp(1.1rem,2.8vw,2rem);
   color:#FFD600;
   text-shadow:
     0 0 8px  rgba(255,214,0,0.9),
@@ -150,10 +150,12 @@ nav.dark-nav .pill-btn{background:var(--yellow);color:var(--black);border-color:
   display:flex;
   flex-direction:column;
   align-items:flex-start;
+  justify-content:center;
   gap:0;
-  padding:0 60px 0 48px;
+  padding:0 60px 0 40px;
   pointer-events:none;
   width:100%;
+  height:100%;
   margin-top:0;
 }
 
